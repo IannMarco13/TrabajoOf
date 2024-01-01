@@ -1,0 +1,90 @@
+/* Estilos para la tabla */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border: 30px solid #ffffff00; /* Agrega un borde al contenedor */
+    border-radius: 10px; /* Opcional: agrega esquinas redondeadas */
+    padding: 10px; /* Opcional: añade un espacio interno */
+}
+
+
+#TablaRemesas {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-bottom: 20px !important;
+    /* Agrega !important a las propiedades que quieras priorizar */
+}
+
+#TablaRemesas th,
+#TablaRemesas td {
+    padding: 10px !important;
+    text-align: center !important;
+    border-bottom: 1px solid #000000 !important;
+}
+
+/* Estilos para el encabezado */
+#TablaRemesas thead th {
+    background-color: #ed8529;
+    color: #ffffff;
+    padding: 8px 27px !important; /* Ajusta el padding para las celdas de encabezado */
+    position: relative; /* Habilita la posición relativa para las flechas */
+}
+
+/* Estilos para las flechas de ordenamiento */
+#TablaRemesas thead th::after {
+    content: ""; /* Agrega un elemento después del texto */
+    display: inline-block; /* Convierte el contenido en un bloque */
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent; /* Establece la apariencia de la flecha */
+    border-right: 4px solid transparent; /* Establece la apariencia de la flecha */
+    border-top: 4px solid #fff; /* Establece la apariencia de la flecha */
+    position: absolute; /* Habilita la posición absoluta para las flechas */
+    top: 50%; /* Ajusta la posición vertical */
+    right: 8px; /* Ajusta la separación de las flechas del texto */
+    transform: translateY(-50%); /* Centra verticalmente las flechas */
+}
+
+/* Estilos para las filas impares */
+#TablaRemesas tbody tr:nth-child(odd) {
+    background-color: rgba(224, 223, 223, 0.914);
+    color: #000000;
+}
+
+/* Estilos para las filas impares */
+#TablaRemesas tbody tr:nth-child(even) {
+    background-color: rgba(253, 253, 253, 0.914); /* Cambia el color de fondo */
+    color: #000000;
+}
+
+/* Estilos para el encabezado */
+#TablaRemesas thead {
+    background-color: #ed8529;
+    color: #ffffff;
+}
+
+/* Estilos para el hover */
+#TablaRemesas tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+#TablaRemesas_wrapper .dataTables_paginate .paginate_button {
+    display: inline-block !important;
+    margin-bottom: 4px !important;
+    padding: .5rem .75rem !important;
+    font-size: 1rem !important;
+    line-height: 1.25 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+    cursor: pointer !important;
+    border-radius: .25rem !important;
+    color: #fff !important;
+    background-color: #ed8529 !important;
+    border: 1px solid transparent !important;
+}
+
+@media (max-width: 767.98px) {
+    
+}

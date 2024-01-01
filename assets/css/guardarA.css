@@ -1,0 +1,68 @@
+/*---------------------------------------*/
+/* Estilos para los inputs */
+.guardar_archivo .form {
+    margin-bottom: 2%; /* Cambiado a porcentaje */
+}
+
+/* Estilos específicos para el input de tipo file */
+.guardar_archivo .input-file {
+    font-family: Arial, sans-serif;
+    color: #312929;
+    font-size: 1.5em; /* Cambiado a em */
+    border: 0.2em solid #151414; /* Cambiado a em */
+    padding: 1em; /* Cambiado a em */
+    border-radius: 0.5em; /* Cambiado a em */
+}
+
+/* Cambiar estilo cuando el input file está enfocado */
+.guardar_archivo .input-file:focus {
+    outline: none;
+    border-color: #984701;
+    box-shadow: 0 0 0.3em rgba(212, 175, 8, 0.5); /* Cambiado a em */
+}
+
+/* Estilos para el botón de enviar */
+.guardar_archivo .submit-button {
+    
+    background-color: #ed8529;
+    color: rgb(240, 234, 234);
+    padding: 1em 2em; /* Cambiado a em */
+    border-radius: 0.4em; /* Cambiado a em */
+    cursor: pointer;
+    font-size: 1.5em; /* Cambiar tamaño de letra */
+}
+
+/* Estilo para el contenedor personalizado del botón */
+.guardar_archivo .custom-file-upload {
+    padding: 0.5em 1em; /* Cambiado a em */
+    font-size: 1em; /* Cambiado a em */
+}
+
+/* Estilos para el formulario */
+.guardar_archivo body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.guardar_archivo .formulario {
+    margin: 2% auto 0 10%; /* Cambiado a porcentaje y ajustado para pantallas más pequeñas */
+    width: 80%; /* Cambiado a porcentaje */
+}
+
+/* Ocultar el input file original */
+.guardar_archivo .file-name {
+    margin-left: 1em; /* Cambiado a em */
+    color: #ff0000e8;
+}
+
+/* @media queries para pantallas más pequeñas */
+@media (max-width: 600px) {
+    .guardar_archivo .formulario {
+        margin: 2% auto 0 5%; /* Ajuste para pantallas muy pequeñas */
+        width: 90%; /* Ajuste para pantallas muy pequeñas */
+    }
+}

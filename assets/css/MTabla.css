@@ -1,0 +1,58 @@
+thead {
+    background-color: #ed8529;
+    color: #FFF;
+}
+
+
+.text-center {
+    text-align: center;
+}
+
+/* Estilos para el contenedor y los elementos internos */
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 25%;/* Establece el ancho al 50% del contenedor padre */
+    padding: 8px; /* Añade espacio de relleno alrededor del contenido */
+    border-radius: 50px;/* Redondea los bordes del elemento */
+    border: 1px solid #000000; /* Establece un borde sólido de 1 píxel con color gris claro */
+    font-size: 14px;/* Define el tamaño de la fuente del texto */
+}
+
+.submit-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #ed8529;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #deb598;
+}
+/* Personalización del botón */
+a.btn-custom {
+    /* Agrega estilos personalizados aquí */
+    /* Por ejemplo, puedes ajustar el tamaño del texto, el padding, los bordes, etc. */
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #36a832; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    /* Y cualquier otro estilo que desees aplicar */
+}
