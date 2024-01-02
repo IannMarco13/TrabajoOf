@@ -10,14 +10,14 @@ class PDF extends FPDF
    function Header()
    {
       $this->Image('img/logo.png', 270, 5, 20); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
-      //$this->SetFont('Arial', 'B', 19); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
+      $this->SetFont('Arial', 'B', 19); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
       $this->Cell(95); // Movernos a la derecha
       $this->SetTextColor(0, 0, 0); //color
       
       $this->SetTextColor(228, 100, 0);//color
       $this->Cell(1); // mover a la derecha
       $this->SetFont('Arial', 'B', 15);
-      $this->Cell(100, 10, utf8_decode("REPORTE"), 0, 1, 'C', 0);
+      $this->Cell(100, 10, utf8_decode("REPORTE DE REMESAS BOLIVIA - CHILE"), 0, 1, 'C', 0);
       $this->Ln(7);
 
       /* CAMPOS DE LA TABLA */
@@ -25,19 +25,21 @@ class PDF extends FPDF
       $this->SetFillColor(255, 165, 0); //colorFondo
       $this->SetTextColor(0, 0, 0); //colorTexto
       $this->SetDrawColor(163, 163, 163); //colorBorde
-      $this->SetFont('times', 'B', 7); // 'times' es el nombre para Times New Roman
+      $this->SetFont('times', 'B', 5); // 'times' es el nombre para Times New Roman
       $this->Cell(8,  5, utf8_decode('N°'), 1, 0, 'C', 1);
-      $this->Cell(10, 5, utf8_decode('COD'), 1, 0, 'C', 1);
-      $this->Cell(10, 5, utf8_decode('AIR'), 1, 0, 'C', 1);
-      $this->Cell(25, 5, utf8_decode('ENVIO'), 1, 0, 'C', 1);
-      $this->Cell(10, 5, utf8_decode('ORIG'), 1, 0, 'C', 1);
-      $this->Cell(10, 5, utf8_decode('DEST'), 1, 0, 'C', 1);
-      $this->Cell(25, 5, utf8_decode('PAGO'), 1, 0, 'C', 1);
-      $this->Cell(17, 5, utf8_decode('ESTADO'), 1, 0, 'C', 1);
-      $this->Cell(10, 5, utf8_decode('BOB'), 1, 0, 'C', 1);
-      $this->Cell(10, 5, utf8_decode('USD'), 1, 0, 'C', 1);
-      $this->Cell(65, 5, utf8_decode('REMITENTE'), 1, 0, 'C', 1);
-      $this->Cell(75, 5, utf8_decode('DESTINATARIO'), 1, 1, 'C', 1);
+      $this->Cell(15, 5, utf8_decode('CODIGO'), 1, 0, 'C', 1);
+      $this->Cell(25, 5, utf8_decode('FECHA REG'), 1, 0, 'C', 1);
+      $this->Cell(25, 5, utf8_decode('CORRELATIVO'), 1, 0, 'C', 1);
+      $this->Cell(25, 5, utf8_decode('DOCUMENTO'), 1, 0, 'C', 1);
+      $this->Cell(60, 5, utf8_decode('US. FIANCIERO'), 1, 0, 'C', 1);
+      $this->Cell(20, 5, utf8_decode('TELF'), 1, 0, 'C', 1);
+      $this->Cell(60, 5, utf8_decode('DESTINATARIO'), 1, 0, 'C', 1);
+      $this->Cell(25, 5, utf8_decode('TELEFONO'), 1, 0, 'C', 1);
+      $this->Cell(10, 5, utf8_decode('MONEDA'),1,0,'C',1);
+      $this->Cell(25, 5, utf8_decode('MONTO BOB'), 1, 0, 'C', 1);
+      $this->Cell(25, 5, utf8_decode('MONTO USD'),1,0,'C',0); 
+      $this->Cell(50, 5, utf8_decode('FECHA PAGADO'),1,0,'C,0') ;
+      $this->Cell(60, 5, utf8_decode('ESTADO'),1, 1,'C') ;
 
    }
    // Pie de página
@@ -46,15 +48,12 @@ class PDF extends FPDF
       $this->SetY(-15); // Posición: a 1,5 cm del final
       $this->SetFont('Arial', 'I', 8); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
       $this->Cell(0, 10, utf8_decode('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C'); //pie de pagina(numero de pagina)
-
       //FECHA FORMATO 
       $this->SetY(-15); // Posición: a 1,5 cm del final
       $this->SetFont('Arial', 'I', 8); // Tipo de fuente: Arial, itálica, tamaño 8
       // Obtener la fecha actual con Carbon y formatearla
       $hoy = Carbon::now()->locale('es_ES')->isoFormat('D [de] MMMM [de] YYYY');
       $this->Cell(540, 10, utf8_decode($hoy), 0, 0, 'C'); // Pie de página (fecha de página)
-
-
 
    }
 }
@@ -87,38 +86,33 @@ if ($fechaInicio <= $fechaFin ){
 $from_date = $_GET['from_date'];
 $to_date = $_GET['to_date'];
 
-$query = ("SELECT * FROM report_chile_bolivia WHERE DATE(FECHA_ORI) BETWEEN '$from_date' AND '$to_date'");
+$query = ("SELECT CODIGO_B, FECHA_B, CORRELATIVO_B, DOCUMENTO_B, USU_FINCACIERO, TELEFONO_U, DESTINATARIO_B, TELEFONO_D, DESTINO_B, MONTO_ENV, MONTO_BOB_B, ULTIMA_MODIFI, ESTADO_B FROM remesas_bolivia_chile  WHERE DATE(FECHA_B) BETWEEN '$from_date' AND '$to_date' ORDER BY FECHA_B ASC");
 
 $query_run = mysqli_query($conexion, $query);
 if(mysqli_num_rows($query_run) > 0){
-    foreach($query_run as $fila){     
+   foreach($query_run as $fila){     
     $i = $i + 1;
     /* TABLA */
-    $pdf->SetFont('times', '', 8);
+    $pdf->SetFont('times', 'B', 8);
     $pdf->Cell(8,  5, utf8_decode($i), 1, 0, 'C', 0);
-    $pdf->Cell(10, 5, utf8_decode($fila['CODIGO_R']), 1, 0, 'C', 0);
-    $pdf->Cell(10, 5, utf8_decode($fila['AIR_R']), 1, 0, 'C', 0);
-    $pdf->Cell(25, 5, utf8_decode(date('d-m-Y h:i', strtotime($fila['FECHA_ORI']))), 1, 0, 'C', 0);
-    $pdf->Cell(10, 5, utf8_decode($fila['ORIGEN_R']), 1, 0, 'C', 0);
-    $pdf->Cell(10, 5, utf8_decode($fila['DESTINO_R']), 1, 0, 'C', 0);
-    $pdf->Cell(25, 5, utf8_decode(date('d-m-Y h:i', strtotime($fila['FECHA_PAG']))), 1, 0, 'C', 0);
-    $pdf->Cell(17,  5, utf8_decode($fila['ESTADO_R']), 1, 0, 'C', 0);
-    $pdf->Cell(10,  5, utf8_decode(number_format($fila['MONTO_BOB'], 0)), 1, 0, 'R', 0);
-    $pdf->Cell(10,  5, utf8_decode(number_format($fila['MONTO_USD'], 1)), 1, 0, 'R', 0);
-    $pdf->Cell(65,  5, utf8_decode($fila['REMITENTE_R']), 1, 'L');
-    $pdf->MultiCell(75,  5, utf8_decode($fila['DESTINATARIO_R']), 1, 'L');
+    $pdf->Cell(10, 5, utf8_decode($fila['CODIGO_B']), 1, 0, 'C', 0);
+    $pdf->Cell(25, 5, utf8_decode(date('d-m-Y h:i', strtotime($fila['FECHA_B']))), 1, 0, 'C', 0);
+    $pdf->Cell(18, 5, utf8_decode($fila['CORRELATIVO_B']), 1, 0, 'C', 0);
+    $pdf->Cell(25, 5, utf8_decode($fila['DOCUMENTO_B']), 1, 0, 'L', 0);
+    $pdf->MultiCell(65, 5, utf8_decode($fila['USU_FINCACIERO']), 1, 'L');
 
-    //$pdf->Cell(10, 5, utf8_decode(number_format($fila['RECIBIDO_USD'], 0)), 1, 0, 'C', 0);
-    //$pdf->Cell(15, 5, utf8_decode(number_format($fila['RECIBIDO_CLP'], 0)), 1, 0, 'C', 0);
-    //$pdf->Cell(8,  5, utf8_decode($fila['MONEDA']), 1, 0, 'C', 0);
-    //$pdf->Cell(13, 5, utf8_decode(number_format($fila['MONTO'], 0)), 1, 0, 'C', 0);
-    //$pdf->Cell(18, 5, utf8_decode($fila['ESTADO']), 1, 0, 'C', 0);
-    //$pdf->Cell(68, 5, utf8_decode($fila['REMITENTE']), 1, 0, 'L', 0);
-    //$pdf->MultiCell(68, 5, utf8_decode($fila['DESTINATARIO']), 1, 'L');
+    $pdf->Cell(15, 5, utf8_decode($fila['TELEFONO_U']), 1, 0, 'C', 0);
+    $pdf->MultiCell(65, 5, utf8_decode($fila['DESTINATARIO_B']), 1,'l');
+    $pdf->Cell(15, 5, utf8_decode($fila['TELEFONO_D']), 1, 0, 'C', 0);
+    $pdf->Cell(10, 5, utf8_decode($fila['DESTINO_B']), 1, 0, 'C', 0);
+    $pdf->Cell(10, 5, utf8_decode(number_format($fila['MONTO_ENV'], 0)), 1, 0, 'C', 0);
+    $pdf->Cell(15, 5, utf8_decode(number_format($fila['MONTO_BOB_B'], 0)), 1, 0, 'C', 0);
+    $pdf->Cell(25, 5, utf8_decode(date('d-m-Y h:i', strtotime($fila['ULTIMA_MODIFI']))), 1, 0, 'C', 0);
+    $pdf->Cell(18,  5, utf8_decode($fila['ESTADO_B']), 1, 1, 'C', 0);
 
-
-   }
+    }
 } 
+
 // Consulta SQL para la segunda tabla
 // Agrega una página en orientación horizontal al PDF
 $query_cont = "SELECT COUNT(MONEDA) AS Total_Registros FROM remesas_env_chile_bolivia WHERE DATE(FECHA) BETWEEN '$from_date' AND '$to_date' AND remesas_env_chile_bolivia.MONEDA = 'BOB'";

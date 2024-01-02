@@ -29,6 +29,7 @@
                             <li class="back"><a href="Mostrar_rem_reporte.php">Reporte</a></li>
                         </ul>
                     </li>
+                    <li class="back"><a href="Mostrar_rep_Bol_Chi.php">Bolivia - Chile</a></li>
                     <li class="front">
                         Consultas
                         <ul class="ul-third">
@@ -39,7 +40,6 @@
                             <li>---</li>
                         </ul>
                     </li>
-                    <li>Bolivia - Chile</li>
                 </ul>
             </li>
             <li>--------</li>

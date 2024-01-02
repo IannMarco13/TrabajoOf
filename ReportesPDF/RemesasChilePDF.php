@@ -17,7 +17,7 @@ class PDF extends FPDF
       $this->SetTextColor(228, 100, 0);//color
       $this->Cell(1); // mover a la derecha
       $this->SetFont('Arial', 'B', 15);
-      $this->Cell(100, 10, utf8_decode("REPORTE DE REMESAS PAGADAS"), 0, 1, 'C', 0);
+      $this->Cell(100, 10, utf8_decode("REPORTE DE REMESAS"), 0, 1, 'C', 0);
       $this->Ln(7);
 
       /* CAMPOS DE LA TABLA */

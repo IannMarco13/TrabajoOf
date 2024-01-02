@@ -29,11 +29,11 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>  
     <!-- Datatables responsive -->
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <title>REMESAS</title>
+    <title>REMESAS BOLIVIA - CHILE</title>
 </head>
 <body> 
     <br>
-    <h1 class="text-center">Listado Reporte</h1>
+    <h1 class="text-center">Listado Reporte Bolivia - Chile</h1>
     <div class="container">
         <form action="" method="GET">
             <div class="row">
@@ -54,7 +54,7 @@
                         <br>
                         <button type="submit" class="submit-button"><i class="fas fa-search"></i> Buscar</button>
                         <!--hacemos que los datos de los canlendarios se guaden y puedan ser re usados-->
-                        <a href="ReportesPDF/ReporteChilePDF.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>" target="_blank" class="submit-button">
+                        <a href="ReportesPDF/RemesasBoliviaPDF.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>" target="_blank" class="submit-button">
                         <i class="far fa-file-pdf"></i> Generar Reporte
                     </a>
                 </div>
@@ -71,16 +71,25 @@
                         <tr>
                             <th>N°</th>
                             <th>CODIGO</th>
-                            <th>AIR</th>
-                            <th>FECHA ORIGEN</th>
-                            <th>ORIGEN</th>
-                            <Th>DESTINO</Th>
-                            <th>FECHA PAGO</th>
-                            <th>ESTADO</th>
-                            <th>MONTO BOB</th>
-                            <th>MONTO USD</th>
-                            <th>REMITENTE</th>
+                            <th>FECHA DE REGISTRO</th>
+                            <th>CORRETATIVO</th>
+                            <th>DOCUMENTO</th>
+                            <Th>US. FINANCIERO</Th>
+                            <th>TELEFONO</th>
                             <th>DESTINATARIO</th>
+                            <th>TELF. DEST</th>
+                            <th>ORIGEN</th>
+                            <th>DESTINO</th>
+                            <th>MONEDA ENVIO</th>
+                            <th>MONTO ENV</th>
+                            <th>% CAM</th>
+                            <th>COMISION</th>
+                            <th>TOPO CAMBIO</th>
+                            <th>MOTNO EN BOB</th>
+                            <th>COMISION EN BOB</th>
+                            <th>ITF EN BOB</th>
+                            <th>ULTIMA MODIFCACION</th>
+                            <th>ESTADO</th>
                         </tr>
                     </thead>
                 <tbody>
@@ -96,42 +105,50 @@
                             // Si la fecha de inicio es mayor que la fecha final
                             echo '<script>alert("La fecha de inicio no puede ser mayor que la fecha fin"); window.location.href = "Mostrar_remesas.php";</script>';
                         }
-    
                         //delimitar por fecha
                         $fechaActual = Carbon::now();
                         if ($fechaInicio->isFuture() || $fechaFin->isFuture()) {
                             // Si alguna de las fechas está en el futuro
                             echo '<script>alert("No puedes ingresar fechas futuras a: '.$fechaActual.'"); window.location.href = "Mostrar_remesas.php";</script>';
                         }
-
-                    if(isset($_GET['from_date']) && isset($_GET['to_date'])){
-                        
-                        $query ="SELECT * FROM report_chile_bolivia WHERE DATE(FECHA_ORI) BETWEEN '$from_date' AND '$to_date'";
+                    if(isset($_GET['from_date']) && isset($_GET['to_date'])){    
+                        $query ="SELECT * FROM remesas_bolivia_chile WHERE DATE(FECHA_B) BETWEEN '$from_date' AND '$to_date' ORDER BY FECHA_B ASC";
                         $query_run = mysqli_query($conexion, $query);
                         if(mysqli_num_rows($query_run) > 0){
                             foreach($query_run as $fila){ 
                                 $cont++;?>
                             <tr>
                                 <td> <?php echo $cont ?> </td>
-                                <td> <?php echo $fila['CODIGO_R'] ?> </td>
-                                <td> <?php echo $fila['AIR_R'] ?> </td>
-                                <!--<td> <?php echo $fila['FECHA_ORI'] ?> </td>-->
-                                <td> <?php echo date("d-m-Y h:i", strtotime($fila['FECHA_ORI'])) ?></td>   
-                                <td> <?php echo $fila['ORIGEN_R'] ?> </td>
-                                <td> <?php echo $fila['DESTINO_R'] ?> </td>
+                                <td> <?php echo $fila['CODIGO_B'] ?> </td>
                                 <!-- Como en la BD las fechas de exel que estan con campos "-" los guarda como 0000-00-00 00:00:00 usando este comando se Haregla-->
-                                <?php if ($fila['FECHA_PAG'] !== null && $fila['FECHA_PAG'] !== '0000-00-00 00:00:00') { ?>
-                                <td><?php echo date("d-m-Y H:i", strtotime($fila['FECHA_PAG'])); ?></td>
+                                <?php if ($fila['FECHA_B'] !== null && $fila['FECHA_B'] !== '0000-00-00 00:00:00') { ?>
+                                <td><?php echo date("d-m-Y H:i", strtotime($fila['FECHA_B'])); ?></td>
                                 <?php } else { ?>
                                 <td>Fecha no disponible</td>
                                 <?php } ?>
-                                <!-- <td> <?php echo date("d-m-Y h:i", strtotime($fila['FECHA_PAG'])) ?> </td>-->
-                                <td> <?php echo $fila['ESTADO_R'] ?> </td>
-                                <td> <?php echo $fila['MONTO_BOB'] ?> </td>
-                                <td> <?php echo $fila['MONTO_USD'] ?> </td>
-                                <td> <?php echo $fila['REMITENTE_R'] ?> </td>  
-                                <td> <?php echo $fila['DESTINATARIO_R'] ?> </td>
-                                
+                                <td> <?php echo $fila['CORRELATIVO_B'] ?> </td>
+                                <td> <?php echo $fila['DOCUMENTO_B'] ?> </td>
+                                <td> <?php echo $fila['USU_FINCACIERO'] ?> </td>
+                                <td> <?php echo $fila['TELEFONO_U'] ?> </td>
+                                <td> <?php echo $fila['DESTINATARIO_B'] ?> </td>
+                                <td> <?php echo $fila['TELEFONO_D'] ?> </td>  
+                                <td> <?php echo $fila['ORIGEN_B'] ?> </td>
+                                <td> <?php echo $fila['DESTINO_B'] ?> </td>
+                                <td> <?php echo $fila['MONEDA_ENV'] ?> </td>
+                                <td> <?php echo $fila['MONTO_ENV'] ?> </td>
+                                <td> <?php echo $fila['POR_COM'] ?> </td>  
+                                <td> <?php echo $fila['COMISION_B'] ?> </td>
+                                <td> <?php echo $fila['TIPO_CAMBIO'] ?> </td>
+                                <td> <?php echo $fila['MONTO_BOB_B'] ?> </td>
+                                <td> <?php echo $fila['COMISION_BOB'] ?> </td>
+                                <td> <?php echo $fila['ITF_BOB'] ?> </td>  
+                                <!-- Como en la BD las fechas de exel que estan con campos "-" los guarda como 0000-00-00 00:00:00 usando este comando se Haregla-->
+                                <?php if ($fila['ULTIMA_MODIFI'] !== null && $fila['ULTIMA_MODIFI'] !== '0000-00-00 00:00:00') { ?>
+                                <td><?php echo date("d-m-Y H:i", strtotime($fila['ULTIMA_MODIFI'])); ?></td>
+                                <?php } else { ?>
+                                <td>Fecha no disponible</td>
+                                <?php } ?>
+                                <td> <?php echo $fila['ESTADO_B'] ?> </td>
                             </tr>                        
                             <?php
                             }
