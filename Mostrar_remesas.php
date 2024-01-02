@@ -4,6 +4,8 @@
     $cont = 0;
     use Carbon\Carbon;
     require_once __DIR__ . '/vendor/autoload.php';
+    $from_date = isset($_GET['from_date']) ? $_GET['from_date'] : '';
+    $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : '';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -59,9 +61,9 @@
                         <br>
                         <button type="submit" class="submit-button"><i class="fas fa-search"></i> Buscar</button>
                         <!--hacemos que los datos de los canlendarios se guaden y puedan ser re usados-->
-                        <a href="ReportesPDF/RemesasChilePDF.php?from_date=<?php echo $_GET['from_date']; ?>&to_date=<?php echo $_GET['to_date']; ?>" target="blank" class="submit-button">
+                        <a href="ReportesPDF/RemesasChilePDF.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>" target="_blank" class="submit-button">
                         <i class="far fa-file-pdf"></i> Generar Reporte
-                    </a>
+                        </a>
                 </div>
             </div>
         </div>
