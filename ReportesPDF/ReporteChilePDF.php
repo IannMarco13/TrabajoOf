@@ -108,15 +108,6 @@ if(mysqli_num_rows($query_run) > 0){
     $pdf->Cell(65,  5, utf8_decode($fila['REMITENTE_R']), 1, 'L');
     $pdf->MultiCell(75,  5, utf8_decode($fila['DESTINATARIO_R']), 1, 'L');
 
-    //$pdf->Cell(10, 5, utf8_decode(number_format($fila['RECIBIDO_USD'], 0)), 1, 0, 'C', 0);
-    //$pdf->Cell(15, 5, utf8_decode(number_format($fila['RECIBIDO_CLP'], 0)), 1, 0, 'C', 0);
-    //$pdf->Cell(8,  5, utf8_decode($fila['MONEDA']), 1, 0, 'C', 0);
-    //$pdf->Cell(13, 5, utf8_decode(number_format($fila['MONTO'], 0)), 1, 0, 'C', 0);
-    //$pdf->Cell(18, 5, utf8_decode($fila['ESTADO']), 1, 0, 'C', 0);
-    //$pdf->Cell(68, 5, utf8_decode($fila['REMITENTE']), 1, 0, 'L', 0);
-    //$pdf->MultiCell(68, 5, utf8_decode($fila['DESTINATARIO']), 1, 'L');
-
-
    }
 } 
 // Consulta SQL para la segunda tabla

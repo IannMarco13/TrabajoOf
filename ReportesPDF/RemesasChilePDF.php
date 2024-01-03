@@ -1,9 +1,11 @@
 <?php
 require('fpdf.php');
 require_once ('../conexion.php');
+
 //ob_end_clean();
 use Carbon\Carbon;
 require __DIR__ . '/../vendor/autoload.php';
+$i=0;
 class PDF extends FPDF
 {
    // Cabecera de página
@@ -17,7 +19,7 @@ class PDF extends FPDF
       $this->SetTextColor(228, 100, 0);//color
       $this->Cell(1); // mover a la derecha
       $this->SetFont('Arial', 'B', 15);
-      $this->Cell(100, 10, utf8_decode("REPORTE DE REMESAS"), 0, 1, 'C', 0);
+      $this->Cell(100, 10, utf8_decode("REPORTE DE REMESAS 123"), 0, 1, 'C', 0);
       $this->Ln(7);
 
       /* CAMPOS DE LA TABLA */
@@ -30,8 +32,8 @@ class PDF extends FPDF
       $this->Cell(70, 5, utf8_decode('SEGUIMIENTO'), 1, 0, 'C', 1);
       $this->Cell(25, 5, utf8_decode('PAGO'), 1, 0, 'C', 1);
       $this->Cell(39, 5, utf8_decode('PROCESO DESTINO'), 1, 0, 'C', 1);
-      $this->Cell(68, 5, utf8_decode('REMITENTE'), 1, 0, 'C', 1);
-      $this->Cell(68, 5, utf8_decode('DESTINATARIO'), 1, 1, 'C', 1);
+      $this->Cell(50, 5, utf8_decode('REMITENTE'), 1, 0, 'C', 1);
+      $this->Cell(85, 5, utf8_decode('DESTINATARIO'), 1, 1, 'C', 1);
       $this->Cell(8,  5, utf8_decode('N°'), 1, 0, 'C', 1);
       $this->Cell(10, 5, utf8_decode('AIR'), 1, 0, 'C', 1);
       $this->Cell(10, 5, utf8_decode('AGR'), 1, 0, 'C', 1);
@@ -43,10 +45,30 @@ class PDF extends FPDF
       $this->Cell(8,  5, utf8_decode('MON'), 1, 0, 'C', 1);
       $this->Cell(13, 5, utf8_decode('MONTO'), 1, 0, 'C', 1);
       $this->Cell(18, 5, utf8_decode('ESTADO'), 1, 0, 'C', 1);
-      $this->Cell(68, 5, utf8_decode('NOMBRE'), 1, 0, 'C', 1);
-      $this->Cell(68, 5, utf8_decode('NOMBRE'), 1, 1, 'C', 1);
+      $this->Cell(50, 5, utf8_decode('NOMBRE'), 1, 0, 'C', 1);
+      $this->Cell(85, 5, utf8_decode('NOMBRE'), 1, 1, 'C', 1);
 
    }
+
+   function AddTableData($data) {
+    $this->SetFont('times', 'B', 5);
+    foreach ($data as $fila) {
+        $this->Cell(8,  5, utf8_decode($fila[0]), 1, 0, 'C', 0);
+        $this->Cell(10,  5, utf8_decode($fila[1]), 1, 0, 'C', 0);
+        $this->Cell(10,  5, utf8_decode($fila[2]), 1, 0, 'C', 0);
+        $this->Cell(10,  5, utf8_decode($fila[3]), 1, 0, 'C', 0);
+        $this->Cell(15,  5, utf8_decode($fila[4]), 1, 0, 'C', 0);
+        $this->Cell(25,  5, utf8_decode($fila[5]), 1, 0, 'C', 0);
+        $this->Cell(10,  5, utf8_decode($fila[6]), 1, 0, 'C', 0);
+        $this->Cell(15,  5, utf8_decode($fila[7]), 1, 0, 'C', 0);
+        $this->Cell(8,  5, utf8_decode($fila[8]), 1, 0, 'C', 0);
+        $this->Cell(13,  5, utf8_decode($fila[9]), 1, 0, 'C', 0);
+        $this->Cell(18,  5, utf8_decode($fila[10]), 1, 0, 'C', 0);
+        $this->Cell(50, 5, utf8_decode($fila[11]), 1, 0, 'L', 0);
+        $this->Cell(85, 5, utf8_decode($fila[12]), 1, 1, 'L', 0);
+    }
+}
+
    // Pie de página
    function Footer()
    {
@@ -62,6 +84,7 @@ class PDF extends FPDF
       $this->Cell(540, 10, utf8_decode($hoy), 0, 0, 'C'); // Pie de página (fecha de página)
 
    }
+
 }
 
 $pdf = new PDF();
@@ -69,7 +92,7 @@ $pdf->AddPage("landscape"); /* aqui entran dos para parametros (horientazion,tam
 $pdf->AliasNbPages(); //muestra la pagina / y total de paginas
 
 $i = 0;
-$pdf->SetFont('Arial', '', 12);
+$pdf->SetFont('Arial', '', 8);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
 //validar aca si no son = votar a usandon redirec
@@ -96,25 +119,52 @@ $query = ("SELECT remesas_env_chile_bolivia.AIR, remesas_env_chile_bolivia.AGR, 
 
 $query_run = mysqli_query($conexion, $query);
 if(mysqli_num_rows($query_run) > 0){
-   foreach($query_run as $fila){     
-    $i = $i + 1;
-    /* TABLA */
-    $pdf->SetFont('times', 'B', 8);
-    $pdf->Cell(8,  5, utf8_decode($i), 1, 0, 'C', 0);
-    $pdf->Cell(10, 5, utf8_decode($fila['AIR']), 1, 0, 'C', 0);
-    $pdf->Cell(10, 5, utf8_decode($fila['AGR']), 1, 0, 'C', 0);
-    $pdf->Cell(10, 5, utf8_decode($fila['CRD']), 1, 0, 'C', 0);
-    $pdf->Cell(15, 5, utf8_decode($fila['CODIGO']), 1, 0, 'C', 0);
-    $pdf->Cell(25, 5, utf8_decode(date('d-m-Y h:i', strtotime($fila['FECHA']))), 1, 0, 'C', 0);
-    $pdf->Cell(10, 5, utf8_decode(number_format($fila['RECIBIDO_USD'], 0)), 1, 0, 'C', 0);
-    $pdf->Cell(15, 5, utf8_decode(number_format($fila['RECIBIDO_CLP'], 0)), 1, 0, 'C', 0);
-    $pdf->Cell(8,  5, utf8_decode($fila['MONEDA']), 1, 0, 'C', 0);
-    $pdf->Cell(13, 5, utf8_decode(number_format($fila['MONTO'], 0)), 1, 0, 'C', 0);
-    $pdf->Cell(18, 5, utf8_decode($fila['ESTADO']), 1, 0, 'C', 0);
-    $pdf->Cell(68, 5, utf8_decode($fila['REMITENTE']), 1, 0, 'L', 0);
-    $pdf->Cell(68, 5, utf8_decode($fila['DESTINATARIO']), 1, 1, 'L', 0);
+    $data = [];
+    foreach($query_run as $fila) {
+        $i = $i + 1;
+        $rowData = [
+            $i,
+            $fila['AIR'],
+            $fila['AGR'],
+            $fila['CRD'],
+            $fila['CODIGO'],
+            date('d-m-Y h:i', strtotime($fila['FECHA'])),
+            number_format($fila['RECIBIDO_USD'], 0),
+            number_format($fila['RECIBIDO_CLP'], 0),
+            $fila['MONEDA'],
+            number_format($fila['MONTO'], 0),
+            $fila['ESTADO'],
+            $fila['REMITENTE'],
+            $fila['DESTINATARIO']
+        ];
+        array_push($data, $rowData);
     }
-} 
+    $pdf->AddTableData($data);
+} else {
+    // Manejo de error si no hay filas encontradas
+    $pdf->SetFont('times', 'B', 8);
+    $pdf->Cell(40, 10, 'No se encontraron datos para el período seleccionado.', 0, 1);
+}
+//if(mysqli_num_rows($query_run) > 0){
+//   foreach($query_run as $fila){     
+//    $i = $i + 1;
+//    /* TABLA */
+//    $pdf->SetFont('times', 'B', 8);
+//    $pdf->Cell(8,  5, utf8_decode($i), 1, 0, 'C', 0);
+//    $pdf->Cell(10, 5, utf8_decode($fila['AIR']), 1, 0, 'C', 0);
+//    $pdf->Cell(10, 5, utf8_decode($fila['AGR']), 1, 0, 'C', 0);
+//    $pdf->Cell(10, 5, utf8_decode($fila['CRD']), 1, 0, 'C', 0);
+//    $pdf->Cell(15, 5, utf8_decode($fila['CODIGO']), 1, 0, 'C', 0);
+//    $pdf->Cell(25, 5, utf8_decode(date('d-m-Y h:i', strtotime($fila['FECHA']))), 1, 0, 'C', 0);
+//    $pdf->Cell(10, 5, utf8_decode(number_format($fila['RECIBIDO_USD'], 0)), 1, 0, 'C', 0);
+//    $pdf->Cell(15, 5, utf8_decode(number_format($fila['RECIBIDO_CLP'], 0)), 1, 0, 'C', 0);
+//    $pdf->Cell(8,  5, utf8_decode($fila['MONEDA']), 1, 0, 'C', 0);
+//    $pdf->Cell(13, 5, utf8_decode(number_format($fila['MONTO'], 0)), 1, 0, 'C', 0);
+//    $pdf->Cell(18, 5, utf8_decode($fila['ESTADO']), 1, 0, 'C', 0);
+//    $pdf->Cell(68, 5, utf8_decode($fila['REMITENTE']), 1, 0, 'L', 0);
+//    $pdf->Cell(68, 5, utf8_decode($fila['DESTINATARIO']), 1, 1, 'L', 0);
+//    }
+//} 
 
 // Consulta SQL para la segunda tabla
 // Agrega una página en orientación horizontal al PDF
