@@ -22,4 +22,23 @@ function insertar_datos3($conexion, $codigo_b, $fecha_b,$correlativo_b,$document
     var_dump($sentencia);
     return $ejecutar;
  }
+
+ function insertar_datos4($conexion, $fecha, $moneda_s, $resultado_s ,$tc_of, $saldo_bob, $cod_ag, $agencia_a) {
+  
+    global $conexion;
+    $sentencia = "INSERT INTO saldo_cajas (FECHA ,MONEDA_S ,SALDO_S ,TC_OF ,SALDO_BOB ,COD_AG ,AGENCIA_A ) VALUES ('$fecha', '$moneda_s', '$resultado_s' ,'$tc_of', '$saldo_bob', '$cod_ag', '$agencia_a')";
+    $ejecutar = mysqli_query($conexion, $sentencia);
+    //var_dump($sentencia);
+    return $ejecutar;
+    
+ }
+ function insertar_datos5($conexion,$agencia_b,$moneda_b, $fecha_b, $saldo_b, $tc_oficial, $saldo_bob) {
+  
+   global $conexion;
+   $sentencia = "INSERT INTO disp_boveda (AGENCIA_B, MONEDA_B, FECHA_B, SALDO_B, TC_OFICIAL, SALDO_BOB) VALUES ('$agencia_b','$moneda_b', '$fecha_b', '$saldo_b', '$tc_oficial', '$saldo_bob')";
+   $ejecutar = mysqli_query($conexion, $sentencia);
+   //var_dump($sentencia);
+   return $ejecutar;
+   
+}
 ?>

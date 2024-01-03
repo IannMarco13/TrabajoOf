@@ -33,17 +33,17 @@
                     <li class="front">
                         Consultas
                         <ul class="ul-third">
-                            <li>Consultas 1</li>
-                            <li>Consultas 2</li>
-                            <li>Consultas 3</li>
+                            <li class="back"><a href="consulta1.php">Consultas 1</a></li>
+                            <li class="back"><a href="consulta2.php">Consultas 2</a></li>
+                            <li class="back"><a href="consulta3.php">Consultas 3</a></li>
                             <li>---</li>
                             <li>---</li>
                         </ul>
                     </li>
                 </ul>
             </li>
-            <li>--------</li>
-            <li>--------</li>
+            <li class="back"><a href="saldo_cajas.php">Saldos de Caja</a></li>
+            <li class="back"><a href="Dis_boveda.php">Disponibilidad en Bóveda</a></li>
         </ul>
         <br>
     </nav>

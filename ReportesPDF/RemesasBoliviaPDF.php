@@ -27,19 +27,19 @@ class PDF extends FPDF
       $this->SetDrawColor(163, 163, 163); //colorBorde
       $this->SetFont('times', 'B', 5); // 'times' es el nombre para Times New Roman
       $this->Cell(8,  5, utf8_decode('N°'), 1, 0, 'C', 1);
-      $this->Cell(15, 5, utf8_decode('CODIGO'), 1, 0, 'C', 1);
-      $this->Cell(25, 5, utf8_decode('FECHA REG'), 1, 0, 'C', 1);
-      $this->Cell(25, 5, utf8_decode('CORRELATIVO'), 1, 0, 'C', 1);
-      $this->Cell(25, 5, utf8_decode('DOCUMENTO'), 1, 0, 'C', 1);
+      $this->Cell(9, 5, utf8_decode('CODIGO'), 1, 0, 'C', 1);
+      $this->Cell(19, 5, utf8_decode('FECHA REG'), 1, 0, 'C', 1);
+      $this->Cell(13, 5, utf8_decode('CORRELATIVO'), 1, 0, 'C', 1);
+      $this->Cell(19, 5, utf8_decode('DOCUMENTO'), 1, 0, 'C', 1);
       $this->Cell(60, 5, utf8_decode('US. FIANCIERO'), 1, 0, 'C', 1);
-      $this->Cell(20, 5, utf8_decode('TELF'), 1, 0, 'C', 1);
-      $this->Cell(60, 5, utf8_decode('DESTINATARIO'), 1, 0, 'C', 1);
-      $this->Cell(25, 5, utf8_decode('TELEFONO'), 1, 0, 'C', 1);
-      $this->Cell(10, 5, utf8_decode('MONEDA'),1,0,'C',1);
-      $this->Cell(25, 5, utf8_decode('MONTO BOB'), 1, 0, 'C', 1);
-      $this->Cell(25, 5, utf8_decode('MONTO USD'),1,0,'C',0); 
-      $this->Cell(50, 5, utf8_decode('FECHA PAGADO'),1,0,'C,0') ;
-      $this->Cell(60, 5, utf8_decode('ESTADO'),1, 1,'C') ;
+      $this->Cell(10, 5, utf8_decode('TELF'), 1, 0, 'C', 1);
+      $this->Cell(65, 5, utf8_decode('DESTINATARIO'), 1, 0, 'C', 1);
+      $this->Cell(12, 5, utf8_decode('TELEFONO'), 1, 0, 'C', 1);
+      $this->Cell(6, 5, utf8_decode('MON'),1,0,'C',1);
+      $this->Cell(10, 5, utf8_decode('BOB'), 1, 0, 'C', 1);
+      $this->Cell(10, 5, utf8_decode('USD'),1,0,'C',1); 
+      $this->Cell(19, 5, utf8_decode('FECHA PAG'),1,0,'C',1) ;
+      $this->Cell(18, 5, utf8_decode('ESTADO'),1, 1,'C',1) ;
 
    }
    // Pie de página
@@ -95,20 +95,27 @@ if(mysqli_num_rows($query_run) > 0){
 
 
     /* TABLA */
-    $pdf->SetFont('times', 'B', 8);
-    $pdf->Cell(8,  5, utf8_decode($i), 'LR', 0, 'C', 0);
-    $pdf->Cell(10, 5, utf8_decode($fila['CODIGO_B']), 1, 0, 'C', 0);
-    $pdf->Cell(25, 5, utf8_decode(date('d-m-Y h:i', strtotime($fila['FECHA_B']))), 1, 0, 'C', 0);
-    $pdf->Cell(18, 5, utf8_decode($fila['CORRELATIVO_B']), 1, 0, 'C', 0);
-    $pdf->Cell(25, 5, utf8_decode($fila['DOCUMENTO_B']), 1, 0, 'L', 0);
-    $pdf->MultiCell(65, 5, utf8_decode($fila['USU_FINCACIERO']), 'LR', 'L',false);
-    $pdf->Cell(15, 5, utf8_decode($fila['TELEFONO_U']), 1, 0, 'C', 0);
-    $pdf->MultiCell(65, 5, utf8_decode($fila['DESTINATARIO_B']), 1,'l');
-    $pdf->Cell(15, 5, utf8_decode($fila['TELEFONO_D']), 1, 0, 'C', 0);
-    $pdf->Cell(10, 5, utf8_decode($fila['DESTINO_B']), 1, 0, 'C', 0);
-    $pdf->Cell(10, 5, utf8_decode(number_format($fila['MONTO_ENV'], 0)), 1, 0, 'C', 0);
-    $pdf->Cell(15, 5, utf8_decode(number_format($fila['MONTO_BOB_B'], 0)), 1, 0, 'C', 0);
-    $pdf->Cell(25, 5, utf8_decode(date('d-m-Y h:i', strtotime($fila['ULTIMA_MODIFI']))), 1, 0, 'C', 0);
+    $pdf->SetFont('times', '', 6);
+    $pdf->Cell(8,  5, utf8_decode($i), 1, 0, 'C', 0);
+    $pdf->Cell(9, 5, utf8_decode($fila['CODIGO_B']), 1, 0, 'C', 0);
+    $pdf->Cell(19, 5, utf8_decode(date('d-m-Y h:i', strtotime($fila['FECHA_B']))), 1, 0, 'C', 0);
+    $pdf->Cell(13, 5, utf8_decode($fila['CORRELATIVO_B']), 1, 0, 'C', 0);
+    $pdf->Cell(19, 5, utf8_decode($fila['DOCUMENTO_B']), 1, 0, 'L', 0);
+    $pdf->Cell(60, 5, utf8_decode($fila['USU_FINCACIERO']), 1, 'L',false);
+    $pdf->Cell(10, 5, utf8_decode($fila['TELEFONO_U']), 1, 0, 'C', 0);
+    $pdf->Cell(65, 5, utf8_decode($fila['DESTINATARIO_B']), 1,'l');
+    $pdf->Cell(12, 5, utf8_decode($fila['TELEFONO_D']), 1, 0, 'C', 0);
+    $pdf->Cell(6, 5, utf8_decode($fila['DESTINO_B']), 1, 0, 'R', 0);
+    $pdf->Cell(10, 5, utf8_decode(number_format($fila['MONTO_ENV'], 0)), 1, 0, 'R', 0);
+    $pdf->Cell(10, 5, utf8_decode(number_format($fila['MONTO_BOB_B'], 0)), 1, 0, 'R', 0);
+
+    // Aquí incluimos la lógica para la celda de la fecha
+    if ($fila['ULTIMA_MODIFI'] !== null && $fila['ULTIMA_MODIFI'] !== '0000-00-00 00:00:00') {
+        $pdf->Cell(19, 5, utf8_decode(date("d-m-Y H:i", strtotime($fila['ULTIMA_MODIFI']))), 1, 0, 'C', 0);
+    } else {
+        $pdf->Cell(19, 5, utf8_decode('Fecha no disponible'), 1, 0, 'C', 0);
+    }
+    
     $pdf->Cell(18,  5, utf8_decode($fila['ESTADO_B']), 1, 1, 'C', 0);
 
     }

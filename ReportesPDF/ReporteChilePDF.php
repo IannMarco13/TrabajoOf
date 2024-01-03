@@ -25,19 +25,19 @@ class PDF extends FPDF
       $this->SetFillColor(255, 165, 0); //colorFondo
       $this->SetTextColor(0, 0, 0); //colorTexto
       $this->SetDrawColor(163, 163, 163); //colorBorde
-      $this->SetFont('times', 'B', 7); // 'times' es el nombre para Times New Roman
+      $this->SetFont('times', 'B', 6); // 'times' es el nombre para Times New Roman
       $this->Cell(8,  5, utf8_decode('N°'), 1, 0, 'C', 1);
       $this->Cell(10, 5, utf8_decode('COD'), 1, 0, 'C', 1);
       $this->Cell(10, 5, utf8_decode('AIR'), 1, 0, 'C', 1);
-      $this->Cell(25, 5, utf8_decode('ENVIO'), 1, 0, 'C', 1);
-      $this->Cell(10, 5, utf8_decode('ORIG'), 1, 0, 'C', 1);
-      $this->Cell(10, 5, utf8_decode('DEST'), 1, 0, 'C', 1);
-      $this->Cell(25, 5, utf8_decode('PAGO'), 1, 0, 'C', 1);
-      $this->Cell(17, 5, utf8_decode('ESTADO'), 1, 0, 'C', 1);
+      $this->Cell(19, 5, utf8_decode('ENVIO'), 1, 0, 'C', 1);
+      $this->Cell(8, 5, utf8_decode('ORIG'), 1, 0, 'C', 1);
+      $this->Cell(8, 5, utf8_decode('DEST'), 1, 0, 'C', 1);
+      $this->Cell(19, 5, utf8_decode('PAGO'), 1, 0, 'C', 1);
+      $this->Cell(15, 5, utf8_decode('ESTADO'), 1, 0, 'C', 1);
       $this->Cell(10, 5, utf8_decode('BOB'), 1, 0, 'C', 1);
       $this->Cell(10, 5, utf8_decode('USD'), 1, 0, 'C', 1);
-      $this->Cell(65, 5, utf8_decode('REMITENTE'), 1, 0, 'C', 1);
-      $this->Cell(75, 5, utf8_decode('DESTINATARIO'), 1, 1, 'C', 1);
+      $this->Cell(60, 5, utf8_decode('REMITENTE'), 1, 0, 'C', 1);
+      $this->Cell(100, 5, utf8_decode('DESTINATARIO'), 1, 1, 'C', 1);
 
    }
    // Pie de página
@@ -94,19 +94,24 @@ if(mysqli_num_rows($query_run) > 0){
     foreach($query_run as $fila){     
     $i = $i + 1;
     /* TABLA */
-    $pdf->SetFont('times', '', 8);
+    $pdf->SetFont('times', '', 6);
     $pdf->Cell(8,  5, utf8_decode($i), 1, 0, 'C', 0);
     $pdf->Cell(10, 5, utf8_decode($fila['CODIGO_R']), 1, 0, 'C', 0);
     $pdf->Cell(10, 5, utf8_decode($fila['AIR_R']), 1, 0, 'C', 0);
-    $pdf->Cell(25, 5, utf8_decode(date('d-m-Y h:i', strtotime($fila['FECHA_ORI']))), 1, 0, 'C', 0);
-    $pdf->Cell(10, 5, utf8_decode($fila['ORIGEN_R']), 1, 0, 'C', 0);
-    $pdf->Cell(10, 5, utf8_decode($fila['DESTINO_R']), 1, 0, 'C', 0);
-    $pdf->Cell(25, 5, utf8_decode(date('d-m-Y h:i', strtotime($fila['FECHA_PAG']))), 1, 0, 'C', 0);
-    $pdf->Cell(17,  5, utf8_decode($fila['ESTADO_R']), 1, 0, 'C', 0);
+    $pdf->Cell(19, 5, utf8_decode(date('d-m-Y h:i', strtotime($fila['FECHA_ORI']))), 1, 0, 'C', 0);
+    $pdf->Cell(8, 5, utf8_decode($fila['ORIGEN_R']), 1, 0, 'C', 0);
+    $pdf->Cell(8, 5, utf8_decode($fila['DESTINO_R']), 1, 0, 'C', 0);
+    // Aquí incluimos la lógica para la celda de la fecha
+    if ($fila['FECHA_PAG'] !== null && $fila['FECHA_PAG'] !== '0000-00-00 00:00:00') {
+        $pdf->Cell(19, 5, utf8_decode(date("d-m-Y H:i", strtotime($fila['FECHA_PAG']))), 1, 0, 'C', 0);
+    } else {
+        $pdf->Cell(19, 5, utf8_decode('Fecha no disponible'), 1, 0, 'C', 0);
+    }
+    $pdf->Cell(15,  5, utf8_decode($fila['ESTADO_R']), 1, 0, 'C', 0);
     $pdf->Cell(10,  5, utf8_decode(number_format($fila['MONTO_BOB'], 0)), 1, 0, 'R', 0);
     $pdf->Cell(10,  5, utf8_decode(number_format($fila['MONTO_USD'], 1)), 1, 0, 'R', 0);
-    $pdf->Cell(65,  5, utf8_decode($fila['REMITENTE_R']), 1, 'L');
-    $pdf->MultiCell(75,  5, utf8_decode($fila['DESTINATARIO_R']), 1, 'L');
+    $pdf->Cell(60,  5, utf8_decode($fila['REMITENTE_R']), 1, 'L');
+    $pdf->MultiCell(100,  5, utf8_decode($fila['DESTINATARIO_R']), 1, 'L');
 
    }
 } 

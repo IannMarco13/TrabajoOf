@@ -27,45 +27,44 @@ class PDF extends FPDF
       $this->SetFillColor(255, 165, 0); //colorFondo
       $this->SetTextColor(0, 0, 0); //colorTexto
       $this->SetDrawColor(163, 163, 163); //colorBorde
-      $this->SetFont('times', 'B', 8); // 'times' es el nombre para Times New Roman
-      $this->Cell(8,  5, utf8_decode(' '), 1, 0, 'C', 1);
-      $this->Cell(70, 5, utf8_decode('SEGUIMIENTO'), 1, 0, 'C', 1);
-      $this->Cell(25, 5, utf8_decode('PAGO'), 1, 0, 'C', 1);
-      $this->Cell(39, 5, utf8_decode('PROCESO DESTINO'), 1, 0, 'C', 1);
-      $this->Cell(50, 5, utf8_decode('REMITENTE'), 1, 0, 'C', 1);
-      $this->Cell(85, 5, utf8_decode('DESTINATARIO'), 1, 1, 'C', 1);
+      $this->SetFont('times', 'B', 7); // 'times' es el nombre para Times New Roman
+      $this->Cell(67, 5, utf8_decode('SEGUIMIENTO'), 1, 0, 'C', 1);
+      $this->Cell(24, 5, utf8_decode('PAGO'), 1, 0, 'C', 1);
+      $this->Cell(38, 5, utf8_decode('PROCESO DESTINO'), 1, 0, 'C', 1);
+      $this->Cell(55, 5, utf8_decode('REMITENTE'), 1, 0, 'C', 1);
+      $this->Cell(93, 5, utf8_decode('DESTINATARIO'), 1, 1, 'C', 1);
       $this->Cell(8,  5, utf8_decode('N°'), 1, 0, 'C', 1);
       $this->Cell(10, 5, utf8_decode('AIR'), 1, 0, 'C', 1);
       $this->Cell(10, 5, utf8_decode('AGR'), 1, 0, 'C', 1);
       $this->Cell(10, 5, utf8_decode('CRD'), 1, 0, 'C', 1);
-      $this->Cell(15, 5, utf8_decode('CODIGO'), 1, 0, 'C', 1);
-      $this->Cell(25, 5, utf8_decode('FECHA'), 1, 0, 'C', 1);
-      $this->Cell(10, 5, utf8_decode('[USD]'), 1, 0, 'C', 1);
+      $this->Cell(10, 5, utf8_decode('CODIGO'), 1, 0, 'C', 1);
+      $this->Cell(19, 5, utf8_decode('FECHA'), 1, 0, 'C', 1);
+      $this->Cell(9, 5, utf8_decode('[USD]'), 1, 0, 'C', 1);
       $this->Cell(15, 5, utf8_decode('[CLP]'), 1, 0, 'C', 1);
       $this->Cell(8,  5, utf8_decode('MON'), 1, 0, 'C', 1);
-      $this->Cell(13, 5, utf8_decode('MONTO'), 1, 0, 'C', 1);
-      $this->Cell(18, 5, utf8_decode('ESTADO'), 1, 0, 'C', 1);
-      $this->Cell(50, 5, utf8_decode('NOMBRE'), 1, 0, 'C', 1);
-      $this->Cell(85, 5, utf8_decode('NOMBRE'), 1, 1, 'C', 1);
+      $this->Cell(15, 5, utf8_decode('MONTO'), 1, 0, 'C', 1);
+      $this->Cell(15, 5, utf8_decode('ESTADO'), 1, 0, 'C', 1);
+      $this->Cell(55, 5, utf8_decode('NOMBRE'), 1, 0, 'C', 1);
+      $this->Cell(93, 5, utf8_decode('NOMBRE'), 1, 1, 'C', 1);
 
    }
 
    function AddTableData($data) {
-    $this->SetFont('times', 'B', 5);
+    $this->SetFont('times', '', 6);
     foreach ($data as $fila) {
         $this->Cell(8,  5, utf8_decode($fila[0]), 1, 0, 'C', 0);
         $this->Cell(10,  5, utf8_decode($fila[1]), 1, 0, 'C', 0);
         $this->Cell(10,  5, utf8_decode($fila[2]), 1, 0, 'C', 0);
         $this->Cell(10,  5, utf8_decode($fila[3]), 1, 0, 'C', 0);
-        $this->Cell(15,  5, utf8_decode($fila[4]), 1, 0, 'C', 0);
-        $this->Cell(25,  5, utf8_decode($fila[5]), 1, 0, 'C', 0);
-        $this->Cell(10,  5, utf8_decode($fila[6]), 1, 0, 'C', 0);
-        $this->Cell(15,  5, utf8_decode($fila[7]), 1, 0, 'C', 0);
+        $this->Cell(10,  5, utf8_decode($fila[4]), 1, 0, 'C', 0);
+        $this->Cell(19,  5, utf8_decode($fila[5]), 1, 0, 'C', 0);
+        $this->Cell(9,  5, utf8_decode($fila[6]), 1, 0, 'R', 0);
+        $this->Cell(15,  5, utf8_decode($fila[7]), 1, 0, 'R', 0);
         $this->Cell(8,  5, utf8_decode($fila[8]), 1, 0, 'C', 0);
-        $this->Cell(13,  5, utf8_decode($fila[9]), 1, 0, 'C', 0);
-        $this->Cell(18,  5, utf8_decode($fila[10]), 1, 0, 'C', 0);
-        $this->Cell(50, 5, utf8_decode($fila[11]), 1, 0, 'L', 0);
-        $this->Cell(85, 5, utf8_decode($fila[12]), 1, 1, 'L', 0);
+        $this->Cell(15,  5, utf8_decode($fila[9]), 1, 0, 'R', 0);
+        $this->Cell(15,  5, utf8_decode($fila[10]), 1, 0, 'C', 0);
+        $this->Cell(55, 5, utf8_decode($fila[11]), 1, 0, 'L', 0);
+        $this->MultiCell(93, 5, utf8_decode($fila[12]), 1, 'L');
     }
 }
 
@@ -145,29 +144,7 @@ if(mysqli_num_rows($query_run) > 0){
     $pdf->SetFont('times', 'B', 8);
     $pdf->Cell(40, 10, 'No se encontraron datos para el período seleccionado.', 0, 1);
 }
-//if(mysqli_num_rows($query_run) > 0){
-//   foreach($query_run as $fila){     
-//    $i = $i + 1;
-//    /* TABLA */
-//    $pdf->SetFont('times', 'B', 8);
-//    $pdf->Cell(8,  5, utf8_decode($i), 1, 0, 'C', 0);
-//    $pdf->Cell(10, 5, utf8_decode($fila['AIR']), 1, 0, 'C', 0);
-//    $pdf->Cell(10, 5, utf8_decode($fila['AGR']), 1, 0, 'C', 0);
-//    $pdf->Cell(10, 5, utf8_decode($fila['CRD']), 1, 0, 'C', 0);
-//    $pdf->Cell(15, 5, utf8_decode($fila['CODIGO']), 1, 0, 'C', 0);
-//    $pdf->Cell(25, 5, utf8_decode(date('d-m-Y h:i', strtotime($fila['FECHA']))), 1, 0, 'C', 0);
-//    $pdf->Cell(10, 5, utf8_decode(number_format($fila['RECIBIDO_USD'], 0)), 1, 0, 'C', 0);
-//    $pdf->Cell(15, 5, utf8_decode(number_format($fila['RECIBIDO_CLP'], 0)), 1, 0, 'C', 0);
-//    $pdf->Cell(8,  5, utf8_decode($fila['MONEDA']), 1, 0, 'C', 0);
-//    $pdf->Cell(13, 5, utf8_decode(number_format($fila['MONTO'], 0)), 1, 0, 'C', 0);
-//    $pdf->Cell(18, 5, utf8_decode($fila['ESTADO']), 1, 0, 'C', 0);
-//    $pdf->Cell(68, 5, utf8_decode($fila['REMITENTE']), 1, 0, 'L', 0);
-//    $pdf->Cell(68, 5, utf8_decode($fila['DESTINATARIO']), 1, 1, 'L', 0);
-//    }
-//} 
 
-// Consulta SQL para la segunda tabla
-// Agrega una página en orientación horizontal al PDF
 $query_cont = "SELECT COUNT(MONEDA) AS Total_Registros FROM remesas_env_chile_bolivia WHERE DATE(FECHA) BETWEEN '$from_date' AND '$to_date' AND remesas_env_chile_bolivia.MONEDA = 'BOB'";
 
 $query_run_cont = mysqli_query($conexion, $query_cont);

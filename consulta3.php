@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -29,19 +29,19 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>  
     <!-- Datatables responsive -->
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <title>REMESAS</title>
+    <title></title>
 </head>
 <body> 
     <br>
-    <h1 class="text-center">Listado Reporte</h1>
+    <h1 class="text-center">Listado Consulta 3</h1>
     <div class="container">
         <form action="" method="GET">
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label><b>Del Dia</b></label>
-                        <input type="date" name="from_date" value="<?php if(date(isset($_GET['from_date']))){ echo $_GET['from_date']; } ?>" class="form-control">
-                    </div>    
+                        <input type="date" name="from_date" value="<?php if(date(isset($_GET['from_date']))){ echo $_GET['from_date']; } ?>" class="form-control">   
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
@@ -55,39 +55,39 @@
                         <button type="submit" class="submit-button"><i class="fas fa-search"></i> Buscar</button>
                         <!--hacemos que los datos de los canlendarios se guaden y puedan ser re usados-->
                         <a href="ReportesPDF/ReporteChilePDF.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>" target="_blank" class="submit-button">
-                        <i class="far fa-file-pdf"></i> Generar Reporte
-                    </a>
+                            <i class="far fa-file-pdf"></i> Generar Reporte
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+
+    </div>
+
     <div calss="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <table id="TablaRemesas" class="table table-striped table-bordered" style="width:100%">
                     <thead>
-                        <tr>
-                            <th>N°</th>
-                            <th>CODIGO</th>
-                            <th>AIR</th>
-                            <th>FECHA ORIGEN</th>
-                            <th>ORIGEN</th>
-                            <Th>DESTINO</Th>
-                            <th>FECHA PAGO</th>
-                            <th>ESTADO</th>
-                            <th>MONTO BOB</th>
-                            <th>MONTO USD</th>
-                            <th>REMITENTE</th>
-                            <th>DESTINATARIO</th>
+                    <tr>
+                        <!--<th>NUM</th>-->
+                        <th>N°</th>
+                        <th>CODIGO T1</th>
+                        <th>REMITENTE</th>
+                        <th>FECHA ENVIO T1</th>
+                        <th>ESTADO</th>
+                        <th>MONTO</th>
+                        <th>DESTINATARIO</th>
+                        <th>FECHA PAGO</th>
+                        <th>ESTADO</th>
                         </tr>
                     </thead>
                 <tbody>
                     <?php 
                     $from_date = $_GET['from_date'] ?? null;
                     $to_date = $_GET['to_date'] ?? null;
-
+                    
                     if ($from_date && $to_date) {
                         $fechaInicio = Carbon::createFromFormat('Y-m-d', $from_date);
                         $fechaFin = Carbon::createFromFormat('Y-m-d', $to_date);
@@ -96,50 +96,45 @@
                             // Si la fecha de inicio es mayor que la fecha final
                             echo '<script>alert("La fecha de inicio no puede ser mayor que la fecha fin"); window.location.href = "Mostrar_remesas.php";</script>';
                         }
-    
                         //delimitar por fecha
                         $fechaActual = Carbon::now();
                         if ($fechaInicio->isFuture() || $fechaFin->isFuture()) {
                             // Si alguna de las fechas está en el futuro
                             echo '<script>alert("No puedes ingresar fechas futuras a: '.$fechaActual.'"); window.location.href = "Mostrar_remesas.php";</script>';
                         }
+                        if(isset($_GET['from_date']) && isset($_GET['to_date'])){
+                            $query ="SELECT remesas_env_chile_bolivia.CODIGO,remesas_env_chile_bolivia.REMITENTE, remesas_env_chile_bolivia.FECHA,remesas_env_chile_bolivia.ESTADO,remesas_env_chile_bolivia.MONTO,SUBSTRING_INDEX(DESTINATARIO, ' // ', 1) AS DESTINATARIO, report_chile_bolivia.FECHA_PAG,report_chile_bolivia.ESTADO_R FROM remesas_env_chile_bolivia INNER JOIN report_chile_bolivia ON remesas_env_chile_bolivia.AIR = report_chile_bolivia.AIR_R WHERE remesas_env_chile_bolivia.ESTADO != report_chile_bolivia.ESTADO_R AND DATE(FECHA)BETWEEN '$from_date' AND '$to_date' ORDER BY FECHA ASC;";
+                            $query_run = mysqli_query($conexion, $query);
+                            
+                            if(mysqli_num_rows($query_run) > 0){
+                                foreach($query_run as $fila){
+                                    $cont++;
+                                    $DESTINATARIO = $fila['DESTINATARIO'];
+                                    ?>
+                        <tr>
+                            <td> <?php echo $cont; ?></td>
+                            <td> <?php echo $fila['CODIGO'] ?> </td>
+                            <td> <?php echo $fila['REMITENTE'] ?> </td>
+                            <td> <?php echo date("d-m-Y h:i", strtotime($fila['FECHA'])) ?> </td>
+                            <td> <?php echo $fila['ESTADO'] ?> </td>
+                            <td> <?php echo $fila['MONTO'] ?> </td>
+                            <td> <?php echo $DESTINATARIO ?> </td>
+                            <?php if ($fila['FECHA_PAG'] !== null && $fila['FECHA_PAG'] !== '0000-00-00 00:00:00') { ?>
+                            <td><?php echo date("d-m-Y H:i", strtotime($fila['FECHA_PAG'])); ?></td>
+                            <?php } else { ?>
+                            <td>Fecha no disponible</td>
+                            <?php } ?>
+                            <td> <?php echo $fila['ESTADO_R'] ?> </td>
 
-                    if(isset($_GET['from_date']) && isset($_GET['to_date'])){
-                        
-                        $query ="SELECT * FROM report_chile_bolivia WHERE DATE(FECHA_ORI) BETWEEN '$from_date' AND '$to_date'";
-                        $query_run = mysqli_query($conexion, $query);
-                        if(mysqli_num_rows($query_run) > 0){
-                            foreach($query_run as $fila){ 
-                                $cont++;?>
-                            <tr>
-                                <td> <?php echo $cont ?> </td>
-                                <td> <?php echo $fila['CODIGO_R'] ?> </td>
-                                <td> <?php echo $fila['AIR_R'] ?> </td>
-                                <!--<td> <?php echo $fila['FECHA_ORI'] ?> </td>-->
-                                <td> <?php echo date("d-m-Y h:i", strtotime($fila['FECHA_ORI'])) ?></td>   
-                                <td> <?php echo $fila['ORIGEN_R'] ?> </td>
-                                <td> <?php echo $fila['DESTINO_R'] ?> </td>
-                                <!-- Como en la BD las fechas de exel que estan con campos "-" los guarda como 0000-00-00 00:00:00 usando este comando se Haregla-->
-                                <?php if ($fila['FECHA_PAG'] !== null && $fila['FECHA_PAG'] !== '0000-00-00 00:00:00') { ?>
-                                <td><?php echo date("d-m-Y H:i", strtotime($fila['FECHA_PAG'])); ?></td>
-                                <?php } else { ?>
-                                <td>Fecha no disponible</td>
-                                <?php } ?>
-                                <td> <?php echo $fila['ESTADO_R'] ?> </td>
-                                <td> <?php echo $fila['MONTO_BOB'] ?> </td>
-                                <td> <?php echo $fila['MONTO_USD'] ?> </td>
-                                <td> <?php echo $fila['REMITENTE_R'] ?> </td>  
-                                <td> <?php echo $fila['DESTINATARIO_R'] ?> </td>
-                                
-                            </tr>                        
+                        </tr>
                             <?php
                             }
                         }else{?>
                         <tr>
                             <td><?php  echo "No se encontraron resultados"; ?></td>
-                        <?php }                                
-                    } 
-                    }?>
+                            <?php }
+                            }
+                        }?> 
                     </tbody>
                 </table>
                 <?php  mysqli_close($conexion); ?>

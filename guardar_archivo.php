@@ -10,7 +10,8 @@ include("encabezado.php");
     <!--<link rel="stylesheet" href="assets/css/style.css">-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     
-    <link rel="stylesheet" href="assets/css/guardarA.css">
+    <link rel="stylesheet" href="assets/css/guardar.css">
+
     <!--Boostrap JS-->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -21,7 +22,7 @@ include("encabezado.php");
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 </head>
 <body>
-    <br>
+
     <div class="guardar_archivo">
         <div class="formulario">
             <h1>
@@ -30,7 +31,7 @@ include("encabezado.php");
             <form action="guardar_archivo.php" class="formulariocompleto" method="post" enctype="multipart/form-data">
                 <input type="file" id="archivo1" name="archivo1" class="form input-file" />
                 <button type="submit" class="submit-button" name="enviar1">
-                    <i class="fas fa-folder"></i> Subir Archivo
+                    <i class="fas fa-folder"></i> Subir Archivo Remesas Chile Bolivia
                 </button>
             </form>
             <script src="assets/js/guardar.js"></script>
@@ -40,7 +41,7 @@ include("encabezado.php");
     <div class="guardar_archivo">
         <div class="formulario">
             <h1>
-               REPORTE REMESAS CHILE BOLIVIA
+                REPORTE REMESAS CHILE BOLIVIA
             </h1>
             <form action="guardar_archivo.php" class="formulariocompleto" method="post" enctype="multipart/form-data">
                 <input type="file" id="archivo2" name="archivo2" class="form input-file" />
@@ -49,10 +50,10 @@ include("encabezado.php");
                     <i class="fas fa-folder"></i> Subir Archivo Reportes
                 </button>
             </form>
-            
             <script src="assets/js/guardar.js"></script>
         </div>
     </div>
+
     <div class="guardar_archivo">
         <div class="formulario">
             <h1>
@@ -61,11 +62,41 @@ include("encabezado.php");
             <form action="guardar_archivo.php" class="formulariocompleto" method="post" enctype="multipart/form-data">        
             <input type="file" id="archivo3" name="archivo3" class="form input-file"/>
             <button type="submit" class="submit-button" name="enviar3">
-                    <i class="fas fa-folder"></i> Subir Archivo Remesas Bolivi
+                    <i class="fas fa-folder"></i> Subir Archivo Remesas Bolivia
                 </button>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
+
+    <div class="guardar_archivo">
+        <div class="formulario">
+            <h1>
+                SALDO DE CAJAS
+            </h1>
+            <form action="guardar_archivo.php" class="formulariocompleto" method="post" enctype="multipart/form-data">
+                <input type="file" id="archivo4" name="archivo4" class="form input-file"/>
+                <button type="submit" class="submit-button" name="enviar4">
+                    <i class="fas fa-folder"></i>Subir Archivo Cierre De Cajas
+                </button>
+            </form>
+            <script src="assets/js/guardar.js"></script>
+        </div>
+    </div>
+
+    <div class="guardar_archivo">
+        <div class="formulario">
+            <h1>
+                DISPONIBILIDAD EN BÓVEDA
+            </h1>
+            <form action="guardar_archivo.php" class="formulariocompleto" method="post" enctype="multipart/form-data">
+                <input type="file" id="archivo5" name="archivo5" class="form input-file"/>
+                <button type="submit" class="submit-button" name="enviar5">
+                    <i class="fas fa-folder"></i>Subir Archivo Cierre De Cajas
+                </button>
+            </form>
+            <script src="assets/js/guardar.js"></script>
+        </div>
+    </div>
 
 </body>
 </html>
@@ -227,7 +258,7 @@ include("encabezado.php");
             while ($datos = fgetcsv($fp,1000,";")) {
     
                 $fecha_convertida_1 = ($datos[1] === '-' || empty($datos[1])) ? NULL : DateTime::createFromFormat('d-m-Y H:i:s', $datos[1]);
-                $fecha_convertida_19 = ($datos[19] === '-' || empty($datos[19])) ? NULL : DateTime::createFromFormat('d-m-Y H:i:s', $datos[9]);
+                $fecha_convertida_19 = ($datos[19] === '-' || empty($datos[19])) ? NULL : DateTime::createFromFormat('d-m-Y H:i:s', $datos[19]);
     
                 if ($fecha_convertida_1) {
                     $fecha_convertida_1 = $fecha_convertida_1->format('Y-m-d H:i:s');
@@ -281,5 +312,137 @@ include("encabezado.php");
         }else{
             echo "No existe el archivo copiado <br/>";
         }
+    }
+
+    if (isset($_POST["enviar4"])) {//permite recepcionar una variable que si exista y que no sea null
+    
+        require_once("conexion.php");
+        require_once("funtions.php");
+    
+        $directorio_destino = 'C:/xampp/htdocs/RemesasT/exel/';
+        $archivo4 = $_FILES["archivo4"]["name"];
+        $archivo_guardado4 = $directorio_destino . "copia_" . $archivo4;
+        
+        // Verificar si el archivo ya existe en el directorio
+        if (file_exists($archivo_guardado4)) {
+            echo "El archivo ya existe. No se puede subir el mismo archivo nuevamente.";
+        } else {
+            $archivo_copiado4 = $_FILES["archivo4"]["tmp_name"];
+        
+            if (copy($archivo_copiado4, $archivo_guardado4)) {
+                $alert = "Se copió correctamente el archivo temporal a nuestra carpeta";
+            } else {
+                echo "Error en el copiado <br/>";
+            }
+    
+        //echo $archivo. "esta en la ruta temporal: " .$archivo_copiado;
+        if (copy($archivo_copiado4, $archivo_guardado4)) {
+            $alert = "Se copio correctamente el archivo temmporal a nuestra carpeta";
+            //echo "Se copio correctamente el archivo temmporal a nuestra carpeta <br/>";
+        }else{
+            echo"Error en el copiado <br/>";
+        }
+    
+        if(file_exists($archivo_guardado4)) {
+            $fp = fopen($archivo_guardado4,"r");
+    
+            fgetcsv($fp, 1000, ";");
+            
+            while ($datos = fgetcsv($fp,1000,";")) {
+    
+                // Transformar valores decimales (12,3)
+                $decimal_2 = str_replace(".", "", $datos[2]); // Eliminar puntos de los miles
+                $decimal_2 = str_replace(",", ".", $decimal_2); // Reemplazar comas por puntos
+                $decimal_2 = floatval($decimal_2); // Convertir a float
+    
+                $decimal_3 = str_replace(".", "", $datos[3]); // Eliminar puntos de los miles
+                $decimal_3 = str_replace(",", ".", $decimal_3); // Reemplazar comas por puntos
+                $decimal_3 = floatval($decimal_3); // Convertir a float
+    
+                $decimal_4 = str_replace(".", "", $datos[4]); // Eliminar puntos de los miles
+                $decimal_4 = str_replace(",", ".", $decimal_4); // Reemplazar comas por puntos
+                $decimal_4 = floatval($decimal_4); // Convertir a float
+    
+                // Redondear a 3 decimales si es necesario
+                $decimal_2 = number_format($decimal_2, 2, '.', '');
+                $decimal_3 = number_format($decimal_3, 6, '.', '');
+                $decimal_4 = number_format($decimal_4, 2, '.', '');
+                
+                $resultado4 = insertar_datos4($conexion,$datos[0],$datos[1], $decimal_2, $decimal_3, $decimal_4, $datos[5], $datos[6]);
+            }
+                
+        }else{
+            echo "No existe el archivo copiado <br/>";
+        }
+    }
+    }
+
+    if (isset($_POST["enviar5"])) {//permite recepcionar una variable que si exista y que no sea null
+    
+        require_once("conexion.php");
+        require_once("funtions.php");
+    
+        $directorio_destino = 'C:/xampp/htdocs/RemesasT/exel/';
+        $archivo5 = $_FILES["archivo5"]["name"];
+        $archivo_guardado5 = $directorio_destino . "copia_" . $archivo5;
+        
+        // Verificar si el archivo ya existe en el directorio
+        if (file_exists($archivo_guardado5)) {
+            echo "El archivo ya existe. No se puede subir el mismo archivo nuevamente.";
+        } else {
+            $archivo_copiado5 = $_FILES["archivo5"]["tmp_name"];
+        
+            if (copy($archivo_copiado5, $archivo_guardado5)) {
+                $alert = "Se copió correctamente el archivo temporal a nuestra carpeta";
+            } else {
+                echo "Error en el copiado <br/>";
+            }
+    
+        //echo $archivo. "esta en la ruta temporal: " .$archivo_copiado;
+        if (copy($archivo_copiado5, $archivo_guardado5)) {
+            $alert = "Se copio correctamente el archivo temmporal a nuestra carpeta";
+            //echo "Se copio correctamente el archivo temmporal a nuestra carpeta <br/>";
+        }else{
+            echo"Error en el copiado <br/>";
+        }
+    
+        if(file_exists($archivo_guardado5)) {
+            $fp = fopen($archivo_guardado5,"r");
+    
+            fgetcsv($fp, 1000, ";");
+            
+            while ($datos = fgetcsv($fp,1000,";")) {
+
+                $fecha_convertida_2 = ($datos[2] === '-' || empty($datos[2])) ? NULL : DateTime::createFromFormat('j/n/Y', $datos[2]);
+
+                if ($fecha_convertida_2) {
+                    $fecha_convertida_2 = $fecha_convertida_2->format('Y-m-d H:i:s');
+                }
+                
+                // Transformar valores decimales (12,3)
+                $decimal_3 = str_replace(".", "", $datos[3]); // Eliminar puntos de los miles
+                $decimal_3 = str_replace(",", ".", $decimal_3); // Reemplazar comas por puntos
+                $decimal_3 = floatval($decimal_3); // Convertir a float
+
+                $decimal_4 = str_replace(".", "", $datos[4]); // Eliminar puntos de los miles
+                $decimal_4 = str_replace(",", ".", $decimal_4); // Reemplazar comas por puntos
+                $decimal_4 = floatval($decimal_4); // Convertir a float
+    
+                $decimal_5 = str_replace(".", "", $datos[5]); // Eliminar puntos de los miles
+                $decimal_5 = str_replace(",", ".", $decimal_5); // Reemplazar comas por puntos
+                $decimal_5 = floatval($decimal_5); // Convertir a float
+
+                // Redondear a 3 decimales si es necesario
+                $decimal_3 = number_format($decimal_3, 2, '.', '');
+                $decimal_4 = number_format($decimal_4, 6, '.', '');
+                $decimal_5 = number_format($decimal_5, 2, '.', '');
+                
+                $resultado5 = insertar_datos5($conexion,$datos[0],$datos[1], $fecha_convertida_2, $decimal_3, $decimal_4, $decimal_5);
+            }
+                
+        }else{
+            echo "No existe el archivo copiado <br/>";
+        }
+    }
     }
 ?>
