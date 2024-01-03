@@ -92,15 +92,16 @@ $query_run = mysqli_query($conexion, $query);
 if(mysqli_num_rows($query_run) > 0){
    foreach($query_run as $fila){     
     $i = $i + 1;
+
+
     /* TABLA */
     $pdf->SetFont('times', 'B', 8);
-    $pdf->Cell(8,  5, utf8_decode($i), 1, 0, 'C', 0);
+    $pdf->Cell(8,  5, utf8_decode($i), 'LR', 0, 'C', 0);
     $pdf->Cell(10, 5, utf8_decode($fila['CODIGO_B']), 1, 0, 'C', 0);
     $pdf->Cell(25, 5, utf8_decode(date('d-m-Y h:i', strtotime($fila['FECHA_B']))), 1, 0, 'C', 0);
     $pdf->Cell(18, 5, utf8_decode($fila['CORRELATIVO_B']), 1, 0, 'C', 0);
     $pdf->Cell(25, 5, utf8_decode($fila['DOCUMENTO_B']), 1, 0, 'L', 0);
-    $pdf->MultiCell(65, 5, utf8_decode($fila['USU_FINCACIERO']), 1, 'L');
-
+    $pdf->MultiCell(65, 5, utf8_decode($fila['USU_FINCACIERO']), 'LR', 'L',false);
     $pdf->Cell(15, 5, utf8_decode($fila['TELEFONO_U']), 1, 0, 'C', 0);
     $pdf->MultiCell(65, 5, utf8_decode($fila['DESTINATARIO_B']), 1,'l');
     $pdf->Cell(15, 5, utf8_decode($fila['TELEFONO_D']), 1, 0, 'C', 0);
