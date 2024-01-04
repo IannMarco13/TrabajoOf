@@ -1,0 +1,102 @@
+/*thead {
+/*    background-color: #ed8529;
+/*    color: #FFF;
+/*}
+/*
+/*
+/*.text-center {
+/*    text-align: left;
+/*}
+/*
+/* Estilos para el contenedor y los elementos internos 
+/*.container {
+/*    max-width: 500px;
+/*    margin: 0 auto;
+/*    padding: 20px;
+/*}
+/*
+/*.row {
+/*    margin-bottom: 20px;
+/*}
+/*
+/*.form-group {
+/*    margin-bottom: 15px;
+/*}
+/*
+/*.form-control {
+/*    width: 50%;/* Establece el ancho al 50% del contenedor padre */
+/*    padding: 8px; /* Añade espacio de relleno alrededor del contenido */
+/*    border-radius: 50px;/* Redondea los bordes del elemento */
+/*    border: 1px solid #000000; /* Establece un borde sólido de 1 píxel con color gris claro */
+/*    font-size: 14px;/* Define el tamaño de la fuente del texto */
+/*}
+/*
+/*.submit-button {
+/*    padding: 10px 15px;
+/*    border: none;
+/*    border-radius: 5px;
+/*    font-size: 14px;
+/*    cursor: pointer;
+/*    background-color: #088c8c;
+/*    color: #fff;
+/*    transition: background-color 0.3s;
+/*}
+/*
+/*.submit-button:hover {
+/*    background-color: #deb598;
+/*}
+/* Personalización del botón */
+/*a.btn-custom {
+/*    /* Agrega estilos personalizados aquí */
+/*    /* Por ejemplo, puedes ajustar el tamaño del texto, el padding, los bordes, etc. */
+/*    padding: 8px 16px;
+/*    border-radius: 5px;
+/*    font-size: 14px;
+/*    background-color: #36a832; /* Color de fondo del botón */
+/*    color: white; /* Color del texto */
+/*    /* Y cualquier otro estilo que desees aplicar */
+/*}*/
+
+.form-control {
+    width: 50%;/* Establece el ancho al 50% del contenedor padre */
+    padding: 8px; /* Añade espacio de relleno alrededor del contenido */
+    border-radius: 50px;/* Redondea los bordes del elemento */
+    border: 1px solid #000000; /* Establece un borde sólido de 1 píxel con color gris claro */
+    font-size: 14px;/* Define el tamaño de la fuente del texto */
+}
+
+.formu {
+    width: 500px; /* Ancho fijo */
+    margin: 0 10px; /* Márgenes a los lados */
+    text-align: center; /* Centra el texto */
+}
+
+.submit-button {
+    padding: 10px 20px; /* Espaciado interior del botón */
+    border: 2px solid #000; /* con borde color negro */
+    border-radius: 10px; /* Borde redondeado */
+    font-size: 16px; /* Tamaño de la fuente */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    background-color: #ed8529; /* Color de fondo del botón */
+    color: #fff; /* Color del texto */
+    transition: background-color 0.3s; /* Efecto de transición al pasar el ratón */
+}
+
+.submit-button:hover {
+    background-color: #deb598; /* Cambia el color de fondo al pasar el ratón */
+}
+.btn-custom {
+    padding: 10px 20px; /* Espaciado interior del botón */
+    border-radius: 5px; /* Borde redondeado */
+    border: 2px solid #000; /* con borde color negro */ 
+    font-size: 16px; /* Tamaño de la fuente */
+    background-color: #ed8529; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    text-decoration: none; /* Quita subrayado enlaces */
+    transition: background-color 0.3s; /* Efecto de transición al pasar el ratón */
+    margin-left: 10px; /* Agrega espacio entre los botones */
+}
+
+.btn-custom:hover {
+    background-color: #6d6b69; /* Cambia el color de fondo al pasar el ratón */
+}

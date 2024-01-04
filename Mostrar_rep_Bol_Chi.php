@@ -15,7 +15,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="assets/css/MTabla.css">
+    <link rel="stylesheet" href="assets/css/MTabla1.css">
     <link rel="stylesheet" href="assets/css/tabla.css">
     <!-- Datatables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>  
@@ -58,6 +58,9 @@
                         <i class="far fa-file-pdf"></i> Generar Reporte
                     </a>
                 </div>
+                <a href="ReportesPDF/RemesaReportChilePDF.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>" target="_blank" class="submit-button">
+                <i  class="far fa-file-pdf"></i> Generar Consulta
+                </a>
             </div>
         </div>
     </form>

@@ -4,12 +4,26 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
-
+.header-home {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #ed8529;  
+}
 body {
-    height: 100vh;
-    background-color: #a9aaac;
-    /*a9aaac*/
-    color: #fff;
+    height: 100%;
+    background: linear-gradient(222deg, #e4e5e5,#656464); /*degradado*/
+    color: #ffffff;
+    /*-webkit-text-stroke: 1px rgb(0, 0, 0); /* Trazo alrededor del texto - Prefijo para WebKit (Safari/Chrome) */
+    /*text-stroke: 1px blue; /* Trazo alrededor del texto */
+
+    /* Estilos del texto */
+    font-family: Arial, sans-serif; /* Cambiar la fuente */
+    font-size: 16px; /* Tamaño del texto */
+    font-weight: bold; /* Peso de la fuente (puede ser bold, normal, etc.) */
+    font-style: normal; /* Estilo de la fuente (puede ser italic, normal, etc.) */
+    text-transform: uppercase; /* Transformación del texto (uppercase, lowercase, none) */
 }
 
 nav {
@@ -17,8 +31,14 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #ed8529;
+    background: linear-gradient(140deg,#454544, rgb(233, 163, 128),#FF6100);;
     padding-left: 2vw;
+}
+
+.logo-danicodex {
+    width: 250px !important; /* Ajusta el ancho de la imagen según tu preferencia */
+    height: auto !important; /* Esto mantendrá la proporción de la imagen */    
+    /*outline: 2px solid blue;   contorno en la img*/
 }
 
 .cont-ul {
@@ -93,11 +113,3 @@ a:hover {
   }
 
 
-  /* estilo para guardar guardar archivo*/
-
-
-@media (max-width:900px) {
-    .logo-danicodex {
-        display: none;
-    }
-}

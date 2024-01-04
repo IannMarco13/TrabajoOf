@@ -5,7 +5,7 @@ thead {
 
 
 .text-center {
-    text-align: center;
+    text-align: left;
 }
 
 /* Estilos para el contenedor y los elementos internos */
@@ -37,7 +37,7 @@ thead {
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
-    background-color: #ed8529;
+    background-color: #414fd2;
     color: #fff;
     transition: background-color 0.3s;
 }

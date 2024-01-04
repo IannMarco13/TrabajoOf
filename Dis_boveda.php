@@ -15,7 +15,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="assets/css/MTabla.css">
+    <link rel="stylesheet" href="assets/css/MTabla1.css">
     <link rel="stylesheet" href="assets/css/tabla.css">
     <!-- Datatables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>  
@@ -33,36 +33,35 @@
 </head>
 <body> 
     <br>
-    <h1 class="text-center">Disponibilidad en Bóveda</h1>
+    <div class="formu">
+    <h1>Disponibilidad en Bóveda</h1>
     <div class="container">
         <form action="" method="GET">
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label><b>Del Dia</b></label>
-                        <input type="date" name="from_date" value="<?php if(date(isset($_GET['from_date']))){ echo $_GET['from_date']; } ?>" class="form-control">   
-                    </div>
+                        <label class= "prue"><b>Del Dia</b></label>
+                        <input type="date" name="from_date" value="<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>" class="form-control">
+                    </div>    
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label><b>Hasta el Dia</b></label>
-                        <input type="date" name="to_date" value="<?php if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>" class="form-control">
+                        <input type="date" name="to_date" value="<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-group">
-                        <br>
+                    <div class="form-group btn-group">
                         <button type="submit" class="submit-button"><i class="fas fa-search"></i> Buscar</button>
-                        <!--hacemos que los datos de los canlendarios se guaden y puedan ser re usados-->
-                        <a href="ReportesPDF/ReporteChilePDF.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>" target="_blank" class="submit-button">
+                        <a href="ReportesPDF/ReporteChilePDF.php?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" target="_blank" class="btn-custom">
                             <i class="far fa-file-pdf"></i> Generar Reporte
                         </a>
                     </div>
                 </div>
             </div>
         </form>
-
     </div>
+</div>
 
     <div calss="container">
         <div class="row">
