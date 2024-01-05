@@ -40,41 +40,41 @@
 <body>
     <br>
     <div class="formu">
-    <h1>Listado Remesas Chile Bolivia</h1>
-    <div class="container">
-        <form action="" method="GET">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class= "prue"><b>Del Dia</b></label>
-                        <input type="date" name="from_date" value="<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>" class="form-control">
-                    </div>    
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label><b>Hasta el Dia</b></label>
-                        <input type="date" name="to_date" value="<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" class="form-control">
+        <h1>Listado Remesas Chile Bolivia</h1>
+        <div class="container">
+            <form action="" method="GET">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class= "prue"><b>Del Dia</b></label>
+                            <input type="date" name="from_date" value="<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>" class="form-control">
+                        </div>    
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <br>
-                    <div class="form-group btn-group">
-                        <button type="submit" class="submit-button"><i class="fas fa-search"></i> Buscar</button>
-                        <a href="ReportesPDF/ReporteChilePDF.php?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" target="_blank" class="btn-custom">
-                            <i class="far fa-file-pdf"></i> Generar Reporte
-                        </a>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><b>Hasta el Dia</b></label>
+                            <input type="date" name="to_date" value="<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" class="form-control">
+                        </div>
                     </div>
-                    <div class="form-group btn-group">
+                    <div class="col-md-4">
                         <br>
-                        <a href="ReportesPDF/RemesaReportChilePDF.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>" target="_blank" class="btn-custom">
-                            <i  class="far fa-file-pdf"></i> Generar Consulta
-                        </a>
+                        <div class="form-group btn-group">
+                            <button type="submit" class="submit-button"><i class="fas fa-search"> Buscar </i></button>
+                            <a href="ReportesPDF/RemesasChilePDF.php?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" target="_blank" class="btn-custom">
+                            <i class="fas fa-print"> Imprimir Tabla</i> 
+                            </a>
+                        </div>
+                        <div class="form-group btn-group">
+                            <br>
+                            <a href="ReportesPDF/RemesaReportChilePDF.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>" target="_blank" class="btn-custom">
+                                <i  class="far fa-file-pdf"> Generar Consulta </i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
     <div calss="container">
         <div class="row">
             <div class="col-lg-12">
@@ -126,9 +126,7 @@
 
                     if(isset($_GET['from_date']) && isset($_GET['to_date'])){
                         
-                        $query ="SELECT * 
-                        FROM remesas_env_chile_bolivia 
-                        WHERE DATE(FECHA) BETWEEN '$from_date' AND '$to_date';";
+                        $query ="SELECT * FROM remesas_env_chile_bolivia WHERE DATE(FECHA) BETWEEN '$from_date' AND '$to_date'ORDER BY FECHA ASC;";
                         $query_run = mysqli_query($conexion, $query);
                         if(mysqli_num_rows($query_run) > 0){
                             foreach($query_run as $fila){ 

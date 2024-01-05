@@ -33,38 +33,42 @@
 </head>
 <body> 
     <br>
+    <div class="formu">
     <h1 class="text-center">Listado Reporte Bolivia - Chile</h1>
     <div class="container">
-        <form action="" method="GET">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label><b>Del Dia</b></label>
-                        <input type="date" name="from_date" value="<?php if(date(isset($_GET['from_date']))){ echo $_GET['from_date']; } ?>" class="form-control">
-                    </div>    
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label><b>Hasta el Dia</b></label>
-                        <input type="date" name="to_date" value="<?php if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>" class="form-control">
+            <form action="" method="GET">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class= "prue"><b>Del Dia</b></label>
+                            <input type="date" name="from_date" value="<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>" class="form-control">
+                        </div>    
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><b>Hasta el Dia</b></label>
+                            <input type="date" name="to_date" value="<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <br>
+                        <div class="form-group btn-group">
+                            <button type="submit" class="submit-button"><i class="fas fa-search"> Buscar </i></button>
+                            <a href="ReportesPDF/RemesasBoliviaPDF.php?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" target="_blank" class="btn-custom">
+                            <i class="fas fa-print"> Imprimir Tabla</i> 
+                            </a>
+                        </div>
+                        <div class="form-group btn-group">
+                            <br>
+                            <a href="ReportesPDF/RemesaReportChilePDF.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>" target="_blank" class="btn-custom">
+                                <i  class="far fa-file-pdf"> Generar Consulta </i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <br>
-                        <button type="submit" class="submit-button"><i class="fas fa-search"></i> Buscar</button>
-                        <!--hacemos que los datos de los canlendarios se guaden y puedan ser re usados-->
-                        <a href="ReportesPDF/RemesasBoliviaPDF.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>" target="_blank" class="submit-button">
-                        <i class="far fa-file-pdf"></i> Generar Reporte
-                    </a>
-                </div>
-                <a href="ReportesPDF/RemesaReportChilePDF.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>" target="_blank" class="submit-button">
-                <i  class="far fa-file-pdf"></i> Generar Consulta
-                </a>
-            </div>
+            </form>
         </div>
-    </form>
-</div>
+    </div>
     <div calss="container">
         <div class="row">
             <div class="col-lg-12">
@@ -88,7 +92,7 @@
                             <th>% CAM</th>
                             <th>COMISION</th>
                             <th>TOPO CAMBIO</th>
-                            <th>MOTNO EN BOB</th>
+                            <th>MONTO EN BOB</th>
                             <th>COMISION EN BOB</th>
                             <th>ITF EN BOB</th>
                             <th>ULTIMA MODIFCACION</th>

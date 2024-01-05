@@ -34,65 +34,36 @@
 <body> 
 
     <br>
-<!--<h1 class="text-center">Listado Reporte</h1>
-    <div class="container">
-        <form action="" method="GET">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label><b>Del Dia</b></label>
-                        <input type="date" name="from_date" value="<?php if(date(isset($_GET['from_date']))){ echo $_GET['from_date']; } ?>" class="form-control">
-                    </div>    
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label><b>Hasta el Dia</b></label>
-                        <input type="date" name="to_date" value="<?php // if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>" class="form-control">
+    <div class="formu">
+        <h1>Lista Reporte</h1>
+        <div class="container">
+            <form action="" method="GET">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class= "prue"><b>Del Dia</b></label>
+                            <input type="date" name="from_date" value="<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>" class="form-control">
+                        </div>    
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><b>Hasta el Dia</b></label>
+                            <input type="date" name="to_date" value="<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group btn-group">
+                            <button type="submit" class="submit-button"><i class="fas fa-search"></i> Buscar</button>
+                            <a href="ReportesPDF/ReporteChilePDF.php?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" target="_blank" class="btn-custom">
+                                <i class="far fa-file-pdf"></i> Generar Reporte
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <br>
-                        <button type="submit" class="submit-button"><i class="fas fa-search"></i> Buscar</button>
-                        hacemos que los datos de los canlendarios se guaden y puedan ser re usados
-                        <a href="ReportesPDF/ReporteChilePDF.php?from_date=<?php // echo $from_date; ?>&to_date=<?php // echo $to_date; ?>" target="_blank" class="submit-button">
-                        <i class="far fa-file-pdf"></i> Generar Reporte
-                    </a>
-                </div>
-            </div>
+            </form>
         </div>
-    </form>
-</div>-->
-
-<div class="formu">
-    <h1>Lista Reporte</h1>
-    <div class="container">
-        <form action="" method="GET">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class= "prue"><b>Del Dia</b></label>
-                        <input type="date" name="from_date" value="<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>" class="form-control">
-                    </div>    
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label><b>Hasta el Dia</b></label>
-                        <input type="date" name="to_date" value="<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group btn-group">
-                        <button type="submit" class="submit-button"><i class="fas fa-search"></i> Buscar</button>
-                        <a href="ReportesPDF/ReporteChilePDF.php?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" target="_blank" class="btn-custom">
-                            <i class="far fa-file-pdf"></i> Generar Reporte
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </form>
     </div>
-</div>
+
     <div calss="container">
         <div class="row">
             <div class="col-lg-12">
@@ -137,7 +108,7 @@
 
                     if(isset($_GET['from_date']) && isset($_GET['to_date'])){
                         
-                        $query ="SELECT * FROM report_chile_bolivia WHERE DATE(FECHA_ORI) BETWEEN '$from_date' AND '$to_date'";
+                        $query ="SELECT * FROM report_chile_bolivia WHERE DATE(FECHA_ORI) BETWEEN '$from_date' AND '$to_date' ORDER BY FECHA_ORI ASC";
                         $query_run = mysqli_query($conexion, $query);
                         if(mysqli_num_rows($query_run) > 0){
                             foreach($query_run as $fila){ 

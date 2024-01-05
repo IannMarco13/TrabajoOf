@@ -121,70 +121,21 @@ if(mysqli_num_rows($query_run) > 0){
     }
 } 
 
-// Consulta SQL para la segunda tabla
-// Agrega una página en orientación horizontal al PDF
-$query_cont = "SELECT COUNT(MONEDA) AS Total_Registros FROM remesas_env_chile_bolivia WHERE DATE(FECHA) BETWEEN '$from_date' AND '$to_date' AND remesas_env_chile_bolivia.MONEDA = 'BOB'";
-
-$query_run_cont = mysqli_query($conexion, $query_cont);
-
-if ($query_run_cont) {
-    $result = mysqli_fetch_assoc($query_run_cont);
-    $Total_Registros = $result['Total_Registros'];
-
-    // Encabezado de la tabla
-    $pdf->Ln(); // Salto de línea antes de la tabla
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(50, 10,utf8_decode('Cantidad Envios[BOB]'), 1, 0, 'C', 0);// ver borde,salto de linea, posision del conetenido , nose    Salto de línea después de la fila
-    // Contenido de la tabla
-    $pdf->SetFont('Arial', '', 12);
-    $pdf->Cell(20, 10, $Total_Registros, 1, 0, 'C',0);
-       // Salto de línea después de la fila
-
-} else {
-    // Manejar el error si la consulta falla
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(40, 10, 'Error en la consulta de conteo:', 0, 1);
-    $pdf->SetFont('Arial', '', 12);
-    $pdf->Cell(40, 10, mysqli_error($conexion), 0, 1);
-}
-$query_cont_usd = "SELECT COUNT(MONEDA) AS Total_Registros
-FROM remesas_env_chile_bolivia WHERE DATE(FECHA) BETWEEN '$from_date' AND '$to_date' AND remesas_env_chile_bolivia.MONEDA = 'USD'";
-$query_run_cont_usd = mysqli_query($conexion, $query_cont_usd);
-
-if ($query_run_cont) {
-    $result = mysqli_fetch_assoc($query_run_cont_usd);
-    $Total_Registros = $result['Total_Registros'];
-    // Encabezado de la tabla
-    $pdf->Ln(); // Salto de línea antes de la tabla
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(50, 10,utf8_decode('Cantidad Envios[USD]'), 1, 0, 'C', 0);// ver borde,salto de linea, posision del conetenido , nose    Salto de línea después de la fila
-    // Contenido de la tabla
-    $pdf->SetFont('Arial', '', 12);
-    $pdf->Cell(20, 10, $Total_Registros, 1, 0, 'C',0);
-       // Salto de línea después de la fila
-} else {
-    // Manejar el error si la consulta falla
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(40, 10, 'Error en la consulta de conteo:', 0, 1);
-    $pdf->SetFont('Arial', '', 12);
-    $pdf->Cell(40, 10, mysqli_error($conexion), 0, 1);
-}
-
-$query_T = "SELECT SUM(report_chile_bolivia.MONTO_BOB) AS Total_Monto_BOB , SUM(report_chile_bolivia.MONTO_USD) AS TOTAL_MONTO_USD FROM remesas_env_chile_bolivia INNER JOIN report_chile_bolivia ON remesas_env_chile_bolivia.AIR = report_chile_bolivia.AIR_R WHERE DATE(FECHA) BETWEEN '$from_date' AND '$to_date'";
+$query_T = "SELECT SUM(remesas_bolivia_chile.MONTO_ENV) AS TOTAL_USD , SUM(remesas_bolivia_chile.MONTO_BOB_B) AS TOTAL_BOB FROM remesas_bolivia_chile WHERE DATE(FECHA_B) BETWEEN '$from_date' AND '$to_date'";
 
 $query_run_T = mysqli_query($conexion, $query_T);
 
 if ($query_run_T) {
     $result = mysqli_fetch_assoc($query_run_T);
-    $Total_Monto_BOB = $result['Total_Monto_BOB'];
-    $TOTAL_MONTO_USD = $result['TOTAL_MONTO_USD'];
+    $Total_Monto_BOB = $result['TOTAL_BOB'];
+    $TOTAL_MONTO_USD = $result['TOTAL_USD'];
 
     // Encabezado de la tabla
     $pdf->Ln(); // Salto de línea antes de la tabla
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->Cell(30, 10,utf8_decode('N° TOTAL'), 1, 0, 'C', 0);
     $pdf->Cell(30, 10, utf8_decode('Total BOB'), 1,0, 'C', 0);
-    $pdf->Cell(30, 10, utf8_decode('Total USD'), 1, 1,'C', 0); // ver borde,salto de linea, posision del conetenido , nose    Salto de línea después de la fila
+    $pdf->Cell(30, 10, utf8_decode('Total USD'), 1, 1,'C', 0); // ver borde,salto de linea, posision del conetenido , relleno del cuadro  Salto de línea después de la fila
 
     // Contenido de la tabla
     $pdf->SetFont('Arial', '', 12);
