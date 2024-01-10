@@ -12,8 +12,6 @@ class PDF extends FPDF
       $this->Image('img/logo.png', 270, 5, 20); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
       $this->SetFont('Arial', 'B', 19); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
       $this->Cell(95); // Movernos a la derecha
-      $this->SetTextColor(0, 0, 0); //color
-      
       $this->SetTextColor(228, 100, 0);//color
       $this->Cell(1); // mover a la derecha
       $this->SetFont('Arial', 'B', 15);
@@ -40,7 +38,6 @@ class PDF extends FPDF
       $this->Cell(10, 5, utf8_decode('USD'),1,0,'C',1); 
       $this->Cell(19, 5, utf8_decode('FECHA PAG'),1,0,'C',1) ;
       $this->Cell(18, 5, utf8_decode('ESTADO'),1, 1,'C',1) ;
-
    }
    // Pie de página
    function Footer()

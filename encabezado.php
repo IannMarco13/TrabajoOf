@@ -34,7 +34,7 @@
                             <li class="back"><a href="consulta1.php">Consultas 1</a></li>
                             <li class="back"><a href="consulta2.php">Consultas 2</a></li>
                             <li class="back"><a href="consulta3.php">Consultas 3</a></li>
-                            <li>---</li>
+                            <li class="back"><a href="Compra_venta.php">Compra-Venta</a></li>
                             <li>---</li>
                         </ul>
                     </li>

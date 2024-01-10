@@ -1,0 +1,40 @@
+/* Estilos para el contenedor de la tabla */
+.tabla-container {
+    width: 50%; /* Ancho del contenedor */
+    margin: 10px auto; /* Márgenes automáticos para centrar */
+}
+
+/* Estilos para la tabla Tabla_CompraVenta_TC */
+#Tabla_CompraVenta_TC {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto;
+}
+
+/* Estilos para las celdas de encabezado */
+#Tabla_CompraVenta_TC th {
+    background-color: #df9215;
+    border: 1px solid #110101;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Estilos para las celdas de datos */
+#Tabla_CompraVenta_TC td {
+    border: 1px solid #150101;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Estilos para filas impares */
+#Tabla_CompraVenta_TC tr:nth-child(odd) {
+    background-color: #ecf2ee;
+    color: #110101;
+}
+
+/* Estilos para hacer la tabla responsiva en dispositivos móviles */
+@media (max-width: 768px) {
+    #Tabla_CompraVenta_TC {
+        overflow-x: auto;
+    }
+}
