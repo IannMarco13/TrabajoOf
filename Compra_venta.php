@@ -19,7 +19,7 @@ $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/comp_vent_estilo.css">
     <link rel="stylesheet" href="assets/css/tabla.css">
-    
+    <link rel="stylesheet" href="assets/css/tablaTC.css">
 
     <!-- Datatables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>  
@@ -37,11 +37,8 @@ $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : '';
     <title>COMPRA Y VENTA</title>
 </head>
 <body>
-    <table id="Tabla_CompraVenta">
+    <table border="9" id="Tabla_CompraVenta">
     <th>
-        <form action="" method="post">
-            <input type="submit" name="actualizar_compra_venta" value="Actualizar Compra Venta">
-        </form>
         <form action="">
             <div class="col-md-4">
                 <div class="form-group">
@@ -63,13 +60,11 @@ $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : '';
             </div> 
         </div>
         </form> 
-    </th>
-        <th>
             <div calss="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="table-responsive">
-                        <table id="TablaRemesas" class="table table-striped table-bordered" style="width:100%">
+                        <table  id="TablaRemesas" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>N°</th>
@@ -128,6 +123,7 @@ $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : '';
         </th>
         <th>
             <form method="post" action="Compra_venta.php">
+            <input type="submit" name="actualizar_compra_venta" value="Actualizar Compra Venta">
                 <label for="agencia">Selecciona una agencia:</label>
                 <select name="agencia" id="agencia">
                     <option value="101">SUCRE CENTRAL</option>
@@ -167,6 +163,78 @@ $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : '';
             </form>
             <script src="assets/js/Compra_Venta.js"></script>
         </th>
+        <tr>
+            <th>
+                <table  id="TablaCV" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>MONEDA</th>
+                        <th>PROMEDIO</th>
+                        <th>COMPRA MIN</th>
+                        <th>COMPRA MAX</th>
+                        <th>VENTA MIN</th>
+                        <th>VENTA MAX</th>
+                    </tr>
+                </thead>
+                <?php
+                $from_date = $_GET['from_date'] ?? null;
+                $to_date = $_GET['to_date'] ?? null;
+
+                if ($from_date && $to_date) {
+                    $query = "SELECT Moneda, AVG(promedio) AS promedio_general, MAX(max_compra) AS max_compra, MIN(min_compra) AS min_compra, MAX(max_venta) AS max_venta, MIN(min_venta) AS min_venta
+                        FROM (
+                            SELECT 
+                                Moneda,
+                                MAX(COMPRA) AS max_compra,
+                                MIN(COMPRA) AS min_compra,
+                                MAX(VENTA) AS max_venta,
+                                MIN(VENTA) AS min_venta,
+                                (AVG(COMPRA) + AVG(VENTA)) / 2 AS promedio
+                            FROM tp_cambio
+                            INNER JOIN tablamonedas ON tp_cambio.CODIGO_MONEDA = tablamonedas.CodigoMoneda
+                            WHERE CODIGO_MONEDA IN ('USD', 'CLP', 'BRL', 'EUR', 'ARS', 'ASD', 'CAD', 'PEN', 'GBP', 'CHF', 'NZD', 'PYG') 
+                            AND DATE(FECHA_TP) BETWEEN '$from_date' AND '$to_date'
+                            GROUP BY Moneda
+                        ) AS subconsulta
+                        GROUP BY Moneda";
+
+                    $query_run = mysqli_query($conexion, $query);
+                        
+                    if ($query_run) {
+                        if (mysqli_num_rows($query_run) > 0) {
+                            $cont = 0;
+                            while ($fila = mysqli_fetch_assoc($query_run)) {
+                                $cont++;
+                ?>
+                <tr>
+                    <td><?php echo $cont ?></td>
+                    <td class= "texto-izquierda"><?php echo $fila['Moneda'] ?></td>
+                    <td><?php echo number_format($fila['promedio_general'],5) ?></td>
+                    <td><?php echo number_format($fila['min_compra'], 4) ?></td>
+                    <td><?php echo number_format($fila['max_compra'], 4) ?></td>
+                    <td><?php echo number_format($fila['min_venta'] , 4)?></td>
+                    <td><?php echo number_format($fila['max_venta'] , 4)?></td>
+                </tr>
+<?php
+            }
+        } else {
+            echo "No se encontraron resultados.";
+        }
+    } else {
+        echo "Error al ejecutar la consulta: " . mysqli_error($conexion);
+    }
+} else {
+    echo "Fechas no especificadas.";
+}
+?>
+
+                </table>
+            </th>
+        <th>
+            
+        </th>
+        </tr>
     </table>
 </body>
 </html> 
