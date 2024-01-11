@@ -1,0 +1,135 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Estilos para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #e67300;
+    padding: 8px;
+    text-align: center;
+}
+
+/* Estilos para la columna "Moneda" */
+.moneda {
+    background-color: #0d0c0c; /* Fondo amarillo */
+    color: #fff; /* Texto oscuro */
+    font-weight: bold; /* Negrita */
+    text-align: left;
+}
+.Total {
+    background-color: #0d0c0c; /* Fondo amarillo */
+    color: #fff; /* Texto oscuro */
+    font-weight: bold; /* Negrita */
+    text-align: center;
+}
+
+#resultado {
+    background: linear-gradient(179deg,#D41A08, #EEE338 ,#007129);
+    color: #000000; /* Texto oscuro */
+    font-weight: bold; /* Negrita */
+    text-align: center;
+}
+
+#total {
+    background: linear-gradient(90deg,#DFDFE7, #3C3B6E,#B22234);
+    color: #000000; /* Texto oscuro */
+    font-weight: bold; /* Negrita */
+    text-align: center;
+}
+
+th {
+    background-color: #0d0c0c;
+}
+
+/* Estilos para los inputs */
+input {
+    padding: 5px;
+}
+
+/* Estilos para los botones */
+input[type="button"], input[type="reset"] {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FF6100;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+input[type="text"] {
+    text-align: center;
+}
+#TablaActa tbody tr:nth-child(odd) {
+    background-color: rgba(224, 223, 223, 0.914);
+    color: #000000;
+}
+
+/* Estilos para las filas impares */
+#TablaActa tbody tr:nth-child(even) {
+    background-color: rgba(253, 253, 253, 0.914); /* Cambia el color de fondo */
+    color: #000000;
+}
+/* Estilos para el resultado total */
+#total-dolarizado-global {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Estilos para DataTables */
+.dataTables_wrapper {
+    margin-top: 20px;
+}
+
+/* Estilos para la barra de búsqueda de DataTables */
+.dataTables_filter label {
+    margin-right: 10px;
+}
+
+/* Estilos para el botón de DataTables */
+.dataTables_length label {
+    margin-left: 10px;
+}
+
+/* Estilos para las paginaciones de DataTables */
+.dataTables_paginate {
+    margin-top: 10px;
+}
+
+/* Estilos para el ícono de DataTables */
+.dataTables_paginate .paginate_button {
+    margin-right: 10px;
+}
+
+/* Estilos para las flechas de ordenamiento de DataTables */
+.dataTables_sort:before, .dataTables_sort:after {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+/* Estilos para las flechas de ordenamiento ascendente de DataTables */
+.dataTables_sort_asc:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    border: 4px solid transparent;
+    border-bottom: 4px solid #000;
+}
+
+/* Estilos para las flechas de ordenamiento descendente de DataTables */
+.dataTables_sort_desc:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    border: 4px solid transparent;
+    border-top: 4px solid #000;
+}

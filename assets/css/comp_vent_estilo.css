@@ -62,9 +62,7 @@ input[type="submit"]:hover {
     margin-bottom: 20px !important;
     /* Agrega !important a las propiedades que quieras priorizar */
 }
-texto-izquierda {
-    text-align: left !important;
-}
+
 #TablaCV th,
 #TablaCV td {
     padding: 10px ;

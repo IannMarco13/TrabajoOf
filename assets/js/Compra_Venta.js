@@ -1,6 +1,6 @@
 const relacionesAgenciaMoneda = {
     101: ['USD', 'CLP', 'BRL', 'EUR', 'ARS', 'ASD', 'CAD', 'PEN', 'GBP', 'CHF', 'NZD', 'PYG'], 
-    202: ['USD', 'CLP', 'BRL', 'EUR', 'ARS','PEN'], 
+    202: ['USD', 'CLP', 'BRL', 'EUR', 'ARS', 'ASD', 'CAD', 'PEN', 'GBP', 'CHF', 'NZD', 'PYG'], 
     210: ['USD', 'CLP', 'BRL', 'EUR', 'ARS','PEN'],
     301: ['USD', 'CLP', 'BRL', 'EUR', 'ARS','PEN'],
     401: ['USD', 'CLP', 'BRL', 'EUR', 'ARS','PEN'], 

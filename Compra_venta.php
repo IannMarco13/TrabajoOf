@@ -254,7 +254,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Guardar']) ) {
         
         if ($conexion->query($sql) === TRUE) {
             echo '<script>alert("Actualizado correctamente"); window.location.href = "Compra_venta.php";</script>';
-
         } else {
             echo '<script>alert("Error al actualizar los valores"); window.location.href = "Compra_venta.php";</script>';
         } 
@@ -280,7 +279,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actualizar_compra_vent
             AND t1.Cod_agencia IN (101, 202, 210, 301, 401, 501, 701, 702)";
     
     if ($conexion->query($sql) === TRUE) {
-        echo "Actualización realizada correctamente";
+        echo '<script>alert("Actualización realizada correctamente."); window.location.href = "Compra_venta.php";</script>';
         
         actualizarFechaUltimaActualizacion($conexion);
     } else {
