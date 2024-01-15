@@ -4,7 +4,6 @@ require_once('conexion.php');
 use Carbon\Carbon;
 ob_start();
 require_once __DIR__ . '/vendor/autoload.php';
-// Configurar el huso horario a Bolivia
 $hoy = Carbon::now('America/La_Paz')->startOfDay();
 ?>
 <!DOCTYPE html>
@@ -14,6 +13,7 @@ $hoy = Carbon::now('America/La_Paz')->startOfDay();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/Acta_Entrega.css">
     <script src="assets/js/Acta_Entrega.js"></script>
+    <script src="assets/js/Acta_EntregaPDF.js"></script>
     <title>Acta de Entrega</title>
 </head>
 <body>
@@ -22,7 +22,7 @@ $hoy = Carbon::now('America/La_Paz')->startOfDay();
     <h1>Acta de Entrega</h1>
     </center>
         <br>
-    <form action="Acta_Entrega.php">
+    <form action="ReportesPDF/Acta_EntregaPDF.php" method="post" id="miFormulario">
     <table id="TablaActa" border="1">
         <thead>
             <tr>
@@ -52,7 +52,8 @@ $hoy = Carbon::now('America/La_Paz')->startOfDay();
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr align='left' data-monedas='true'>";
                     echo "<td class='moneda'>" . $row['Moneda'] . "</td>";
-                    echo "<td><input type='text' name='TotalEnviado' maxlength='12' placeholder='Ingresar total' oninput='calcularDolarizado(this.parentNode.parentNode)'></td>";
+                    echo "<td><input type='text' id='TotalEnviado_$row[Moneda]' name='TotalEnviado_$row[Moneda]' maxlength='12' placeholder='Ingresar total' oninput='calcularDolarizado(this.parentNode.parentNode)'></td>";
+                    //echo "<td><input type='text' id='TotalEnviado_$row[Moneda]' name='TotalEnviado' maxlength='12' placeholder='Ingresar total' oninput='calcularDolarizado(this.parentNode.parentNode)'></td>";
                     echo "<td class='tipo-cambio-venta' >" . $row['VENTA'] . "</td>";
                     echo "<td id='resultado' class='resultado-op'  >Total (bob)</td>";
                     echo "<td class='tipo-cambio-compra'  >" . $row['COMPRA'] . "</td>";
@@ -61,15 +62,12 @@ $hoy = Carbon::now('America/La_Paz')->startOfDay();
                 }
                 ?>
             <tr>
-                <td colspan="2" align="center"><input type="reset">
-                <input type="button" value="Ir a otra página" onclick="redirigirAotraPagina()">
-                <script>
-                // Función para redirigir
-                function redirigirAotraPagina() {
-                    window.location.href = 'ReportesPDF/Acta_EntregaPDF.php';
-                }
-                </script>
+            
+                <td colspan="2" align="center">
+                    <input type="reset">
+                    <input type="submit" value="Ir a otra página">
                 </td>
+            
                 <td colspan="3" align="center">Total Dolarizado Global</td>
                 <td id="total-dolarizado-global" class='Total'>0</td>
             </tr>

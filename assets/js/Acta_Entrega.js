@@ -4,8 +4,8 @@ function calcularDolarizado(fila) {
     var moneda = fila.querySelector("td.moneda").innerText.trim();
 
     // Obtener el valor ingresado en el input "Total Enviado" y convertirlo a un número decimal
-    var totalEnviado = parseFloat(fila.querySelector("input[name='TotalEnviado']").value);
-
+    var totalEnviado = parseFloat(fila.querySelector("input[name^='TotalEnviado']").value);//  ^= en el selector de atributo para encontrar el campo que comienza con el nombre TotalEnviado.
+    
     // Obtener los tipos de cambio de venta y compra para la moneda de la fila actual
     var tipoCambioVenta = parseFloat(fila.querySelector("td.tipo-cambio-venta").innerText);
     var tipoCambioCompra = parseFloat(fila.querySelector("td.tipo-cambio-compra").innerText);
@@ -21,7 +21,7 @@ function calcularDolarizado(fila) {
     fila.querySelector("td.resultado-op").innerText = resultadoOp.toFixed(2);
 
     // Mostrar el total dolarizado en la columna "Total USD", redondeado a número entero si es USD, de lo contrario con 2 decimales
-    fila.querySelector("td.total-dolarizado").innerText = moneda === 'USD' ? totalDolarizado.toFixed(0) : totalDolarizado.toFixed(2);
+    fila.querySelector("td.total-dolarizado").innerText = moneda === '' ? totalDolarizado.toFixed(0) : totalDolarizado.toFixed(2);
 
     // Actualizar el total dolarizado global y mostrarlo
     actualizarTotalDolarizado();
@@ -40,5 +40,5 @@ function actualizarTotalDolarizado() {
     });
 
     // Mostrar el total dolarizado global en el elemento con el ID "total-dolarizado-global"
-    document.getElementById("total-dolarizado-global").innerText = totalDolarizado.toFixed(2);
+    document.getElementById("total-dolarizado-global").innerText = totalDolarizado.toFixed();
 }

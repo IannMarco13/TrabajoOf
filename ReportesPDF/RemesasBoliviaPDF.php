@@ -56,7 +56,7 @@ class PDF extends FPDF
 }
 
 $pdf = new PDF();
-$pdf->AddPage("landscape"); /* aqui entran dos para parametros (horientazion,tamaño)V->portrait H->landscape tamaño (A3.A4.A5.letter.legal) */
+$pdf->AddPage('Letter'); /* aqui entran dos para parametros (horientazion,tamaño)V->portrait H->landscape tamaño (A3.A4.A5.letter.legal) */
 $pdf->AliasNbPages(); //muestra la pagina / y total de paginas
 
 $i = 0;
