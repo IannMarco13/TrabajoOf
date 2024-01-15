@@ -13,7 +13,6 @@ $hoy = Carbon::now('America/La_Paz')->startOfDay();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/Acta_Entrega.css">
     <script src="assets/js/Acta_Entrega.js"></script>
-    <script src="assets/js/Acta_EntregaPDF.js"></script>
     <title>Acta de Entrega</title>
 </head>
 <body>
@@ -22,7 +21,7 @@ $hoy = Carbon::now('America/La_Paz')->startOfDay();
     <h1>Acta de Entrega</h1>
     </center>
         <br>
-    <form action="ReportesPDF/Acta_EntregaPDF.php" method="post" id="miFormulario">
+    <form action="ReportesPDF/Acta_EntregaPDF.php" method="post" id="FormularioAE">
     <table id="TablaActa" border="1">
         <thead>
             <tr>
@@ -38,7 +37,7 @@ $hoy = Carbon::now('America/La_Paz')->startOfDay();
             $query = "SELECT tablamonedas.Moneda, VENTA,
             CASE 
                 WHEN CODIGO_MONEDA = 'USD' THEN COMPRA
-                ELSE (SELECT COMPRA FROM tp_cambio WHERE CODIGO_MONEDA = 'USD' AND Cod_agencia = '202' AND DATE(FECHA_TP) = '2024-01-11')
+                ELSE (SELECT COMPRA FROM tp_cambio WHERE CODIGO_MONEDA = 'USD' AND Cod_agencia = '202' AND DATE(FECHA_TP) = '$hoy')
                 END AS COMPRA
                 FROM
                 tp_cambio
@@ -50,27 +49,28 @@ $hoy = Carbon::now('America/La_Paz')->startOfDay();
                 AND DATE(FECHA_TP) = '$hoy';";
                 $result = $conexion->query($query);
                 while ($row = $result->fetch_assoc()) {
-                    echo "<tr align='left' data-monedas='true'>";
+                    echo "<tr align='left' data-monedas='true'>"; 
                     echo "<td class='moneda'>" . $row['Moneda'] . "</td>";
                     echo "<td><input type='text' id='TotalEnviado_$row[Moneda]' name='TotalEnviado_$row[Moneda]' maxlength='12' placeholder='Ingresar total' oninput='calcularDolarizado(this.parentNode.parentNode)'></td>";
-                    //echo "<td><input type='text' id='TotalEnviado_$row[Moneda]' name='TotalEnviado' maxlength='12' placeholder='Ingresar total' oninput='calcularDolarizado(this.parentNode.parentNode)'></td>";
                     echo "<td class='tipo-cambio-venta' >" . $row['VENTA'] . "</td>";
                     echo "<td id='resultado' class='resultado-op'  >Total (bob)</td>";
                     echo "<td class='tipo-cambio-compra'  >" . $row['COMPRA'] . "</td>";
-                    echo "<td id='total' class='total-dolarizado'  >Total (usd)</td>";
+                    echo "<td id='total-dolarizado' class='total-dolarizado'  >Total (usd)</td>";
+                
                     echo "</tr>";
                 }
-                ?>
+                ?>  
+                
             <tr>
-            
                 <td colspan="2" align="center">
                     <input type="reset">
-                    <input type="submit" value="Ir a otra página">
+                    <input type="submit" id="generar" value="Generar PDF">
+                    <!--<button type="submit" name="generar_pdf" value="Generar PDF">Generar PDF</button>-->
                 </td>
             
                 <td colspan="3" align="center">Total Dolarizado Global</td>
                 <td id="total-dolarizado-global" class='Total'>0</td>
-            </tr>
+            </tr>   
     </table>
     </form>
 </body>

@@ -22,7 +22,6 @@ function calcularDolarizado(fila) {
 
     // Mostrar el total dolarizado en la columna "Total USD", redondeado a número entero si es USD, de lo contrario con 2 decimales
     fila.querySelector("td.total-dolarizado").innerText = moneda === '' ? totalDolarizado.toFixed(0) : totalDolarizado.toFixed(2);
-
     // Actualizar el total dolarizado global y mostrarlo
     actualizarTotalDolarizado();
 }

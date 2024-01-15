@@ -84,22 +84,28 @@ class PDF extends FPDF {
      $this->Cell(25, 25, utf8_decode('La Paz, '.$hoy), 0, 0, 'C'); 
     }
  }
+
 $pdf = new PDF();
+
 $pdf->AddPage('P','Letter');
 $pdf->AliasNbPages(); 
 $pdf->SetFont('times', 'B', 12);
 $i=0;
-$suma=0;
+$suma = 0;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   
+var_dump ($_POSTS);
+exit();
     foreach ($_POST as $key => $value) {
       $posicion = $value;
       $pdf->Cell(195,  5, utf8_decode($posicion), 1, 1, 'R', 0);
-      $suma = $suma + $posicion;
-      //var_dump($_POST);
+      //$suma = $suma + $posicion;
       }
-      $pdf->Cell(195,  5, utf8_decode("sss".$suma), 1, 1, 'R', 0);
+      //$pdf->Cell(195,  5, utf8_decode("".$suma), 1, 1, 'R', 0);
   }
-  
-$pdf->Output();
+
+// Nombre del archivo PDF
+$fileName = 'reporte_ActaDeEntrega.pdf';
+
+// Salida del PDF para mostrar en una ventana nueva
+$pdf->Output($fileName, 'I');
 ?>

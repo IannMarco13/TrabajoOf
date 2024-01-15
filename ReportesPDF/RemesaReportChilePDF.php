@@ -243,4 +243,3 @@ $fileName = 'reporte_envios.pdf';
 // Salida del PDF para mostrar en una ventana nueva
 $pdf->Output($fileName, 'I');
 ?>
-

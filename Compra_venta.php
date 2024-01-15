@@ -123,7 +123,7 @@ $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : '';
         </th>
         <th>
             <form method="post" action="Compra_venta.php">
-            <input type="submit" name="actualizar_compra_venta" value="Actualizar Compra Venta">
+            <input type="submit" name="actualizarCV" value="Actualizar Compra Venta">
                 <label for="agencia">Selecciona una agencia:</label>
                 <select name="agencia" id="agencia">
                     <option value="101">SUCRE CENTRAL</option>
@@ -159,7 +159,7 @@ $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : '';
                 <label for="venta">Venta:</label>
                 <input type="text" id="venta" name="venta" maxlength="12" placeholder="Valor de Venta">
                 <br><br>    
-                <input type="submit" name="Guardar" value="Guardar">
+               <input type="submit" id="Guardar" name+="Guardar">
             </form>
             <script src="assets/js/Compra_Venta.js"></script>
         </th>
@@ -261,29 +261,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Guardar']) ) {
         echo '<script>alert("Por favor, complete todos los campos."); window.location.href = "Compra_venta.php";</script>';
     }
 }
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actualizar_compra_venta'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actualizarCV'])) {
     // Verificar si ya se ha realizado la actualización hoy
     $ultima_actualizacion = obtenerUltimaActualizacion($conexion);
     $hoy = Carbon::now('America/La_Paz')->startOfDay();
+
+    // Obtener la última fecha de la base de datos
+    $ultima_fecha_bd = obtenerUltimaActualizacion($conexion);
+    // Si no hay última fecha de la base de datos, usar una fecha por defecto
+    if (!$ultima_fecha_bd) {
+        $ultima_fecha_bd = Carbon::parse('2024-01-12')->startOfDay();
+    }
     
     if ($ultima_actualizacion && $ultima_actualizacion->gte($hoy)) {
         echo '<script>alert("La actualización ya se realizó hoy. No se puede actualizar más de una vez al día."); window.location.href = "Compra_venta.php";</script>';
+        //var_dump($ultima_actualizacion);
         exit;
     }
-
     // Realizar la actualización
     $sql = "INSERT INTO tp_cambio (Cod_agencia, CODIGO_MONEDA, FECHA_TP, COMPRA, VENTA)
-            SELECT t1.Cod_agencia, t1.CODIGO_MONEDA, NOW() AS FECHA_TP, t1.COMPRA, t1.VENTA
-            FROM tp_cambio t1
-            WHERE DATE(t1.FECHA_TP) = DATE_SUB(CURDATE(), INTERVAL 1 DAY)
-            AND t1.Cod_agencia IN (101, 202, 210, 301, 401, 501, 701, 702)";
+    SELECT t1.Cod_agencia, t1.CODIGO_MONEDA, '$hoy' AS FECHA_TP, t1.COMPRA, t1.VENTA
+    FROM tp_cambio t1
+    WHERE DATE(t1.FECHA_TP) = '$ultima_fecha_bd'
+    AND t1.Cod_agencia IN (101, 202, 210, 301, 401, 501, 701, 702);
+    ";
     
     if ($conexion->query($sql) === TRUE) {
         echo '<script>alert("Actualización realizada correctamente."); window.location.href = "Compra_venta.php";</script>';
+        var_dump($sql);
         
         actualizarFechaUltimaActualizacion($conexion);
     } else {
         echo "Error al realizar la actualización: " . $conexion->error;
+        
     }
 }
 // Función para obtener la fecha de la última actualización
@@ -304,5 +314,7 @@ function actualizarFechaUltimaActualizacion($conexion) {
     $conexion->query($sql);
 }
 ?>
+
+
 
 
