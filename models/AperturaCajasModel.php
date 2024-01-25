@@ -1,7 +1,7 @@
 <?php
-require_once('conexion.php');
+require_once '../../conexion.php';
 
-class CierreCajas {
+class AperturaCajasModel {
     private $pdo;
 
     public function __construct() {
@@ -10,7 +10,7 @@ class CierreCajas {
         } catch (Exception $e) {
             die($e->getMessage());
         }
-    }
+    }   
 
     public function ListarMonedas() {
         try {   
@@ -32,7 +32,7 @@ class CierreCajas {
             $totalActual  = $totales[$index];
             
             if ($totalActual != 0) {
-                $query = "INSERT INTO cierre_cajas (MONEDA_TC, CORTE, FAJO, UNIDAD, TOTAL, FECHA_TC) VALUES ('$monedaActual', $corteActual, $fajoActual, $unidadActual, $totalActual, '$fecha')";
+                $query = "INSERT INTO apertura_cajas (MONEDA_TA, CORTE, FAJO, UNIDAD, TOTAL, FECHA_TA) VALUES ('$monedaActual', $corteActual, $fajoActual, $unidadActual, $totalActual, '$fecha')";
                 
                 if ($this->pdo->query($query)) {
                     $datosGuardados = true;
@@ -45,4 +45,4 @@ class CierreCajas {
         return $datosGuardados ? '¡Datos guardados correctamente!' : '';
     }
 }
-?>
+?> 

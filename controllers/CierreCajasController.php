@@ -1,6 +1,6 @@
 <?php
-require_once('CierreCajas.php');
-require_once('conexion.php');
+require_once('../../models/AperturaCajasModel.php');
+require_once('../../conexion.php');
 use Carbon\Carbon;
 
 class CierreCajasController {

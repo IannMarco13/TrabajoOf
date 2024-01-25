@@ -1,18 +1,17 @@
 <?php
-require_once('CierreCajas.php');
-require_once('encabezado.php');
-require_once('conexion.php');
-require_once __DIR__ . '/vendor/autoload.php';
-require_once('CierreCajasController.php'); 
-$cierreCajasModel = new CierreCajas();
-$cierreCajasController = new CierreCajasController($cierreCajasModel);
-$mensaje = $cierreCajasController->procesarFormulario();
+include '../../models/AperturaCajasModel.php';
+require_once '../../encabezado.php';
+require_once __DIR__ . '../../../vendor/autoload.php';
+$AperturaCajasModel = new AperturaCajasModel();
+require_once('../../controllers/AperturaCajasController.php'); 
+$AperturaCajasController = new AperturaCajasController($AperturaCajasModel);
+$mensaje = $AperturaCajasController->procesarFormulario();
 ?>
- <link rel="stylesheet" href="assets/css/container.css">
+ <link rel="stylesheet" href="/REMESAST/assets/css/container1.css">
+ 
  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
- <script src="assets/js/CierreCajasB.js"></script>
  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
+ <script src="/REMESAST/assets/js/AperturaCajas.js"></script>
 <h1>
     <br>
     <center>
@@ -27,7 +26,7 @@ $mensaje = $cierreCajasController->procesarFormulario();
                 <h5> moneda </h5>
                 <select name="Moneda" class="form-control form-control-sm" id="Moneda" onchange="redirigir()">
                 <option value="0">EXT</option>
-                <?php foreach ($cierreCajasModel->ListarMonedas() as $row) { ?>
+                <?php foreach ($AperturaCajasModel->ListarMonedas() as $row) { ?>
                     <option value="<?=$row->ID_TABLA_MONEDAS?>"><?=$row->Moneda?></option>
                 <?php } ?>
                 </select>
@@ -48,7 +47,7 @@ $mensaje = $cierreCajasController->procesarFormulario();
 <div>
     <center>
         <br><br>
-        <h1>Peso Argentino [ARS]</h1>
+        <h1>Dolar Canadiense [CAD]</h1>
         <br>
             <br><br>
             <table border="3">
@@ -63,8 +62,8 @@ $mensaje = $cierreCajasController->procesarFormulario();
                     <th>Total</th>
                 </tr>
                 <?php
-                $query = "SELECT CodigoMoneda AS MONEDA, CORTE FROM corte_monedas WHERE CodigoMoneda = 'ARS' ORDER BY CORTE DESC";
-                $result = $conexion->query($query);
+            $query = "SELECT CodigoMoneda AS MONEDA, CORTE FROM corte_monedas WHERE CodigoMoneda = 'CAD' ORDER BY CORTE DESC";
+            $result = $conexion->query($query);
                 while ($row = $result->fetch_assoc()){
                     echo "<tr Data-Monedas='true'>";
                 ?>
@@ -75,22 +74,19 @@ $mensaje = $cierreCajasController->procesarFormulario();
                     echo "<td class='Corte'>" . $row['CORTE'] . "</td>";
                     echo "<input type='hidden' class='MonedaHidden' name='Moneda[]' value='" . $row['MONEDA'] . "'>";
                     echo "<input type='hidden' class='CorteHidden' name='Corte[]' value='" . $row['CORTE'] . "'>";
-                    echo "<td><input type='text' class='Fajo' name='Fajo[]' maxlength='12' placeholder='Ingresar fajo' oninput='calculaCierre(this.parentNode.parentNode)'></td>";
-                    echo "<td><input type='text' class='Unidad' name='Unidad[]' maxlength='12' placeholder='Ingresar unidad' oninput='calculaCierre(this.parentNode.parentNode)'></td>";
+                    echo "<td><input type='text' class='Fajo' name='Fajo[]' maxlength='12' placeholder='Ingresar fajo' oninput='calculaApertura(this.parentNode.parentNode)'></td>";
+                    echo "<td><input type='text' class='Unidad' name='Unidad[]' maxlength='12' placeholder='Ingresar unidad' oninput='calculaApertura(this.parentNode.parentNode)'></td>";
                     echo "<td class='Total'>0</td>";
                     echo "<input type='hidden' class='TotalHidden' name='Total[]' value=''>";
                     echo "</tr>";
                 }
                 ?>        
             </table>
-            <center>
-            <input type="button" value="RECETAR" onclick="Recet6()">
+            <input type="button" value="RECETAR" onclick="Recet8()">
             <button type="button" onclick="guardarCierre()">Guardar</button>
             <?php if (!empty($mensaje) && $_SERVER['REQUEST_METHOD'] == 'POST'): ?>
             <p><?php echo $mensaje; ?></p>
-            <?php endif; ?>
-            </center>
-        </form>
-    </center>
-</div>
-
+            <?php endif; ?> 
+        </center>
+    </div>
+</form>

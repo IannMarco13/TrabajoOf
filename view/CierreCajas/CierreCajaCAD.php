@@ -1,17 +1,17 @@
 <?php
-require_once('CierreCajas.php');
-require_once('encabezado.php');
-require_once('conexion.php');
-require_once __DIR__ . '/vendor/autoload.php';
+require_once('../../models/CierreCajasModel.php');
+require_once('../../encabezado.php');
+require_once __DIR__ . '../../../vendor/autoload.php';
 $cierreCajasModel = new CierreCajas();
-require_once('CierreCajasController.php'); 
+require_once('../../controllers/CierreCajasController.php'); 
 $cierreCajasController = new CierreCajasController($cierreCajasModel);
 $mensaje = $cierreCajasController->procesarFormulario();
 ?>
- <link rel="stylesheet" href="assets/css/container.css">
+ <link rel="stylesheet" href="/REMESAST/assets/css/container1.css">
+ 
  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
- <script src="assets/js/CierreCajasB.js"></script>
  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+ <script src="/REMESAST/assets/js/CierreCajas.js"></script>
 <h1>
     <br>
     <center>
@@ -47,13 +47,13 @@ $mensaje = $cierreCajasController->procesarFormulario();
 <div>
     <center>
         <br><br>
-        <h1>Euros [EUR]</h1>
+        <h1>Dolar Canadiense [CAD]</h1>
         <br>
-        <form action="">
             <br><br>
             <table border="3">
                 <tr>
-                    <th colspan="5" id='totalOP'>Total: 0</th> 
+                    <th colspan="5" id='totalOP'>Total: 0</th>
+                    <input type="hidden" class="" name="totalOP[]" value="">  
                 </tr>
                 <tr align='right'>
                     <th colspan="2">corte</th> 
@@ -62,8 +62,8 @@ $mensaje = $cierreCajasController->procesarFormulario();
                     <th>Total</th>
                 </tr>
                 <?php
-                $query = "SELECT CodigoMoneda AS MONEDA, CORTE FROM corte_monedas WHERE CodigoMoneda = 'EUR' ORDER BY CORTE DESC";
-                $result = $conexion->query($query);
+            $query = "SELECT CodigoMoneda AS MONEDA, CORTE FROM corte_monedas WHERE CodigoMoneda = 'CAD' ORDER BY CORTE DESC";
+            $result = $conexion->query($query);
                 while ($row = $result->fetch_assoc()){
                     echo "<tr Data-Monedas='true'>";
                 ?>
@@ -82,7 +82,7 @@ $mensaje = $cierreCajasController->procesarFormulario();
                 }
                 ?>        
             </table>
-            <input type="button" value="RECETAR" onclick="Recet1()">
+            <input type="button" value="RECETAR" onclick="Recet8()">
             <button type="button" onclick="guardarCierre()">Guardar</button>
             <?php if (!empty($mensaje) && $_SERVER['REQUEST_METHOD'] == 'POST'): ?>
             <p><?php echo $mensaje; ?></p>
