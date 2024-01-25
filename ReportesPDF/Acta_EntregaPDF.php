@@ -7,7 +7,6 @@ class PDF extends FPDF {
    // Cabecera de página
     function Header()
     {
-       
        $this->Image('img/imgPdf.png', 0, 0, $this->GetPageWidth(), $this->GetPageHeight()); 
        $this->SetFont('Arial', 'B', 19); 
        $this->Cell(95); 
@@ -85,27 +84,42 @@ class PDF extends FPDF {
     }
  }
 
+// Obtener los datos del formulario
+$monedas = $_POST['moneda'];
+$TotalEnviado = $_POST['totalEnviado'];
+$resultadoOps = $_POST['resultadoOp'];
+$totalDolarizados = $_POST['totalDolarizado'];
+$totalDolarizadoGlobal = $_POST['totalGloval'];
+
 $pdf = new PDF();
-
 $pdf->AddPage('P','Letter');
-$pdf->AliasNbPages(); 
-$pdf->SetFont('times', 'B', 12);
-$i=0;
-$suma = 0;
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-var_dump ($_POSTS);
-exit();
-    foreach ($_POST as $key => $value) {
-      $posicion = $value;
-      $pdf->Cell(195,  5, utf8_decode($posicion), 1, 1, 'R', 0);
-      //$suma = $suma + $posicion;
-      }
-      //$pdf->Cell(195,  5, utf8_decode("".$suma), 1, 1, 'R', 0);
-  }
+$pdf->SetFont('TIMES', 'B', 16);
+// Iterar sobre los datos y agregarlos al PDF
+$pdf->Cell(0,10, utf8_decode("AGENCIA COLON:"),0,1,"L",0);
+$pdf->SetFont('TIMES', 'B', 12);
+$pdf->Cell(70,7, utf8_decode(""),0,0,"C",0);
+$pdf->Cell(50,7, utf8_decode("TOTAL ENVIADO"),1,0,"C",0);
+$pdf->Cell(50,7, utf8_decode("TOTAL DOLARIZADO"),1,1,"C",0);
 
-// Nombre del archivo PDF
-$fileName = 'reporte_ActaDeEntrega.pdf';
 
-// Salida del PDF para mostrar en una ventana nueva
+for ($i = 0; $i < count($resultadoOps); $i++) {
+  $pdf->SetFont('TIMES', 'B', 12);
+  $pdf->Cell(70, 7, utf8_decode($monedas[$i]), 1, 0, "L", 0);
+  $pdf->SetFont('TIMES', '', 12);
+  $pdf->Cell(50, 7, utf8_decode($TotalEnviado[$i]), 1, 0, "R", 0);
+  $pdf->Cell(50, 7, utf8_decode($totalDolarizados[$i]), 1, 1, "R", 0);
+}
+// Verificar si $totalDolarizadoGlobal es un array
+if (is_array($totalDolarizadoGlobal)) {
+    $totalDolarizadoGlobalString = implode(', ', $totalDolarizadoGlobal);
+    $pdf->SetFont('TIMES', 'B', 12);
+    $pdf->Cell(120, 7, utf8_decode('Total Dolarizado Global: '),  1, 0, "C", 0);
+    $pdf->Cell(50, 7, ($totalDolarizadoGlobalString), 1, 1, "R", 0);
+} else {
+    $pdf->Cell(40, 7, utf8_decode('Total Dolarizado Global: '),1, 0, "L", 0);
+    $pdf->Cell(50, 7, ($totalDolarizadoGlobal), 1, 1, "R", 0);
+}
+$fileName = 'ActaEntrega.pdf';
 $pdf->Output($fileName, 'I');
+
 ?>

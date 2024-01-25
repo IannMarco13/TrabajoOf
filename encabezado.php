@@ -15,7 +15,7 @@
     <nav>
         <img src="assets/img/logocompleto.png" alt="Logo" class="logo-danicodex">
         <ul class="cont-ul">
-            <li><a href="encabezado.php">INICIO</li>
+            <li><a href="/REMESAST/encabezado.php">INICIO</li>
             <li><a href="guardar_archivo.php">SUBIR ARCHIVO</a></li>
             <li class="develop">
                 CONULTAS 
@@ -40,6 +40,7 @@
                     </li>
                 </ul>
             </li>
+            <li class="back"><a href="/REMESAST/CierreCajas/CierredeCajas.php">Cierre de Cajas</a></li>
             <li class="back"><a href="saldo_cajas.php">Saldos de Caja</a></li>
             <li class="back"><a href="Dis_boveda.php">Disponibilidad en Bóveda</a></li>
         </ul>

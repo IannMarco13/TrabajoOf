@@ -120,7 +120,7 @@ $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : '';
                     </div>
                 </div>
             </div>
-        </th>
+    </th>
         <th>
             <form method="post" action="Compra_venta.php">
             <input type="submit" name="actualizarCV" value="Actualizar Compra Venta">
@@ -159,7 +159,7 @@ $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : '';
                 <label for="venta">Venta:</label>
                 <input type="text" id="venta" name="venta" maxlength="12" placeholder="Valor de Venta">
                 <br><br>    
-               <input type="submit" id="Guardar" name+="Guardar">
+               <input type="submit" id="Guardar" name="Guardar">
             </form>
             <script src="assets/js/Compra_Venta.js"></script>
         </th>
@@ -192,7 +192,7 @@ $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : '';
                                 MIN(VENTA) AS min_venta,
                                 (AVG(COMPRA) + AVG(VENTA)) / 2 AS promedio
                             FROM tp_cambio
-                            INNER JOIN tablamonedas ON tp_cambio.CODIGO_MONEDA = tablamonedas.CodigoMoneda
+                            INNER JOIN tabla_monedas ON tp_cambio.CODIGO_MONEDA = tabla_monedas.CodigoMoneda
                             WHERE CODIGO_MONEDA IN ('USD', 'CLP', 'BRL', 'EUR', 'ARS', 'ASD', 'CAD', 'PEN', 'GBP', 'CHF', 'NZD', 'PYG') 
                             AND DATE(FECHA_TP) BETWEEN '$from_date' AND '$to_date'
                             GROUP BY Moneda
@@ -216,24 +216,20 @@ $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : '';
                     <td><?php echo number_format($fila['min_venta'] , 4)?></td>
                     <td><?php echo number_format($fila['max_venta'] , 4)?></td>
                 </tr>
-<?php
-            }
-        } else {
-            echo "No se encontraron resultados.";
-        }
-    } else {
-        echo "Error al ejecutar la consulta: " . mysqli_error($conexion);
-    }
-} else {
-    echo "Fechas no especificadas.";
-}
-?>
-
+                <?php
+                            }
+                        } else {
+                            echo "No se encontraron resultados.";
+                        }
+                    } else {
+                        echo "Error al ejecutar la consulta: " . mysqli_error($conexion);
+                    }
+                } else {
+                    echo "Fechas no especificadas.";
+                }
+                ?>
                 </table>
             </th>
-        <th>
-            
-        </th>
         </tr>
     </table>
 </body>
@@ -262,56 +258,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Guardar']) ) {
     }
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actualizarCV'])) {
-    // Verificar si ya se ha realizado la actualización hoy
+    
     $ultima_actualizacion = obtenerUltimaActualizacion($conexion);
-    $hoy = Carbon::now('America/La_Paz')->startOfDay();
-
-    // Obtener la última fecha de la base de datos
-    $ultima_fecha_bd = obtenerUltimaActualizacion($conexion);
-    // Si no hay última fecha de la base de datos, usar una fecha por defecto
-    if (!$ultima_fecha_bd) {
-        $ultima_fecha_bd = Carbon::parse('2024-01-12')->startOfDay();
-    }
+    $ultima_actualizacion_query = $ultima_actualizacion->format('Y-m-d');
+    $hoy = Carbon::now('America/La_Paz');
+    $fechaYHora = $hoy->format('Y-m-d H:i:s');
     
-    if ($ultima_actualizacion && $ultima_actualizacion->gte($hoy)) {
+    if ($ultima_actualizacion && $ultima_actualizacion->isSameDay($hoy)) {
         echo '<script>alert("La actualización ya se realizó hoy. No se puede actualizar más de una vez al día."); window.location.href = "Compra_venta.php";</script>';
-        //var_dump($ultima_actualizacion);
-        exit;
-    }
-    // Realizar la actualización
-    $sql = "INSERT INTO tp_cambio (Cod_agencia, CODIGO_MONEDA, FECHA_TP, COMPRA, VENTA)
-    SELECT t1.Cod_agencia, t1.CODIGO_MONEDA, '$hoy' AS FECHA_TP, t1.COMPRA, t1.VENTA
-    FROM tp_cambio t1
-    WHERE DATE(t1.FECHA_TP) = '$ultima_fecha_bd'
-    AND t1.Cod_agencia IN (101, 202, 210, 301, 401, 501, 701, 702);
-    ";
-    
-    if ($conexion->query($sql) === TRUE) {
-        echo '<script>alert("Actualización realizada correctamente."); window.location.href = "Compra_venta.php";</script>';
-        var_dump($sql);
-        
-        actualizarFechaUltimaActualizacion($conexion);
     } else {
-        echo "Error al realizar la actualización: " . $conexion->error;
-        
+        // Realizar la actualización
+        $query = "INSERT INTO tp_cambio (Cod_agencia, CODIGO_MONEDA, FECHA_TP, COMPRA, VENTA)
+        SELECT Cod_agencia, CODIGO_MONEDA, '$fechaYHora', COMPRA, VENTA
+        FROM tp_cambio 
+        WHERE DATE(FECHA_TP) = '$ultima_actualizacion_query'
+        AND Cod_agencia IN (101, 202, 210, 301, 401, 501, 701, 702);";
+        if ($conexion->query($query) === TRUE) {
+            //echo '<script>alert("Actualización realizada correctamente."); window.location.href = "Compra_venta.php";</script>';
+            echo "ultima_actualizacion: " . $ultima_actualizacion . "<br>";
+            echo "fechaYHora: " . $fechaYHora . "<br>";
+            var_dump($query);
+        } 
     }
 }
 // Función para obtener la fecha de la última actualización
 function obtenerUltimaActualizacion($conexion) {
-    $sql = "SELECT MAX(FECHA_TP) AS ultima_actualizacion FROM tp_cambio";
-    $result = $conexion->query($sql);
+    $query = "SELECT MAX(FECHA_TP) AS ultima_actualizacion FROM tp_cambio";
+    $result = $conexion->query($query);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         return Carbon::createFromFormat('Y-m-d H:i:s', $row['ultima_actualizacion'], 'America/La_Paz');
     }
     return null;
-}
-// Función para actualizar la fecha de la última actualización
-function actualizarFechaUltimaActualizacion($conexion) {
-    $hoy = Carbon::now('America/La_Paz')->toDateTimeString();
-    $sql = "INSERT INTO ultima_actualizacion (fecha) VALUES ('$hoy')
-            ON DUPLICATE KEY UPDATE fecha = VALUES(fecha)";
-    $conexion->query($sql);
 }
 ?>
 
