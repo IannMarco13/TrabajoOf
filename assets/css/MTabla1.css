@@ -56,6 +56,11 @@
 /*    color: white; /* Color del texto */
 /*    /* Y cualquier otro estilo que desees aplicar */
 /*}*/
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
 .form-control {
     width: 50%;/* Establece el ancho al 50% del contenedor padre */

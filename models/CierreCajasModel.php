@@ -2,11 +2,11 @@
 require_once '../../conexion.php';
 
 class CierreCajas {
-    private $pdo;
+    private $conexion;
 
     public function __construct() {
         try {
-            $this->pdo = Conexion::Conectar();
+            $this->conexion = Conexion::Conectar();
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -14,7 +14,7 @@ class CierreCajas {
 
     public function ListarMonedas() {
         try {   
-            $tco = $this->pdo->prepare("SELECT * FROM tabla_monedas");
+            $tco = $this->conexion->prepare("SELECT * FROM tabla_monedas");
             $tco->execute();
             return $tco->fetchAll(PDO::FETCH_OBJ);
         } catch (Exception $e) {
@@ -34,10 +34,10 @@ class CierreCajas {
             if ($totalActual != 0) {
                 $query = "INSERT INTO cierre_cajas (MONEDA_TC, CORTE, FAJO, UNIDAD, TOTAL, FECHA_TC) VALUES ('$monedaActual', $corteActual, $fajoActual, $unidadActual, $totalActual, '$fecha')";
                 
-                if ($this->pdo->query($query)) {
+                if ($this->conexion->query($query)) {
                     $datosGuardados = true;
                 } else {
-                    $errorInfo = $this->pdo->errorInfo();
+                    $errorInfo = $this->conexion->errorInfo();
                     return 'Error al guardar los datos: ' . $errorInfo[2]; 
                 }
             }

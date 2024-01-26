@@ -1,0 +1,49 @@
+.Tutulo {
+    text-align: center;
+}
+.container {
+    padding: 0px;
+    height: 100vh; 
+  }
+
+  .container div {
+    flex-grow: 1;
+}
+  
+  .container-a {
+    background-color: #f20a0a;
+    float: left;
+    width: 20vh;
+  }
+  
+  .container-b {
+   background-color: #0e6352;
+    float: right;
+    width: 1vh;
+  }
+  .container-c {
+    text-align: left;
+    margin: 0 auto; /* Esto centrará horizontalmente el bloque */
+    max-width: 1000px; /* Puedes ajustar esto según tus necesidades */
+    background-color: #8f8851f9; 
+}
+.container-c1{
+    flex-grow: 10; /* Distribuye el espacio disponible entre .container-c1 y .container-c2 */
+    margin: 0px;
+}
+.container-c2 {
+    flex-grow: 10; /* Distribuye el espacio disponible entre .container-c1 y .container-c2 */
+    margin: 0px; /* Espaciado entre .container-c1 y .container-c2 */
+}
+
+.container-c1 {
+    width: 900px;
+    height: 25px;  
+    background-color: #187387; 
+}
+
+.container-c2 {
+    height: 60px;  
+    width: 900px;
+    background-color: #9bdcebe1; 
+}

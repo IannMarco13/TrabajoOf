@@ -35,7 +35,7 @@ nav {
     padding-left: 2vw;
 }
 
-.logo-danicodex {
+.logo {
     width: 250px !important; /* Ajusta el ancho de la imagen según tu preferencia */
     height: auto !important; /* Esto mantendrá la proporción de la imagen */    
     /*outline: 2px solid blue;   contorno en la img*/

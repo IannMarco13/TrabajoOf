@@ -13,9 +13,9 @@
 
     <header  class="header-home">
     <nav>
-        <img src="/REMESAST/assets/img/logocompleto.png" alt="Logo" class="logo-danicodex">
+        <img src="assets/img/logocompleto.png" alt="Logo" class="logo">
         <ul class="cont-ul">
-            <li><a href="/REMESAST/encabezado.php">INICIO</li>
+            <li><a href="/REMESAST/index.php">INICIO</li>
             <li><a href="/REMESAST/guardar_archivo.php">SUBIR ARCHIVO</a></li>
             <li class="develop">
                 CONULTAS 

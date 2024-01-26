@@ -1,0 +1,210 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background: linear-gradient(222deg, #e4e5e5, #656464);
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    text-transform: uppercase;
+}
+/* Estilos de la barra de navegación */
+nav {
+    height: 80px;
+    width: 100%;
+    background: linear-gradient(140deg, #454544, rgb(233, 163, 128), #FF6100); /* Degradado de fondo de la barra de navegación */ 
+}
+
+.header-home {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;  
+}
+
+.enlace {
+    position: absolute;
+    padding: 20px 50px;
+}
+
+.logo {
+    height: 40px; /* Altura automática para mantener la proporción */
+}
+
+nav ul {
+    float: right;
+    margin-right: 15px;
+}
+
+
+nav ul li {
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+}
+nav ul li a{
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 13px;
+    border-radius: 15px;
+    text-transform: uppercase;
+}
+
+li a.active,
+li a:hover {
+    font-size: 20px;
+    background: #050509;
+    color: #f37b37; 
+    transition: .5s;
+}
+a{
+    color:#fff;
+}
+.checkbtn {
+    font-size: 30px;
+    color: #fff;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+
+#check {
+    display: none;
+}
+
+/* Desarrollo de submenús desplegables */
+.develop {
+    position: relative;
+}
+
+.ul-second {
+    display: none;
+    position: absolute;
+    left: 10px;
+    top: 50px;
+    margin-top: 1vw;
+    font-size: 10px; /* Tamaño de letra */
+    color: #ffffff; /* Color del texto */
+    font-family: 'Arial', sans-serif; /* Tipo de letra */
+}
+
+.ul-second > li {
+    width: 190px;
+    transform: translateX(20px);
+    border-bottom: solid 1px #fff;
+    text-align: center;
+    background-color: #e7952aa9;
+    font-size: 10px; /* Tamaño de letra */
+    color: #d91c1c; /* Color del texto */
+    font-family: 'Verdana', sans-serif; /* Tipo de letra */
+    font-style: times; /* Estilo de letra */
+}
+
+.ul-second > li:hover {
+    background-color: #883b00; /* Cambio de color al pasar el ratón sobre un elemento del submenú */
+
+}
+.develop:hover > .ul-second {
+    display: block; /* Mostrar submenú cuando el elemento padre se pasa por encima */
+}
+
+.ul-third {
+    position: absolute;
+    transform: translateX(108%);
+    right: auto;
+    top: 10px;
+    display: none;
+    margin-top: 1vw;
+    background-color: #9d4e15;
+}
+
+.ul-third > li {
+    padding: 0.5vw;
+    border-bottom: solid 1px #fff;
+}
+
+.front:hover > .ul-third {
+    display: block; /* Mostrar submenú cuando el elemento padre se pasa por encima */
+}
+
+@media (max-width: 858px) {
+    .checkbtn {
+        display: block;
+    }
+
+    ul {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #a67605;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+
+    nav ul li a {
+        font-size: 20px;
+    }
+
+    li a:hover,
+    li a.active {
+        background: none;
+        color: rgb(196, 172, 172);
+    }
+
+    #check:checked~ul {
+        left: 0;
+    }
+    /* Desarrollo de submenús desplegables */
+    .ul-second {
+        background: none;
+        display: none;
+        left: 0px;
+        top: 0px;
+        width: 50%; /* Ajusta el ancho al 100% */
+    }
+
+    .ul-second > li {
+        width: 50%; /* Ajusta el ancho al 100% */
+        padding: 1vw; /* Ajusta el padding según tus preferencias */
+        border-bottom: solid 1px #fff;
+        text-align: center;
+        background-color: #e7952aa9;
+    }
+
+    .ul-second > li:hover {
+        background-color: #883b00;
+    }
+
+    .ul-third {
+        position: absolute;
+        transform: translateX(108%);
+        right: 50px;
+        top: 10px;
+        display: none;
+        margin-top: 1vw;
+        width: 100%; /* Ajusta el ancho al 100% */
+        background-color: #9d4e15;
+    }
+
+    .ul-third > li {
+        border-bottom: solid 1px #fff;
+    }
+}

@@ -7,7 +7,7 @@ require_once('../../controllers/CierreCajasController.php');
 $cierreCajasController = new CierreCajasController($cierreCajasModel);
 $mensaje = $cierreCajasController->procesarFormulario();
 ?>
- <link rel="stylesheet" href="/REMESAST/assets/css/container1.css">
+ <link rel="stylesheet" href="/REMESAST/assets/css/container.css">
  
  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -19,7 +19,7 @@ $mensaje = $cierreCajasController->procesarFormulario();
     </center>
 </h1>
 <form id="cierreCajaForm" action="" method="post">   
-    <div class="a">
+    <div class="container container-a">
         <div>
             <br>
             <center>
@@ -33,7 +33,7 @@ $mensaje = $cierreCajasController->procesarFormulario();
             </center>
         </div>
     </div>
-    <div class="b">
+    <div class="container container-b">        
         <div>
             <br>
             <center>

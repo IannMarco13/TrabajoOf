@@ -1,29 +1,20 @@
-.a {
-    float: left;
-    padding: 10px;
-  }
-  .a div{
-    height: 100vh;
-    width:  30vh; 
-    background-color: #fa7d7d; /*Azul*/
-  }
-  .b {
-    float: right;
-    padding: 10px;
-  }
-  .b div{
-    height: 100vh;
-    width:  30vh; 
-    background-color: #43ffd9;
-  }
-
-table {
-    border-collapse: collapse;
-    width: 60%;
+.container {
+  float: left;
+  padding: 10px;
+  height: 100vh;
+  width: 30vh;
 }
 
-th, td {
-    border: 1px solid black;
-    padding: 8px; /* Ajusta el tamaño del padding según tus necesidades */
-    text-align: center;
+.container div {
+  height: 100%;
+  width: 100%;
+}
+
+.container-a {
+  background-color: #fa7d7d; /* Azul */
+}
+
+.container-b {
+  background-color: #43ffd9; /* Verde */
+  float: right;
 }
