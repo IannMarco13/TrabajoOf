@@ -9,6 +9,14 @@ $controller = new RemesasController($model);
 $from_date = $_GET['from_date'] ?? null;
 $to_date = $_GET['to_date'] ?? null;
 $remesas = $controller->mostrarRemesas($from_date, $to_date);
+
+//var_dump($controller);
+//echo '<br>';
+//var_dump($to_date);
+//echo '<br>';
+//var_dump($from_date);
+//echo '<br>';
+//var_dump($remesas);
 ?>
 <body>
     <div class="container container-a">
@@ -20,7 +28,8 @@ $remesas = $controller->mostrarRemesas($from_date, $to_date);
         </div>
     </div>
     <div class="container-c">
-        <h1 class="Tutulo">Reporte Chile Bolivia</h1>
+        <br>
+        <h1 class="Titulo"> Reporte Chile Bolivia</h1>
             <form action="" method="GET">
                 <div class="row">
                     <div class="container-c1">
@@ -37,9 +46,11 @@ $remesas = $controller->mostrarRemesas($from_date, $to_date);
                         <div class="col-md-4">
                             <br>
                             <div class="form-group btn-group">
-                                <button type="submit" class="submit-button"><i class="fas fa-search">Buscar</i> </button>
+                                <center>
+                                <button type="submit" class="submit-button"><i class="fas fa-search">Buscar</i></button>
                                 <a href="ReportesPDF/ReporteChilePDF.php?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" target="_blank" class="btn-custom">
                                 <i class="far fa-file-pdf"> Generar Reporte </i></a>
+                                </center>
                             </div>
                         </div>
                     </div>
@@ -67,7 +78,6 @@ $remesas = $controller->mostrarRemesas($from_date, $to_date);
                 <tbody>
                     <?php 
                     if(isset($_GET['from_date']) && isset($_GET['to_date'])){
-                        
                         $query ="SELECT * FROM report_chile_bolivia WHERE DATE(FECHA_ORI) BETWEEN '$from_date' AND '$to_date' ORDER BY FECHA_ORI ASC";
                         $query_run = mysqli_query($conexion, $query);
                         if(mysqli_num_rows($query_run) > 0){
@@ -91,23 +101,23 @@ $remesas = $controller->mostrarRemesas($from_date, $to_date);
                                 <td> <?php echo $fila['MONTO_BOB'] ?> </td>
                                 <td> <?php echo $fila['MONTO_USD'] ?> </td>
                                 <td> <?php echo $fila['REMITENTE_R'] ?> </td>  
-                                <td> <?php echo $fila['DESTINATARIO_R'] ?> </td>
-                                
+                                <td> <?php echo $fila['DESTINATARIO_R'] ?> </td>   
                             </tr>                        
                             <?php
                             }
                         }else{?>
-                        <tr>
+                         <tr>
                             <td><?php  echo "No se encontraron resultados"; ?></td>
-                        <?php }                                
-                    } 
-                        ?>
-                    </tbody>
+                        </tr>
+                        <?php 
+                            }                                
+                        } ?>
+                        </tbody>
                     </table>
                     <?php  mysqli_close($conexion); ?>
                 </div>
             </div>
-        <script src="../assets/js/PieTablas.js"></script>
+        <script src="/RemesasT/assets/js/PieTablass.js"></script>
     </div>
 </body>
 <?php include '../includes/footer.php'; ?>

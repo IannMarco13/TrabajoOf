@@ -24,7 +24,6 @@ class AperturaCajasController {
                 $_POST['Total'],
                 $fechaHoraActual
             );
-
             return $mensaje;
         }
     }

@@ -43,7 +43,6 @@ function actualizarTotal() {
     document.getElementById("totalOP").innerText = "El total es: " + total.toFixed(2);
     document.getElementById("totalOP").style.color = "magenta";
     document.querySelector("input[name='totalOP[]']").value = total.toFixed(2);
-   
 }
 
 function redirigir() {
@@ -52,7 +51,7 @@ function redirigir() {
     var valorSeleccionado = seleccion.options[seleccion.selectedIndex].value;
     switch (valorSeleccionado) {
         case "1":
-            window.location.href = "CierredeCajas.php";
+            window.location.href = "CierreCajaBOB.php";
         break;
         case "2":
             window.location.href = "CierreCajaUSD.php";
@@ -93,7 +92,7 @@ function redirigir() {
     }
 }
 function Recet1() {
-    window.location.href = 'CierredeCajas.php';
+    window.location.href = 'CierreCajaBOB.php';
 }
 function Recet2() {
     window.location.href = 'CierreCajaUSD.php';

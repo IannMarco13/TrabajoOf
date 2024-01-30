@@ -1,30 +1,25 @@
 <?php
+include '../../includes/header.php';
 require_once('../../models/CierreCajasModel.php');
-require_once('../../encabezado.php');
 require_once __DIR__ . '../../../vendor/autoload.php';
 $cierreCajasModel = new CierreCajas();
 require_once('../../controllers/CierreCajasController.php'); 
 $cierreCajasController = new CierreCajasController($cierreCajasModel);
 $mensaje = $cierreCajasController->procesarFormulario();
 ?>
- <link rel="stylesheet" href="/REMESAST/assets/css/container1.css">
  
  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
- <script src="/REMESAST/assets/js/CierreCajas.js"></script>
-<h1>
-    <br>
-    <center>
-        Cierre de Caja
-    </center>
-</h1>
+
+<br>
+<h1> Cierre de Caja </h1>
 <form id="cierreCajaForm" action="" method="post">   
-    <div class="a">
+    <div class="container container-a">
         <div>
             <br>
             <center>
                 <h5> moneda </h5>
-                <select name="Moneda" class="form-control form-control-sm" id="Moneda" onchange="redirigir()">
+                <select name="Moneda" class="form-controll form-control-sm" id="Moneda" onchange="redirigir()">
                 <option value="0">EXT</option>
                 <?php foreach ($cierreCajasModel->ListarMonedas() as $row) { ?>
                     <option value="<?=$row->ID_TABLA_MONEDAS?>"><?=$row->Moneda?></option>
@@ -33,7 +28,7 @@ $mensaje = $cierreCajasController->procesarFormulario();
             </center>
         </div>
     </div>
-    <div class="b">
+    <div class="container container-b">
         <div>
             <br>
             <center>
@@ -44,23 +39,25 @@ $mensaje = $cierreCajasController->procesarFormulario();
             </center>
         </div>
     </div>
-<div>
-    <center>
+    <div class="container-c">
         <br><br>
         <h1>Franco Suizo [CHF]</h1>
         <br>
-            <br><br>
-            <table border="3">
-                <tr>
-                    <th colspan="5" id='totalOP'>Total: 0</th>
-                    <input type="hidden" class="" name="totalOP[]" value="">  
-                </tr>
-                <tr align='right'>
-                    <th colspan="2">corte</th> 
-                    <th>fajo</th> 
-                    <th>unidad</th>
-                    <th>Total</th>
-                </tr>
+        <div class="table-responsive">
+            <table id="TablaRemesas" border="3">
+                <thead>
+                    <tr>
+                        <th colspan="5" id='totalOP'>Total: 0</th>
+                        <input type="hidden" class="" name="totalOP[]" value="">  
+                    </tr>
+                    <tr align='right'>
+                        <th colspan="2">corte</th> 
+                        <th>fajo</th> 
+                        <th>unidad</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <?php
                 $query = "SELECT CodigoMoneda AS MONEDA, CORTE FROM corte_monedas WHERE CodigoMoneda = 'CHF' ORDER BY CORTE DESC";
                 $result = $conexion->query($query);
@@ -79,14 +76,17 @@ $mensaje = $cierreCajasController->procesarFormulario();
                     echo "<td class='Total'>0</td>";
                     echo "<input type='hidden' class='TotalHidden' name='Total[]' value=''>";
                     echo "</tr>";
-                }
-                ?>        
+                }  ?>
+                </tbody>        
             </table>
-            <input type="button" value="RECETAR" onclick="Recet11()">
-            <button type="button" onclick="guardarCierre()">Guardar</button>
-            <?php if (!empty($mensaje) && $_SERVER['REQUEST_METHOD'] == 'POST'): ?>
-            <p><?php echo $mensaje; ?></p>
-            <?php endif; ?> 
-        </center>
+            <center>
+                <input class="submit-button" type="button" value="Reset" onclick="Recet11()">
+                <button class="submit-button"  type="button" onclick="guardarCierre()">Guardar</button>
+                <?php if (!empty($mensaje) && $_SERVER['REQUEST_METHOD'] == 'POST'): ?>
+                    <p><?php echo $mensaje; ?></p>
+                    <?php endif; ?> 
+            </center>
+        </div>
     </div>
 </form>
+<?php include '../../includes/footer.php'; ?>

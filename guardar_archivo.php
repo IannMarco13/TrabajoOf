@@ -6,12 +6,8 @@ include("encabezado.php");
 <head>
     <meta charset="UTF-8">
     <title>Guardar Archivo</title>
-    
-    <!--<link rel="stylesheet" href="assets/css/style.css">-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="assets/css/guardar.css">
-
 </head>
 <body>
     <div class="guardar_archivo">
@@ -29,9 +25,7 @@ include("encabezado.php");
 
     <div class="guardar_archivo">
         <div class="formulario">
-            <h1>
-                REPORTE REMESAS CHILE BOLIVIA
-            </h1>
+            <h1> REPORTE REMESAS CHILE BOLIVIA </h1>
             <form action="guardar_archivo.php" class="formulariocompleto" method="post" enctype="multipart/form-data">
                 <input type="file" id="archivo2" name="archivo2" class="form input-file" />
                 <!--<input type="submit" value="Subir Archvo Reportes" class="submit-button" name="enviar2">-->
@@ -45,9 +39,7 @@ include("encabezado.php");
 
     <div class="guardar_archivo">
         <div class="formulario">
-            <h1>
-                REMESAS BOLIVIA CHILE
-            </h1>
+            <h1> REMESAS BOLIVIA CHILE </h1>
             <form action="guardar_archivo.php" class="formulariocompleto" method="post" enctype="multipart/form-data">        
             <input type="file" id="archivo3" name="archivo3" class="form input-file"/>
             <button type="submit" class="submit-button" name="enviar3">
@@ -59,9 +51,7 @@ include("encabezado.php");
 
     <div class="guardar_archivo">
         <div class="formulario">
-            <h1>
-                SALDO DE CAJAS
-            </h1>
+            <h1> SALDO DE CAJAS </h1>
             <form action="guardar_archivo.php" class="formulariocompleto" method="post" enctype="multipart/form-data">
                 <input type="file" id="archivo4" name="archivo4" class="form input-file"/>
                 <button type="submit" class="submit-button" name="enviar4">
@@ -74,9 +64,7 @@ include("encabezado.php");
 
     <div class="guardar_archivo">
         <div class="formulario">
-            <h1>
-                DISPONIBILIDAD EN BÓVEDA
-            </h1>
+            <h1> DISPONIBILIDAD EN BÓVEDA </h1>
             <form action="guardar_archivo.php" class="formulariocompleto" method="post" enctype="multipart/form-data">
                 <input type="file" id="archivo5" name="archivo5" class="form input-file"/>
                 <button type="submit" class="submit-button" name="enviar5">
@@ -90,7 +78,7 @@ include("encabezado.php");
 </body>
 </html>
 <?php
-    //require_once("menu.php");
+
     if (isset($_POST["enviar1"])) {//permite recepcionar una variable que si exista y que no sea null
     
         require_once("conexion.php");

@@ -38,7 +38,7 @@ function actualizarTotal() {
     });
 
     document.getElementById("totalOP").innerText = "El total es: " + total.toFixed(2);
-    document.getElementById("totalOP").style.color = "magenta";
+    document.getElementById("totalOP").style.color = "black";
     document.querySelector("input[name='totalOP[]']").value = total.toFixed(2);
 }
 

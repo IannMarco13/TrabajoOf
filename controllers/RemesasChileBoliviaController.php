@@ -1,5 +1,4 @@
 <?php
-// RemesasController.php
 use Carbon\Carbon;
 include '../conexion.php';  
 require_once '../models/RemesasChileBoliviaModel.php';

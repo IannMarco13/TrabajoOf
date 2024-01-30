@@ -11,16 +11,17 @@ $to_date = $_GET['to_date'] ?? null;
 $remesas = $controller->mostrarRemesas($from_date, $to_date);
 ?>
 <body>
-    <div class="container container-a">
+    <div class="container-a">
         <div> 
         </div>
     </div>
-    <div class="container container-b">
-        <div>        
+    <div class="container-b">
+        <div>    
         </div>
     </div>
     <div class="container-c">
-        <h1 class="Tutulo"> Remesas Chile Bolivia</h1>
+        <br>
+        <h1> Remesas Chile Bolivia</h1>
             <form action="" method="GET">
                 <div class="row">
                     <div class="container-c1">
@@ -37,12 +38,14 @@ $remesas = $controller->mostrarRemesas($from_date, $to_date);
                         <div class="col-md-4">
                             <br>
                             <div class="form-group btn-group">
+                                <center>
                                 <button type="submit" class="submit-button"><i class="fas fa-search"> Buscar </i></button>
                                 <a href="ReportesPDF/RemesasChilePDF.php?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" target="_blank" class="btn-custom">
                                 <i class="fas fa-print"> Imprimir Tabla</i> </a>
                                 <a href="ReportesPDF/RemesaReportChilePDF.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>" target="_blank" class="btn-custom">
                                 <i  class="far fa-file-pdf"> Generar Consulta </i></a>
                                 <a href="ReporteChileBolivia.php" target="_blank" class="btn-custom"><i class="far fa-file"> Reporte</i></a>
+                                </center>
                             </div>
                         </div>
                     </div>
@@ -117,7 +120,7 @@ $remesas = $controller->mostrarRemesas($from_date, $to_date);
                     <?php  mysqli_close($conexion); ?>
                 </div>
             </div>
-        <script src="../assets/js/PieTablas.js"></script>
+        <script src="/RemesasT/assets/js/PieTablass.js"></script>
     </div>
 </body>
 <?php include '../includes/footer.php'; ?>
