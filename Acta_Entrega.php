@@ -11,7 +11,7 @@ $hoy = Carbon::now('America/La_Paz')->startOfDay();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/Acta_Entrega.css">
+    <link rel="stylesheet" href="assets/css/Acta_Entregaa.css">
     <script src="assets/js/Acta_Entrega1.js"></script>
     <title>Acta de Entrega</title>
 </head>
@@ -70,6 +70,7 @@ $hoy = Carbon::now('America/La_Paz')->startOfDay();
                 <td colspan="2" align="center">
                     <input type="reset">
                     <input type="submit" id="generar" value="Generar PDF">
+                    <button class="submit-button" type="button" onclick="">Guardar</button>
                 </td>
                 <td colspan="3" align="center">Total Dolarizado Global</td>
                 <td id="total-dolarizado-global" class='Total'>0</td>

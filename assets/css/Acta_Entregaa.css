@@ -31,7 +31,7 @@ th, td {
 }
 
 #resultado {
-    background: linear-gradient(179deg,#D41A08, #EEE338 ,#007129);
+    /*background: linear-gradient(179deg,#D41A08, #EEE338 ,#007129);*/
     color: #000000; /* Texto oscuro */
     font-weight: bold; /* Negrita */
     text-align: center;

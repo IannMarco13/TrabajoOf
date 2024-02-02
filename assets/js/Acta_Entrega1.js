@@ -5,7 +5,6 @@ function calcularDolarizado(fila) {
     var moneda = fila.querySelector("td.moneda").innerText.trim();
     // Obtener el valor ingresado en el input "Total Enviado" y convertirlo a un número decimal
     var totalEnviado = parseFloat(fila.querySelector("input.TotalEnviado").value) || 0;//  ^= en el selector de atributo para encontrar el campo que comienza con el nombre totalEnviado.
-
     // Obtener los tipos de cambio de venta y compra para la moneda de la fila actual
     var tipoCambioVenta = parseFloat(fila.querySelector("td.tipo-cambio-venta").innerText);
     var tipoCambioCompra = parseFloat(fila.querySelector("td.tipo-cambio-compra").innerText);

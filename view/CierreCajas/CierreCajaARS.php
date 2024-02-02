@@ -11,6 +11,8 @@ $mensaje = $cierreCajasController->procesarFormulario();
  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+ <script src="/REMESAST/assets/js/CierreCajas.js"></script>
+
 <br>
 <h1> Cierre de Caja </h1>
 <form id="cierreCajaForm" action="" method="post">   
@@ -22,7 +24,7 @@ $mensaje = $cierreCajasController->procesarFormulario();
                 <select name="Moneda" class="form-controll form-control-sm" id="Moneda" onchange="redirigir()">
                 <option value="0">EXT</option>
                 <?php foreach ($cierreCajasModel->ListarMonedas() as $row) { ?>
-                    <option value="<?=$row->ID_TABLA_MONEDAS?>"><?=$row->Moneda?></option>
+                    <option  class="form-control" value="<?=$row->ID_TABLA_MONEDAS?>"><?=$row->Moneda?></option>
                 <?php } ?>
                 </select>
             </center>

@@ -37,7 +37,7 @@ class PDF extends FPDF {
       $pageWidth = $this->GetPageWidth();
       $xPosition = ($pageWidth - 25) / 2; // Calcula la posición X para centrar
       $this->SetXY($xPosition, 30); // Establece la posición X y Y para centrar
-      $this->Cell(25, 25, utf8_decode("REPORTE DE CONCILIACÍN DE REMESAS"), 0, 1, 'C', 0);
+      $this->Cell(25, 25, utf8_decode("REPORTE DE CONCILIACIÓN DE REMESAS"), 0, 1, 'C', 0);
       $this->Ln(1);
    }
    private $pageCount = 0;

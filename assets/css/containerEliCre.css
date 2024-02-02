@@ -1,0 +1,50 @@
+/* Estilos para el contenedor principal */
+.container {
+  display: flex; /* Establece el contenedor como un contenedor flexible */
+}
+
+/* Estilos para cada contenedor de tabla */
+.table-container {
+  margin-right: 600px;
+  margin-left: 600px; 
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background-color: #ed8529;
+  color: #ffffff;
+}
+
+#th{
+  background-color: #ed8529;
+  color: #ffffff;
+}
+
+.total-dolarizado{
+  background-color: #ed8529;
+  color: #ffffff;
+}
+
+table, td {
+  color: #000000;
+  border: 2px solid rgb(9, 9, 9);
+}
+
+th, td {
+  padding: 8px;
+
+}
+#TablaActa tbody tr:nth-child(odd) {
+  background-color: rgba(224, 223, 223, 0.914);
+  color: #000000;
+}
+
+/* Estilos para las filas impares */
+#TablaActa tbody tr:nth-child(even) {
+  background-color: rgba(253, 253, 253, 0.914); /* Cambia el color de fondo */
+  color: #000000;
+}

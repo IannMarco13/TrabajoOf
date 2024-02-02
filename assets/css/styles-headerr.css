@@ -18,7 +18,7 @@ body {
 }
 /* Estilos de la barra de navegación */
 nav {
-    height: 80px;
+    height: 50px;
     width: 100%;
     background: linear-gradient(140deg, #454544, rgb(233, 163, 128), #FF6100); /* Degradado de fondo de la barra de navegación */ 
 }
@@ -36,7 +36,8 @@ nav {
 }
 
 .logo {
-    height: 40px; /* Altura automática para mantener la proporción */
+    width: 100px; /* Ajusta el ancho de la imagen según tu preferencia */
+    height: auto;
 }
 
 nav ul {
@@ -44,17 +45,16 @@ nav ul {
     margin-right: 15px;
 }
 
-
 nav ul li {
     display: inline-block;
-    line-height: 80px;
-    margin: 0 5px;
+    line-height: 50px;
+    margin: 10 5px;
 }
 nav ul li a{
-    color: #fff;
+    color: #ffffff;
     font-size: 18px;
     padding: 10px 13px;
-    border-radius: 15px;
+    border-radius: 99px;
     text-transform: uppercase;
 }
 
@@ -65,12 +65,10 @@ li a:hover {
     color: #f37b37; 
     transition: .5s;
 }
-a{
-    color:#fff;
-}
+
 .checkbtn {
     font-size: 30px;
-    color: #fff;
+    color: #ffffff;
     float: right;
     line-height: 80px;
     margin-right: 40px;
@@ -87,23 +85,25 @@ a{
     position: relative;
 }
 
+/* Estilos para el submenú .ul-second */
 .ul-second {
     display: none;
     position: absolute;
     left: 10px;
-    top: 50px;
+    top: 30px;
     margin-top: 1vw;
-    font-size: 10px; /* Tamaño de letra */
+    font-size: 14px; /* Tamaño de letra */
     color: #ffffff; /* Color del texto */
     font-family: 'Arial', sans-serif; /* Tipo de letra */
+    background-color: #e7952aa9;
+    border-radius: 8px; /* Bordes redondeados */
 }
 
 .ul-second > li {
-    width: 190px;
-    transform: translateX(20px);
+    width: 200px;
+    padding: 0px; /* Ajusta el padding según tus preferencias */
     border-bottom: solid 1px #fff;
     text-align: center;
-    background-color: #e7952aa9;
     font-size: 10px; /* Tamaño de letra */
     color: #d91c1c; /* Color del texto */
     font-family: 'Verdana', sans-serif; /* Tipo de letra */
@@ -112,30 +112,35 @@ a{
 
 .ul-second > li:hover {
     background-color: #883b00; /* Cambio de color al pasar el ratón sobre un elemento del submenú */
-
+    color :#d91c1c;
 }
+
 .develop:hover > .ul-second {
     display: block; /* Mostrar submenú cuando el elemento padre se pasa por encima */
 }
 
+/* Estilos para el submenú .ul-third */
 .ul-third {
     position: absolute;
     transform: translateX(108%);
-    right: auto;
-    top: 10px;
+    right: 0px;
     display: none;
-    margin-top: 1vw;
+    margin-top: -50px;
+    width: 100%; /* Ajusta el ancho al 100% */
     background-color: #9d4e15;
+    border-radius: 8px; /* Bordes redondeados */
 }
 
 .ul-third > li {
-    padding: 0.5vw;
+    width: max-content;
     border-bottom: solid 1px #fff;
+    padding: 8px; /* Ajusta el padding según tus preferencias */
 }
 
 .front:hover > .ul-third {
     display: block; /* Mostrar submenú cuando el elemento padre se pasa por encima */
 }
+
 
 @media (max-width: 858px) {
     .checkbtn {

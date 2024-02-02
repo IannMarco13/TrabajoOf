@@ -7,7 +7,7 @@ function calcularApertura() {
 
 function guardarApertura() {
     calcularApertura();
-    document.getElementById("aperturaCajaForm").submit(); // Cambié el ID del formulario a "aperturaCajaForm"
+    document.getElementById("aperturaCajaForm").submit(); 
 }
 
 function calculaApertura(fila){

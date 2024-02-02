@@ -55,8 +55,7 @@ $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : '';
         <div class="col-md-4">
             <div class="form-group btn-group">
                 <button type="submit" class="submit-button"><i class="fas fa-search"></i> Buscar</button>
-                <a class="a1" href="ReportesPDF/ReporteChilePDF.php?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" target="_blank" class="btn-custom">
-                <i class="far fa-file-pdf"></i> Generar Reporte</a>
+                
             </div> 
         </div>
         </form> 

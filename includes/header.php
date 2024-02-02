@@ -2,8 +2,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -13,7 +12,7 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <!-- Otros estilos CSS -->
-    <link rel="stylesheet" href="/REMESAST/assets/css/styles-header.css">
+    <link rel="stylesheet" href="/REMESAST/assets/css/styles-headerr.css">
     <link rel="stylesheet" href="/REMESAST/assets/css/styles-footer.css">
     <link rel="stylesheet" href="/REMESAST/assets/css/Buscador-Fechas.css">
     <link rel="stylesheet" href="/REMESAST/assets/css/tabla.css">
@@ -31,11 +30,10 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
     <!-- Datatables Responsive JS -->
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script> 
-
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <script src="/REMESAST/assets/js/AperturaCajas.js"></script>
-    <script src="/REMESAST/assets/js/CierreCajas.js"></script>
+    
+</head>
 <body>
 <header  class="header-home">
         <nav>
@@ -53,16 +51,16 @@
             <li class="develop">
                 <a href="#">CONULTAS</a> 
                 <ul class="ul-second">
-                    <li class="front"><a href="/RemesasT/view/RemesasChileBolivia.php">Chile - Bolivia</a> </li>
-                    <li class="back"><a href="/REMESAST/view/ReporteBoliviaChile.php">Bolivia - Chile</a></li>
-                    <li class="front">
+                    <li id="mmm" class="front"><a href="/RemesasT/view/RemesasChileBolivia.php">Chile - Bolivia</a> </li>
+                    <li id="mmm" class="back"><a href="/REMESAST/view/ReporteBoliviaChile.php">Bolivia - Chile</a></li>
+                    <li id="mmm" class="front">
                         <a href="#">Consultas</a>
                         <ul class="ul-third">
                             <li class="back"><a href="/REMESAST/view/ConsultaPagadoMismoDia.php">Consultas 1</a></li>
                             <li class="back"><a href="/REMESAST/view/ConsultaPagadoDistintoDia.php">Consultas 2</a></li>
                             <li class="back"><a href="/REMESAST/view/ConsultaNoPafago.php">Consultas 3</a></li>
-                            <li class="back"><a href="/REMESAST/view/">Compra-Venta</a></li>
-                            <li class="back"><a href="/REMESAST/view/">Acta Entrega</a></li>
+                            <li class="back"><a href="/REMESAST/Compra_venta.php">Compra-Venta</a></li>
+                            <li class="back"><a href="/RemesasT/view/ActaEntrega.php">Acta Entrega</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -81,7 +79,7 @@
                         <a href="#">Apertura</a>
                         <ul class="ul-third">
                             <li class="back"><a href="/REMESAST/view/AperturaCajas/AperturaCajaBOB.php">Apertura Cajas</a></li>
-                            <li class="back"><a href="/REMESAST/consulta2.php">Reporte</a></li>
+                            <li class="back"><a href="/REMESAST/view/ReporteAperturaCajas.php">Reporte</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -94,3 +92,4 @@
     </header>
 </body>
 </html>
+<!--  background: linear-gradient(140deg, #454544, rgb(233, 163, 128), #FF6100); -->

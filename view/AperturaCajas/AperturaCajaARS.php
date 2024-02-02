@@ -10,7 +10,9 @@ $mensaje = $AperturaCajasController->procesarFormulario();
 
  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
- 
+
+ <script src="/REMESAST/assets/js/AperturaCajas.js"></script>
+
 <br>
 <h1>Apertura de Caja </h1>
 <form id="aperturaCajaForm" action="" method="post">   

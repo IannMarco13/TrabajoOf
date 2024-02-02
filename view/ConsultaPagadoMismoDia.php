@@ -95,7 +95,7 @@ $remesas = $controller->mostrarRemesas($from_date, $to_date);
                     </table> <?php  mysqli_close($conexion); ?>
                 </div>
             </div>
-        <script src="../assets/js/PieTablas.js"></script>
+        <script src="/RemesasT/assets/js/PieTablas.js"></script>
     </div>
 </body>
 <?php include '../includes/footer.php'; ?>
