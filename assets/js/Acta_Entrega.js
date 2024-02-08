@@ -47,4 +47,6 @@ function Reset() {
 function Consulta() {
     window.location.href = '/RemesasT/view/ConsultaActaEntrega.php';
 }
-
+function Imprimir() {
+    window.location.href = '/RemesasT/ReportesPDF/ActaEntregaPDF.php';
+}

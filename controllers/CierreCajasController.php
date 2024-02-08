@@ -28,4 +28,17 @@ class CierreCajasController {
             return $mensaje;
         }
     }
+
+    public function verificarCajero($codigoCajero) {
+        // Realiza la consulta SQL para verificar si el código del cajero existe
+        $cajero = $this->cierreCajasModel->obtenerDatosCajero($codigoCajero);
+    
+        if ($cajero) {
+            // Devuelve los datos del cajero si existe
+            return $cajero;
+        } else {
+            // Devuelve un mensaje de error si el cajero no existe
+            return ["error" => "El código del cajero no existe"];
+        }
+    }
 }

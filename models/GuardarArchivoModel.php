@@ -12,7 +12,7 @@ class GuardarArchivoModel {
         }
     }
     // Esta funcion insertara datos en la tabla Remesas_Chile_Bolivia
-    function insertar_datos1($conexion, $codigo, $fecha, $estado, $air, $agr, $ope, $origen, $crd, $destino, $moneda, $monto, $comision_por, $comision_clp, $recibido_usd, $recibido_clp, $total_clp, $remitente, $destinatario) {
+    public function insertar_datos1($conexion, $codigo, $fecha, $estado, $air, $agr, $ope, $origen, $crd, $destino, $moneda, $monto, $comision_por, $comision_clp, $recibido_usd, $recibido_clp, $total_clp, $remitente, $destinatario) {
         global $conexion;
         $sentencia = "INSERT INTO remesas_env_chile_bolivia (CODIGO, FECHA, ESTADO, AIR, AGR, OPE, ORIGEN, CRD, DESTINO, MONEDA, MONTO, COMISION_POR, COMISION_CLP, RECIBIDO_USD, RECIBIDO_CLP, TOTAL_CLP, REMITENTE, DESTINATARIO) VALUES ($codigo, '$fecha', '$estado', $air, $agr, '$ope', '$origen', $crd, '$destino', '$moneda', '$monto', '$comision_por', '$comision_clp', '$recibido_usd', '$recibido_clp', '$total_clp', '$remitente', '$destinatario')";
         $ejecutar = mysqli_query($conexion, $sentencia);

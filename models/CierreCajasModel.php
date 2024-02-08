@@ -22,6 +22,28 @@ class CierreCajas {
         }
     }
     
+    public function ListarCajero() {
+        try {
+            $tco = $this->conexion->prepare("SELECT ID_CAJERO, ID_AGENCIA, NOMBRE FROM cajeros");
+            $tco->execute();
+            return $tco->fetchAll(PDO::FETCH_OBJ);
+        } catch(Exception $e){
+            die ($e->getMessage());
+        } 
+    }
+
+    public function obtenerDatosCajero($codigoCajero) {
+        try {
+            $query = "SELECT * FROM cajeros WHERE ID_CAJERO = ?";
+            $statement = $this->conexion->prepare($query);
+            $statement->bindParam(1, $codigoCajero);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+ 
     public function guardarDatos($monedas, $cortes, $fajos, $unidades, $totales, $fecha) {
         $datosGuardados = false;
 
@@ -43,6 +65,6 @@ class CierreCajas {
             }
         }
         return $datosGuardados ? '¡Datos guardados correctamente!' : '';
-    }
+    }    
 }
 ?> 

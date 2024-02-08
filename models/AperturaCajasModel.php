@@ -44,5 +44,6 @@ class AperturaCajasModel {
         }
         return $datosGuardados ? '¡Datos guardados correctamente!' : '';
     }
+    
 }
 ?> 

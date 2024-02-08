@@ -1,44 +1,78 @@
-h1 {
-  text-align: center;
-}
+  h1 {
+    text-align: center;
+  }
   .container div {
     flex-grow: 1;
-}
+  }
   
   .container-a {
     background-color: #e80f0f00;
+    padding: 20px;
     float: left;
-    width: 35vh;
   }
   
-.container-b {
-  background-color: #0e635200;
-  float: right;
-  width: 30vh;
-}
-.container-c {
-  margin: 0 auto; /* Esto centrará horizontalmente el bloque */
-  max-width: 1200px; /* Puedes ajustar esto según tus necesidades */
-  background-color: #056a2300; 
-}
-.container-c1{
-  text-align: center;
+  .container-b {
+    background-color: #0e635200;
+    float: right;
+    width: 30vh;
+  }
+
+  .container-c {
+    margin: 0 auto; /* Esto centrará horizontalmente el bloque */
+    max-width: 1200px; /* Puedes ajustar esto según tus necesidades */
+    background-color: #056a2300; 
+  }
+  .container-c1{
+    text-align: center;
     flex-grow: 10; /* Distribuye el espacio disponible entre .container-c1 y .container-c2 */
     margin: 0px;
-}
-.container-c2 {
-    flex-grow: 10; /* Distribuye el espacio disponible entre .container-c1 y .container-c2 */
-    margin: 0px; /* Espaciado entre .container-c1 y .container-c2 */
-}
+  }
+  .container-c2 {
+    flex-grow: 10; 
+    margin: 0px; 
+  }
 
-.container-c1 {
+  .container-c1 {
     width: 900px;
     height: 25px;  
     background-color: #18738700; 
-}
+  }
 
-.container-c2 {
+  .container-c2 {
     height: 60px;  
     width: 900px;
     background-color: #9bdceb00; 
+  }
+  .container-guardar {
+    display: inline-flex;
+    justify-content: space-between; /* Para separar los contenedores horizontalmente */
+    flex-wrap: wrap; /* Permite que los contenedores se envuelvan si no hay suficiente espacio */
+}
+  .container-1, .container-2, .container-3 {
+    width: calc(33.33% - 50px); /* Ancho igual para los contenedores, restando el espacio para el padding */
+    padding: 60px;
+    height: 300px;
+    border: 1px solid black;
+    border-radius: 35px; /* Radio de curvatura de las esquinas */
+    margin-bottom: 20px; /* Espacio entre los contenedores */
+    background: linear-gradient(400deg, #e4e5e5, #656464);
+}
+.container-a1{
+  text-align: center;
+  flex-grow: 10; 
+  margin: 0px;
+  width: 1000px;
+  height: 60px;  
+  background-color: #18738700;
+  padding: 10px; 
+}
+
+.containerr {
+  flex-grow: 1;
+} 
+.container-c3{
+  margin: 0 auto;
+    padding: 10px;
+    max-width: 1200px; /* Puedes ajustar esto según tus necesidades */
+    background-color: #14056a00; 
 }

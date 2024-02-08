@@ -2,9 +2,6 @@
 require_once '../models/GuardarArchivoModel.php';
 
 class GuardarArchivoController {
-    public function __construct() {
-        // Puedes incluir cualquier inicialización que necesites aquí
-    }
 
     public function convertirDecimal($valor) {
         $valor = str_replace(".", "", $valor); // Eliminar puntos de los miles
@@ -27,7 +24,7 @@ class GuardarArchivoController {
             $archivo_guardado1 = $directorio_destino . "copia_" . $archivo1;
 
             if (copy($archivo_copiado1, $archivo_guardado1)) {
-                $alert = "Se copió correctamente el archivo temporal a nuestra carpeta";
+                echo "Se copió correctamente el archivo temporal a nuestra carpeta <br/>";
             } else {
                 echo "Error en el copiado <br/>";
             }
@@ -47,17 +44,14 @@ class GuardarArchivoController {
                     $decimal_14 = $this->convertirDecimal($datos[14]);
                     $decimal_15 = $this->convertirDecimal($datos[15]);
 
-                    $resultado1 = insertar_datos1($conexion, $datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5], $datos[6], $datos[7], $datos[8], $datos[9], $decimal_10, $decimal_11, $decimal_12, $decimal_13, $decimal_14, $decimal_15, $datos[16], $datos[17]);
-
-                    var_dump($resultado1);
+                    $resultado1 = insertar_datos1($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5], $datos[6], $datos[7], $datos[8], $datos[9], $decimal_10, $decimal_11, $decimal_12, $decimal_13, $decimal_14, $decimal_15, $datos[16], $datos[17]);
                 }
-
                 if ($resultado1) {
                     echo '<script>alert("¡Los datos se han guardado correctamente!");</script>';
-                    echo '<script>window.location.href = "guardar_archivo.php";</script>';
+                    echo '<script>window.location.href = "/RemesasT/view/GuardarArchivo.php";</script>';
                 } else {
                     echo '<script>alert("Hubo un problema al guardar los datos.");</script>';
-                    echo '<script>window.location.href = "guardar_archivo.php";</script>';
+                    echo '<script>window.location.href = "/RemesasT/view/GuardarArchivo.php";</script>';
                 }
             } else {
                 echo "No existe el archivo copiado <br/>";
@@ -91,7 +85,14 @@ class GuardarArchivoController {
                     $decimal_7 = $this->convertirDecimal($datos[7]);
                     $decimal_8 = $this->convertirDecimal($datos[8]);
 
-                    $resultado2 = insertar_datos2($conexion, $datos[0], $datos[1], $fecha_convertida_2, $datos[3], $datos[4], $fecha_convertida_5, $datos[6], $decimal_7, $decimal_8, $datos[9], $datos[10]);
+                    $resultado2 = insertar_datos2($datos[0], $datos[1], $fecha_convertida_2, $datos[3], $datos[4], $fecha_convertida_5, $datos[6], $decimal_7, $decimal_8, $datos[9], $datos[10]);
+                }
+                if ($resultado2) {
+                    echo '<script>alert("¡Los datos se han guardado correctamente!");</script>';
+                    echo '<script>window.location.href = "/RemesasT/view/GuardarArchivo.php";</script>';
+                } else {
+                    echo '<script>alert("Hubo un problema al guardar los datos.");</script>';
+                    echo '<script>window.location.href = "/RemesasT/view/GuardarArchivo.php";</script>';
                 }
             } else {
                 echo "No existe el archivo copiado <br/>";
@@ -131,9 +132,15 @@ class GuardarArchivoController {
                     $decimal_17 = $this -> convertirDecimal($datos[17]);
                     $decimal_18 = $this -> convertirDecimal($datos[18]);
 
-                    $resultado3 = insertar_datos3($conexion, $datos[0], $fecha_convertida_1, $datos[2], $datos[3], $datos[4], $datos[5], $datos[6], $datos[7], $datos[8], $datos[9], $datos[10], $datos[11], $decimal_12, $decimal_13, $decimal_14, $decimal_15, $decimal_16, $decimal_17, $decimal_18, $fecha_convertida_19, $datos[20]);
+                    $resultado3 = insertar_datos3($datos[0], $fecha_convertida_1, $datos[2], $datos[3], $datos[4], $datos[5], $datos[6], $datos[7], $datos[8], $datos[9], $datos[10], $datos[11], $decimal_12, $decimal_13, $decimal_14, $decimal_15, $decimal_16, $decimal_17, $decimal_18, $fecha_convertida_19, $datos[20]);
                 }
-
+                if ($resultado3) {
+                    echo '<script>alert("¡Los datos se han guardado correctamente!");</script>';
+                    echo '<script>window.location.href = "/RemesasT/view/GuardarArchivo.php";</script>';
+                } else {
+                    echo '<script>alert("Hubo un problema al guardar los datos.");</script>';
+                    echo '<script>window.location.href = "/RemesasT/view/GuardarArchivo.php";</script>';
+                }
             } else {
                 echo "No existe el archivo copiado <br/>";
             }
@@ -172,7 +179,14 @@ class GuardarArchivoController {
                         $decimal_3 = $this -> convertirDecimal($datos[3]);
                         $decimal_4 = $this -> convertirDecimal($datos[4]);
 
-                        $resultado4 = insertar_datos4($conexion, $datos[0], $datos[1], $decimal_2, $decimal_3, $decimal_4, $datos[5], $datos[6]);
+                        $resultado4 = insertar_datos4($datos[0], $datos[1], $decimal_2, $decimal_3, $decimal_4, $datos[5], $datos[6]);
+                    }
+                    if ($resultado4) {
+                        echo '<script>alert("¡Los datos se han guardado correctamente!");</script>';
+                        echo '<script>window.location.href = "/RemesasT/view/GuardarArchivo.php";</script>';
+                    } else {
+                        echo '<script>alert("Hubo un problema al guardar los datos.");</script>';
+                        echo '<script>window.location.href = "/RemesasT/view/GuardarArchivo.php";</script>';
                     }
                 } else {
                     echo "No existe el archivo copiado <br/>";
@@ -180,7 +194,6 @@ class GuardarArchivoController {
             }
         }
     }
-
     public function procesarArchivo5() {
         if (isset($_POST["enviar5"])) {
             require_once "../conexion.php";
@@ -215,7 +228,14 @@ class GuardarArchivoController {
                         $decimal_4 = $this->convertirDecimal($datos[4]);
                         $decimal_5 = $this->convertirDecimal($datos[5]);
 
-                        $resultado5 = insertar_datos5($conexion, $datos[0], $datos[1], $fecha_convertida_2, $decimal_3, $decimal_4, $decimal_5);
+                        $resultado5 = insertar_datos5($datos[0], $datos[1], $fecha_convertida_2, $decimal_3, $decimal_4, $decimal_5);
+                    }
+                    if ($resultado5) {
+                        echo '<script>alert("¡Los datos se han guardado correctamente!");</script>';
+                        echo '<script>window.location.href = "/RemesasT/view/GuardarArchivo.php";</script>';
+                    } else {
+                        echo '<script>alert("Hubo un problema al guardar los datos.");</script>';
+                        echo '<script>window.location.href = "/RemesasT/view/GuardarArchivo.php";</script>';
                     }
                 } else {
                     echo "No existe el archivo copiado <br/>";

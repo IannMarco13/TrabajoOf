@@ -1,5 +1,5 @@
 <?php
-require_once('encabezado.php');
+require_once('includes/header.php');
 require_once('conexion.php');
 use Carbon\Carbon;
 ob_start();
@@ -290,7 +290,10 @@ function obtenerUltimaActualizacion($conexion) {
     }
     return null;
 }
+
+require_once('includes/footer.php');
 ?>
+
 
 
 

@@ -133,3 +133,18 @@ function Recet12() {
 function Recet13() {
     window.location.href = '/RemesasT/view/CierreCajas/CierreCajaPYG.php';
 }
+
+function CompararCajero() {
+    var codigoCajero = $('input.Cajero').val();
+
+    // Verifica el código del cajero haciendo una solicitud al servidor
+    $.post("/Remesast/controllers/CierreCajasController.php", { codigoCajero: codigoCajero }, function(response) {
+        if (response.error) {
+            alert(response.error); // Muestra un mensaje de error si el cajero no existe
+        } else {
+            // Envía el formulario si el cajero existe
+            $('#cierreCajaForm').submit();
+        }
+    }, "json");
+}
+

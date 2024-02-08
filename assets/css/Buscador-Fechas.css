@@ -1,11 +1,28 @@
 
 .form-control {
-    width: 30%;/* Establece el ancho al 50% del contenedor padre */
+    width: 25%;/* Establece el ancho del contenedor padre */
     padding: 8px; /* Añade espacio de relleno alrededor del contenido */
     border-radius: 50px;/* Redondea los bordes del elemento */
     border: 1px solid #010101; /* Establece un borde sólido de 1 píxel con color gris claro */
     font-size: 14px;/* Define el tamaño de la fuente del texto */
 }
+
+.Buscar_fechaAE {
+    width: 20%;/* Establece el ancho del contenedor padre */
+    padding: 8px; /* Añade espacio de relleno alrededor del contenido */
+    border-radius: 50px;/* Redondea los bordes del elemento */
+    border: 12x solid #010101; /* Establece un borde sólido de 1 píxel con color gris claro */
+    font-size: 14px;/* Define el tamaño de la fuente del texto */
+}
+
+.Buscar_fechaAC {
+    width: 15%;/* Establece el ancho del contenedor padre */
+    padding: 8px; /* Añade espacio de relleno alrededor del contenido */
+    border-radius: 50px;/* Redondea los bordes del elemento */
+    border: 1px solid #010101; /* Establece un borde sólido de 1 píxel con color gris claro */
+    font-size: 14px;/* Define el tamaño de la fuente del texto */
+}
+
 
 .formu {
     width: 500px; /* Ancho fijo */

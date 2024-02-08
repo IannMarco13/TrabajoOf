@@ -7,24 +7,22 @@ require_once('../../controllers/CierreCajasController.php');
 $cierreCajasController = new CierreCajasController($cierreCajasModel);
 $mensaje = $cierreCajasController->procesarFormulario();
 ?>
- 
- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
- <script src="/REMESAST/assets/js/CierreCajass.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="/REMESAST/assets/js/CierreCajas.js"></script>
 <br>
-<h1> Cierre de Caja </h1>
 <form id="cierreCajaForm" action="" method="post">   
-    <div class="container container-a">
+    <div class="container container-a"> 
         <div>
             <br>
             <center>
-                <h5> moneda </h5>
+            <br>               
+                <h5> Moneda </h5>
                 <select name="Moneda" class="form-controll form-control-sm" id="Moneda" onchange="redirigir()">
-                <option value="0">EXT</option>
-                <?php foreach ($cierreCajasModel->ListarMonedas() as $row) { ?>
-                    <option value="<?=$row->ID_TABLA_MONEDAS?>"><?=$row->Moneda?></option>
-                <?php } ?>
+                    <option value="0">Seleccione Moneda</option>
+                    <?php foreach ($cierreCajasModel->ListarMonedas() as $row) { ?>
+                        <option value="<?=$row->ID_TABLA_MONEDAS?>"><?=$row->Moneda?></option>
+                    <?php } ?>
                 </select>
             </center>
         </div>
@@ -41,12 +39,15 @@ $mensaje = $cierreCajasController->procesarFormulario();
         </div>
     </div>
     <div class="container-c">
-        <br><br>
-        <h1>Bolivianos [BOB]</h1>
+        <br>
+        <h1> Cierre de Caja </h1>
+        <h1> Bolivianos [BOB]</h1>
         <br>
         <div class="table-responsive">
             <table id="TablaRemesas" border="3">
                 <thead>
+                    <tr>
+                        </tr>
                     <tr>
                         <th colspan="5" id='totalOP'>Total: 0</th>
                         <input type="hidden" class="" name="totalOP[]" value="">  
@@ -60,6 +61,7 @@ $mensaje = $cierreCajasController->procesarFormulario();
                 </thead>
                 <tbody>
                     <?php
+                    //&Cod_moneda
                     $query = "SELECT CodigoMoneda AS MONEDA, CORTE FROM corte_monedas WHERE CodigoMoneda = 'BOB' ORDER BY CORTE DESC";
                     $result = $conexion->query($query);
                     while ($row = $result->fetch_assoc()){

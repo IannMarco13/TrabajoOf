@@ -48,7 +48,7 @@ $remesas = $controller->mostrarRemesas($from_date, $to_date);
                             <div class="form-group btn-group">
                                 <center>
                                 <button type="submit" class="submit-button"><i class="fas fa-search">Buscar</i></button>
-                                <a href="ReportesPDF/ReporteChilePDF.php?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" target="_blank" class="btn-custom">
+                                <a href="/RemesasT/ReportesPDF/ReporteChilePDF.php?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" target="_blank" class="btn-custom">
                                 <i class="far fa-file-pdf"> Generar Reporte </i></a>
                                 </center>
                             </div>
@@ -62,7 +62,7 @@ $remesas = $controller->mostrarRemesas($from_date, $to_date);
                     <thead>
                         <tr>
                             <th>N°</th>
-                            <th>CODIGO</th>
+                            <th>CÓDIGO</th>
                             <th>AIR</th>
                             <th>FECHA ORIGEN</th>
                             <th>ORIGEN</th>

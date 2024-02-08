@@ -1,4 +1,3 @@
-<!-- header.php -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,7 +31,8 @@
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script> 
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    
+    <script src="/RemesasT/assets/js/Botones.js"></script>
+
 </head>
 <body>
 <header  class="header-home">
@@ -49,7 +49,7 @@
             <li><a href="/REMESAST/index.php">INICIO</a></li>
             <li><a href="/REMESAST/view/GuardarArchivo.php">SUBIR ARCHIVO</a></li>
             <li class="develop">
-                <a href="#">CONULTAS</a> 
+                <a href="#">Consultas</a> 
                 <ul class="ul-second">
                     <li id="mmm" class="front"><a href="/RemesasT/view/RemesasChileBolivia.php">Chile - Bolivia</a> </li>
                     <li id="mmm" class="back"><a href="/REMESAST/view/ReporteBoliviaChile.php">Bolivia - Chile</a></li>
@@ -72,7 +72,7 @@
                         <a href="#">Cierre</a> 
                         <ul class="ul-third"">
                             <li class="back"><a href="/REMESAST/view/CierreCajas/CierreCajaBOB.php">Cierre Cajas</a></li>
-                            <li class="back"><a href="/REMESAST/Mostrar_rem_reporte.php">Reporte</a></li>
+                            <li class="back"><a href="/REMESAST/view/ReporteCierreCajas.php">Reporte</a></li>
                         </ul>
                     </li>
                     <li class="front">

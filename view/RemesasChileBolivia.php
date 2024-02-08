@@ -40,9 +40,9 @@ $remesas = $controller->mostrarRemesas($from_date, $to_date);
                             <div class="form-group btn-group">
                                 <center>
                                 <button type="submit" class="submit-button"><i class="fas fa-search"> Buscar </i></button>
-                                <a href="ReportesPDF/RemesasChilePDF.php?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" target="_blank" class="btn-custom">
+                                <a href="/RemesasT/ReportesPDF/RemesasChilePDF.php?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''; ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''; ?>" target="_blank" class="btn-custom">
                                 <i class="fas fa-print"> Imprimir Tabla</i> </a>
-                                <a href="ReportesPDF/RemesaReportChilePDF.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>" target="_blank" class="btn-custom">
+                                <a href="/RemesasT/ReportesPDF/RemesaReportChilePDF.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>" target="_blank" class="btn-custom">
                                 <i  class="far fa-file-pdf"> Generar Consulta </i></a>
                                 <a href="ReporteChileBolivia.php" target="_blank" class="btn-custom"><i class="far fa-file"> Reporte</i></a>
                                 </center>

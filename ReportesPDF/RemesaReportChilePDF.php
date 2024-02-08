@@ -138,7 +138,7 @@ $totalMontoFinal = round($totalMontoBob / 6.86 , 2) + $totalMontoUsd ;
 $pdf = new PDF();
 $pdf->AddPage('P','Letter');
 $pdf->AliasNbPages(); //muestra la pagina / y total de paginas
-$i = 0;
+
 $pdf->SetFont('times', 'B', 12);
 $pdf->Cell(0, 10, utf8_decode('Gambarte Chile S.p.A. :'), 0, 1);
 
